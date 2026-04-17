@@ -187,8 +187,10 @@ Email copy lives in the `EMAIL_SEQUENCES` block inside `tracker-script.js`.
 
 | URL | Status |
 |---|---|
-| **https://www.guinwhite.com** | Custom domain (canonical) — active once DNS is configured |
+| **https://app.guinwhite.com** | Custom subdomain — active once DNS CNAME record is added |
 | **https://buzzfair.github.io/what-you-actually-need/** | Default GitHub Pages URL — live now |
+
+This app is deployed on the subdomain `app.guinwhite.com` so it lives independently from the main website at `guinwhite.com`. The main website DNS is not affected.
 
 ### Static hosting (any provider)
 
@@ -200,13 +202,15 @@ This repository is published via GitHub Pages from the `main` branch root. The d
 
 **https://buzzfair.github.io/what-you-actually-need/**
 
-The custom domain `www.guinwhite.com` is configured in GitHub Pages settings and via the `CNAME` file in the repo root. Once DNS is pointed correctly, `www.guinwhite.com` will serve the app and `guinwhite.com` will redirect to `www.guinwhite.com`.
+The custom domain `app.guinwhite.com` is configured in GitHub Pages settings and via the `CNAME` file in the repo root. Once the DNS CNAME record is added at your registrar, `app.guinwhite.com` will serve the app.
 
 ### Domain configuration
 
-The custom domain is set in two places:
-- `CNAME` file in the repo root (contains `www.guinwhite.com`)
+The custom subdomain is set in two places:
+- `CNAME` file in the repo root (contains `app.guinwhite.com`)
 - GitHub Pages settings under Settings → Pages → Custom domain
+
+This is a subdomain-only configuration. The `@` and `www` records for `guinwhite.com` are not touched.
 
 To verify or update: go to [github.com/buzzfair/what-you-actually-need/settings/pages](https://github.com/buzzfair/what-you-actually-need/settings/pages).
 
