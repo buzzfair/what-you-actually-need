@@ -1,0 +1,1618 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>What You Actually Need</title>
+  <meta name="description" content="A diagnostic for overwhelmed coaches, consultants, and experts. Find your real bottleneck — and what to do about it." />
+
+  <!-- FONTS: Zodiak (display) + Work Sans (body) -->
+  <link href="https://api.fontshare.com/v2/css?f[]=zodiak@400,500,700&display=swap" rel="stylesheet" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300..700&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ============================================================
+       DESIGN TOKENS — Warm stone palette + dusty rose accent
+    ============================================================ */
+    :root,
+    [data-theme="light"] {
+      --color-bg:               #f5f3ef;
+      --color-surface:          #faf9f7;
+      --color-surface-2:        #fdfcfb;
+      --color-surface-offset:   #eeebe6;
+      --color-surface-offset-2: #e8e4de;
+      --color-divider:          #dedad3;
+      --color-border:           #d6d2ca;
+
+      --color-text:         #2a2520;
+      --color-text-muted:   #7c7872;
+      --color-text-faint:   #b5b2ac;
+      --color-text-inverse: #faf9f7;
+
+      --color-primary:           #8e4f6a;
+      --color-primary-hover:     #703d54;
+      --color-primary-active:    #542c3e;
+      --color-primary-highlight: #f0e1e8;
+
+      --color-secondary:           #5a7462;
+      --color-secondary-hover:     #445a4b;
+      --color-secondary-highlight: #dae5db;
+
+      --color-warning:           #956740;
+      --color-warning-highlight: #f0e4d6;
+
+      --radius-sm:   0.375rem;
+      --radius-md:   0.5rem;
+      --radius-lg:   0.75rem;
+      --radius-xl:   1rem;
+      --radius-2xl:  1.5rem;
+      --radius-full: 9999px;
+
+      --transition-fast:        150ms cubic-bezier(0.16, 1, 0.3, 1);
+      --transition-interactive: 180ms cubic-bezier(0.16, 1, 0.3, 1);
+      --transition-slow:        400ms cubic-bezier(0.16, 1, 0.3, 1);
+
+      --shadow-sm: 0 1px 3px oklch(0.2 0.01 50 / 0.07);
+      --shadow-md: 0 4px 16px oklch(0.2 0.01 50 / 0.09);
+      --shadow-lg: 0 12px 40px oklch(0.2 0.01 50 / 0.13);
+
+      --font-display: 'Zodiak', 'Georgia', serif;
+      --font-body:    'Work Sans', 'Helvetica Neue', sans-serif;
+
+      --text-xs:   clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem);
+      --text-sm:   clamp(0.875rem, 0.8rem + 0.35vw, 1rem);
+      --text-base: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
+      --text-lg:   clamp(1.125rem, 1rem + 0.75vw, 1.5rem);
+      --text-xl:   clamp(1.5rem, 1.2rem + 1.25vw, 2.25rem);
+      --text-2xl:  clamp(2rem, 1.2rem + 2.5vw, 3.5rem);
+
+      --space-1:  0.25rem;
+      --space-2:  0.5rem;
+      --space-3:  0.75rem;
+      --space-4:  1rem;
+      --space-5:  1.25rem;
+      --space-6:  1.5rem;
+      --space-8:  2rem;
+      --space-10: 2.5rem;
+      --space-12: 3rem;
+      --space-16: 4rem;
+      --space-20: 5rem;
+      --space-24: 6rem;
+
+      --content-narrow:  560px;
+      --content-default: 720px;
+    }
+
+    [data-theme="dark"] {
+      --color-bg:               #18150f;
+      --color-surface:          #1d1a14;
+      --color-surface-2:        #211d17;
+      --color-surface-offset:   #1a1710;
+      --color-surface-offset-2: #1f1c15;
+      --color-divider:          #2a271f;
+      --color-border:           #3a3730;
+      --color-text:             #d4d0c8;
+      --color-text-muted:       #7e7b74;
+      --color-text-faint:       #5a5852;
+      --color-text-inverse:     #1d1a14;
+      --color-primary:          #c48da8;
+      --color-primary-hover:    #d4a8be;
+      --color-primary-active:   #e0c2d0;
+      --color-primary-highlight: #3a2830;
+      --color-secondary:        #7da886;
+      --color-secondary-hover:  #9bbfa4;
+      --color-secondary-highlight: #1e2e22;
+      --color-warning:          #c49060;
+      --color-warning-highlight: #3a2c1c;
+      --shadow-sm: 0 1px 3px oklch(0 0 0 / 0.25);
+      --shadow-md: 0 4px 16px oklch(0 0 0 / 0.35);
+      --shadow-lg: 0 12px 40px oklch(0 0 0 / 0.45);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme]) {
+        --color-bg:               #18150f;
+        --color-surface:          #1d1a14;
+        --color-surface-2:        #211d17;
+        --color-surface-offset:   #1a1710;
+        --color-surface-offset-2: #1f1c15;
+        --color-divider:          #2a271f;
+        --color-border:           #3a3730;
+        --color-text:             #d4d0c8;
+        --color-text-muted:       #7e7b74;
+        --color-text-faint:       #5a5852;
+        --color-text-inverse:     #1d1a14;
+        --color-primary:          #c48da8;
+        --color-primary-hover:    #d4a8be;
+        --color-primary-active:   #e0c2d0;
+        --color-primary-highlight: #3a2830;
+        --color-secondary:        #7da886;
+        --color-secondary-hover:  #9bbfa4;
+        --color-secondary-highlight: #1e2e22;
+        --color-warning:          #c49060;
+        --color-warning-highlight: #3a2c1c;
+        --shadow-sm: 0 1px 3px oklch(0 0 0 / 0.25);
+        --shadow-md: 0 4px 16px oklch(0 0 0 / 0.35);
+        --shadow-lg: 0 12px 40px oklch(0 0 0 / 0.45);
+      }
+    }
+
+    /* ============================================================
+       BASE RESET
+    ============================================================ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html {
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-rendering: optimizeLegibility;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      min-height: 100dvh;
+      line-height: 1.65;
+      font-family: var(--font-body);
+      font-size: var(--text-base);
+      color: var(--color-text);
+      background-color: var(--color-bg);
+      transition: background-color var(--transition-slow), color var(--transition-slow);
+    }
+
+    img, picture, video, canvas, svg { display: block; max-width: 100%; }
+    input, button, textarea, select { font: inherit; color: inherit; }
+    h1, h2, h3, h4, h5, h6 { text-wrap: balance; line-height: 1.2; font-family: var(--font-display); }
+    p, li { text-wrap: pretty; max-width: 65ch; }
+
+    ::selection { background: var(--color-primary-highlight); color: var(--color-text); }
+    :focus-visible { outline: 2px solid var(--color-primary); outline-offset: 3px; border-radius: var(--radius-sm); }
+
+    button { cursor: pointer; background: none; border: none; }
+    a { color: inherit; }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+    }
+
+    /* ============================================================
+       LAYOUT
+    ============================================================ */
+    .app-wrapper { min-height: 100dvh; display: flex; flex-direction: column; }
+
+    .site-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: var(--space-5) var(--space-6);
+      border-bottom: 1px solid var(--color-divider);
+      position: sticky;
+      top: 0;
+      background-color: var(--color-bg);
+      z-index: 100;
+      transition: background-color var(--transition-slow);
+    }
+
+    .logo {
+      display: flex; align-items: center; gap: var(--space-3);
+      text-decoration: none; color: var(--color-text);
+    }
+    .logo-mark { width: 30px; height: 30px; flex-shrink: 0; }
+    .logo-text {
+      font-family: var(--font-display);
+      font-size: var(--text-sm);
+      font-weight: 500;
+      letter-spacing: 0.01em;
+    }
+
+    .theme-toggle {
+      width: 36px; height: 36px;
+      border-radius: var(--radius-full);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--color-text-muted);
+      border: 1px solid var(--color-border);
+      transition: color var(--transition-interactive), border-color var(--transition-interactive), background var(--transition-interactive);
+    }
+    .theme-toggle:hover { color: var(--color-text); border-color: var(--color-text-muted); background: var(--color-surface-offset); }
+
+    .main-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: var(--space-12) var(--space-6) var(--space-24);
+    }
+
+    .content-col {
+      width: 100%;
+      max-width: var(--content-narrow);
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ============================================================
+       SCREENS
+    ============================================================ */
+    .screen { display: none; width: 100%; flex-direction: column; gap: var(--space-8); }
+    .screen.active { display: flex; animation: fadeUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) both; }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(14px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ============================================================
+       SCREEN 1 — INTRO
+    ============================================================ */
+    .intro-eyebrow {
+      font-size: var(--text-xs);
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--color-primary);
+      font-family: var(--font-body);
+      margin-bottom: var(--space-5);
+    }
+
+    .intro-headline {
+      font-family: var(--font-display);
+      font-size: var(--text-2xl);
+      font-weight: 500;
+      color: var(--color-text);
+      line-height: 1.12;
+      margin-bottom: var(--space-6);
+    }
+
+    .intro-subhead {
+      font-size: var(--text-base);
+      color: var(--color-text-muted);
+      line-height: 1.75;
+      max-width: 54ch;
+      margin-bottom: var(--space-10);
+    }
+
+    .intro-cta-group {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: var(--space-3);
+      margin-bottom: var(--space-10);
+    }
+
+    .intro-microcopy {
+      font-size: var(--text-xs);
+      color: var(--color-text-faint);
+      font-family: var(--font-body);
+    }
+
+    .intro-trust-note {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      padding: var(--space-5) var(--space-6);
+    }
+
+    .intro-trust-note p {
+      font-size: var(--text-sm);
+      color: var(--color-text-muted);
+      line-height: 1.7;
+      max-width: none;
+    }
+
+    .intro-trust-note p + p {
+      margin-top: var(--space-3);
+    }
+
+    .intro-trust-note strong {
+      color: var(--color-text);
+      font-weight: 600;
+    }
+
+    /* ============================================================
+       SCREEN 2 — QUESTIONS
+    ============================================================ */
+    .progress-label {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: var(--space-3);
+    }
+    .progress-label-text {
+      font-size: var(--text-xs);
+      color: var(--color-text-muted);
+      font-weight: 500;
+    }
+    .progress-bar-wrap {
+      background: var(--color-surface-offset);
+      border-radius: var(--radius-full);
+      height: 3px; overflow: hidden;
+    }
+    .progress-bar-fill {
+      height: 100%;
+      background: var(--color-primary);
+      border-radius: var(--radius-full);
+      transition: width 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .question-number {
+      font-size: var(--text-xs);
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--color-primary);
+      font-family: var(--font-body);
+      margin-bottom: var(--space-4);
+    }
+    .question-text {
+      font-family: var(--font-display);
+      font-size: var(--text-xl);
+      font-weight: 500;
+      color: var(--color-text);
+      line-height: 1.25;
+    }
+
+    .options-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-3);
+    }
+
+    .option-btn {
+      width: 100%;
+      text-align: left;
+      padding: var(--space-5) var(--space-6);
+      border-radius: var(--radius-lg);
+      background: var(--color-surface);
+      border: 1.5px solid var(--color-border);
+      color: var(--color-text);
+      font-size: var(--text-base);
+      font-family: var(--font-body);
+      line-height: 1.55;
+      display: flex;
+      align-items: flex-start;
+      gap: var(--space-4);
+      transition:
+        background var(--transition-interactive),
+        border-color var(--transition-interactive),
+        box-shadow var(--transition-interactive),
+        transform var(--transition-interactive);
+    }
+    .option-btn:hover { border-color: var(--color-primary); background: var(--color-surface-2); box-shadow: var(--shadow-sm); }
+    .option-btn:active { transform: translateY(1px); }
+    .option-btn.selected { border-color: var(--color-primary); background: var(--color-primary-highlight); box-shadow: var(--shadow-sm); }
+
+    .option-indicator {
+      width: 22px; height: 22px;
+      border-radius: var(--radius-full);
+      border: 1.5px solid var(--color-border);
+      flex-shrink: 0; margin-top: 1px;
+      display: flex; align-items: center; justify-content: center;
+      transition: border-color var(--transition-interactive), background var(--transition-interactive);
+    }
+    .option-btn.selected .option-indicator { border-color: var(--color-primary); background: var(--color-primary); }
+    .option-btn.selected .option-indicator::after {
+      content: '';
+      display: block;
+      width: 8px; height: 8px;
+      border-radius: var(--radius-full);
+      background: var(--color-text-inverse);
+    }
+    .option-label { flex: 1; }
+
+    /* ============================================================
+       SCREEN 3 — EMAIL GATE
+    ============================================================ */
+    .gate-eyebrow {
+      font-size: var(--text-xs); font-weight: 600;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--color-primary); font-family: var(--font-body);
+      margin-bottom: var(--space-4);
+    }
+    .gate-headline {
+      font-family: var(--font-display);
+      font-size: var(--text-xl); font-weight: 500;
+      color: var(--color-text); line-height: 1.25;
+      margin-bottom: var(--space-3);
+    }
+    .gate-body {
+      color: var(--color-text-muted);
+      font-size: var(--text-base); line-height: 1.7;
+    }
+
+    .email-form { display: flex; flex-direction: column; gap: var(--space-4); }
+    .form-field { display: flex; flex-direction: column; gap: var(--space-2); }
+    .form-label { font-size: var(--text-sm); font-weight: 500; color: var(--color-text); }
+    .form-input {
+      padding: var(--space-4) var(--space-5);
+      border-radius: var(--radius-md);
+      border: 1.5px solid var(--color-border);
+      background: var(--color-surface);
+      color: var(--color-text);
+      font-size: var(--text-base);
+      font-family: var(--font-body);
+      transition: border-color var(--transition-interactive), box-shadow var(--transition-interactive);
+    }
+    .form-input::placeholder { color: var(--color-text-faint); }
+    .form-input:focus { outline: none; border-color: var(--color-primary); box-shadow: 0 0 0 3px var(--color-primary-highlight); }
+
+    .skip-link {
+      background: none; border: none;
+      color: var(--color-text-muted);
+      font-size: var(--text-sm); font-family: var(--font-body);
+      cursor: pointer;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      text-decoration-color: var(--color-text-faint);
+      align-self: center;
+      transition: color var(--transition-interactive);
+    }
+    .skip-link:hover { color: var(--color-text); }
+
+    /* ============================================================
+       SCREEN 4 — RESULTS
+    ============================================================ */
+
+    /* Badge + headline */
+    .result-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+      padding: var(--space-2) var(--space-4);
+      border-radius: var(--radius-full);
+      background: var(--color-primary-highlight);
+      color: var(--color-primary);
+      font-size: var(--text-xs);
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-family: var(--font-body);
+      align-self: flex-start;
+    }
+
+    .result-path-name {
+      font-family: var(--font-display);
+      font-size: var(--text-xl);
+      font-weight: 500;
+      color: var(--color-text);
+      line-height: 1.2;
+      margin-top: var(--space-4);
+    }
+
+    .result-short-diagnosis {
+      font-size: var(--text-base);
+      color: var(--color-text-muted);
+      line-height: 1.75;
+      margin-top: var(--space-4);
+    }
+
+    /* Divider */
+    .result-divider { height: 1px; background: var(--color-divider); }
+
+    /* Expanded explanation */
+    .result-explanation {
+      font-size: var(--text-base);
+      color: var(--color-text);
+      line-height: 1.8;
+    }
+
+    /* 2-column card pair */
+    .result-cards {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--space-4);
+    }
+
+    .result-card {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      padding: var(--space-5) var(--space-6);
+    }
+
+    .result-card-label {
+      font-size: var(--text-xs);
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      font-family: var(--font-body);
+      margin-bottom: var(--space-3);
+      display: flex; align-items: center; gap: var(--space-2);
+    }
+    .result-card-label.dont-need  { color: var(--color-warning); }
+    .result-card-label.do-need    { color: var(--color-secondary); }
+    .result-card-label .label-icon { width: 15px; height: 15px; }
+
+    .result-card-text {
+      font-size: var(--text-base);
+      color: var(--color-text);
+      line-height: 1.65;
+      max-width: none;
+    }
+
+    /* Best next move */
+    .result-next-move {
+      background: var(--color-surface-offset);
+      border-radius: var(--radius-lg);
+      padding: var(--space-5) var(--space-6);
+      border-left: 3px solid var(--color-primary);
+    }
+    .result-next-move-label {
+      font-size: var(--text-xs);
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--color-primary);
+      font-family: var(--font-body);
+      margin-bottom: var(--space-3);
+    }
+    .result-next-move-text {
+      font-size: var(--text-base);
+      color: var(--color-text);
+      line-height: 1.65;
+      max-width: none;
+    }
+
+    /* Primary CTA box */
+    .cta-primary-section {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-xl);
+      padding: var(--space-8) var(--space-6);
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--space-4);
+    }
+    .cta-support-text {
+      font-size: var(--text-sm);
+      color: var(--color-text-muted);
+      line-height: 1.6;
+      max-width: 42ch;
+      text-align: center;
+      max-width: none;
+    }
+
+    /* Secondary recommendation */
+    .secondary-block {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      padding: var(--space-6);
+    }
+    .secondary-block-label {
+      font-size: var(--text-xs);
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--color-text-muted);
+      font-family: var(--font-body);
+      margin-bottom: var(--space-3);
+    }
+    .secondary-block-title {
+      font-family: var(--font-display);
+      font-size: var(--text-base);
+      font-weight: 500;
+      color: var(--color-text);
+      line-height: 1.3;
+      margin-bottom: var(--space-2);
+    }
+    .secondary-block-body {
+      font-size: var(--text-sm);
+      color: var(--color-text-muted);
+      line-height: 1.65;
+      margin-bottom: var(--space-4);
+      max-width: none;
+    }
+    .secondary-block-link {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+      font-size: var(--text-sm);
+      font-weight: 600;
+      color: var(--color-primary);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      text-decoration-color: transparent;
+      font-family: var(--font-body);
+      transition: text-decoration-color var(--transition-interactive), color var(--transition-interactive);
+    }
+    .secondary-block-link:hover { text-decoration-color: var(--color-primary); color: var(--color-primary-hover); }
+
+    /* Affiliate disclosure */
+    .disclosure-block {
+      background: var(--color-warning-highlight);
+      border: 1px solid color-mix(in srgb, var(--color-warning) 25%, transparent);
+      border-radius: var(--radius-md);
+      padding: var(--space-4) var(--space-5);
+    }
+    .disclosure-text {
+      font-size: var(--text-xs);
+      color: var(--color-text-muted);
+      line-height: 1.65;
+      max-width: none;
+    }
+
+    /* Free resource block */
+    .free-resource-block {
+      background: var(--color-secondary-highlight);
+      border: 1px solid color-mix(in srgb, var(--color-secondary) 25%, transparent);
+      border-radius: var(--radius-lg);
+      padding: var(--space-5) var(--space-6);
+    }
+    .free-resource-label {
+      font-size: var(--text-xs);
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--color-secondary);
+      font-family: var(--font-body);
+      margin-bottom: var(--space-3);
+    }
+    .free-resource-title {
+      font-family: var(--font-display);
+      font-size: var(--text-base);
+      font-weight: 500;
+      color: var(--color-text);
+      line-height: 1.3;
+      margin-bottom: var(--space-3);
+    }
+
+    /* Restart */
+    .result-restart { text-align: center; padding-top: var(--space-2); }
+    .restart-btn {
+      font-size: var(--text-sm); color: var(--color-text-muted);
+      text-decoration: underline; text-underline-offset: 3px;
+      text-decoration-color: var(--color-text-faint);
+      background: none; border: none; cursor: pointer;
+      font-family: var(--font-body);
+      transition: color var(--transition-interactive);
+    }
+    .restart-btn:hover { color: var(--color-text); }
+
+    /* ============================================================
+       BUTTONS
+    ============================================================ */
+    .btn {
+      display: inline-flex;
+      align-items: center; justify-content: center;
+      gap: var(--space-2);
+      padding: var(--space-4) var(--space-8);
+      border-radius: var(--radius-full);
+      font-family: var(--font-body);
+      font-size: var(--text-sm);
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      text-decoration: none;
+      cursor: pointer; border: none;
+      transition:
+        background var(--transition-interactive),
+        color var(--transition-interactive),
+        transform var(--transition-interactive),
+        box-shadow var(--transition-interactive);
+    }
+    .btn:active { transform: translateY(1px); }
+
+    .btn-primary {
+      background: var(--color-primary);
+      color: var(--color-text-inverse);
+    }
+    .btn-primary:hover { background: var(--color-primary-hover); box-shadow: var(--shadow-md); }
+
+    /* Large CTA variant */
+    .btn-lg {
+      padding: var(--space-5) var(--space-10);
+      font-size: var(--text-base);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--color-text);
+      border: 1.5px solid var(--color-border);
+    }
+    .btn-outline:hover { border-color: var(--color-text-muted); background: var(--color-surface-offset); }
+
+    /* ============================================================
+       FOOTER
+    ============================================================ */
+    .site-footer {
+      text-align: center;
+      padding: var(--space-8) var(--space-6);
+      border-top: 1px solid var(--color-divider);
+      font-size: var(--text-xs);
+      color: var(--color-text-faint);
+      line-height: 1.7;
+    }
+    .site-footer a { color: var(--color-text-muted); text-decoration: none; transition: color var(--transition-interactive); }
+    .site-footer a:hover { color: var(--color-primary); }
+
+    /* ============================================================
+       UTILITY
+    ============================================================ */
+    .sr-only {
+      position: absolute; width: 1px; height: 1px;
+      padding: 0; margin: -1px; overflow: hidden;
+      clip: rect(0, 0, 0, 0); white-space: nowrap; border-width: 0;
+    }
+
+    /* ============================================================
+       RESPONSIVE
+    ============================================================ */
+    @media (max-width: 480px) {
+      .site-header { padding: var(--space-4); }
+      .main-content { padding: var(--space-8) var(--space-4) var(--space-16); }
+      .intro-headline { font-size: clamp(1.75rem, 8vw, 3rem); }
+      .question-text { font-size: var(--text-lg); }
+      .option-btn { padding: var(--space-4) var(--space-5); }
+      .cta-primary-section { padding: var(--space-6) var(--space-4); }
+      .btn-lg { width: 100%; }
+    }
+
+  </style>
+</head>
+
+<body>
+<div class="app-wrapper">
+
+  <!-- HEADER ================================================= -->
+  <header class="site-header">
+    <a href="#" class="logo" aria-label="What You Actually Need — Home"
+       onclick="showScreen('intro'); return false;">
+      <svg class="logo-mark" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <circle cx="16" cy="16" r="14.5" stroke="currentColor" stroke-width="1.25" opacity="0.25"/>
+        <ellipse cx="16" cy="16" rx="9" ry="5.5" stroke="currentColor" stroke-width="1.5"/>
+        <circle cx="16" cy="16" r="2.5" fill="currentColor"/>
+        <line x1="16" y1="1.5" x2="16" y2="6" stroke="currentColor" stroke-width="1.25" stroke-linecap="round"/>
+        <line x1="16" y1="26" x2="16" y2="30.5" stroke="currentColor" stroke-width="1.25" stroke-linecap="round"/>
+      </svg>
+      <span class="logo-text">What You Actually Need</span>
+    </a>
+    <button class="theme-toggle" data-theme-toggle aria-label="Switch to dark mode">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+      </svg>
+    </button>
+  </header>
+
+  <!-- MAIN =================================================== -->
+  <main class="main-content" id="main-content">
+    <div class="content-col">
+
+      <!-- SCREEN 1: INTRO ===================================== -->
+      <section class="screen active" id="screen-intro" aria-labelledby="intro-heading" role="region">
+
+        <div>
+          <p class="intro-eyebrow">A diagnostic for overwhelmed experts</p>
+          <h1 class="intro-headline" id="intro-heading">You do not need more advice.<br>You need the right diagnosis.</h1>
+          <p class="intro-subhead">
+            If your business feels stuck, scattered, or harder than it should, this short diagnostic will help you tell the difference between an offer problem, a visibility problem, a sales system problem, an overwhelm problem, and an implementation problem.
+          </p>
+
+          <div class="intro-cta-group">
+            <button class="btn btn-primary btn-lg" onclick="startQuiz()">
+              Get my diagnosis
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </button>
+            <span class="intro-microcopy">Takes about 3 minutes. No fluff. No pressure.</span>
+          </div>
+        </div>
+
+        <div class="intro-trust-note">
+          <p><strong>Not everyone needs more coaching.</strong> This tool is built on the premise that the wrong solution — even a good one — costs more than the problem it does not solve. The goal here is directional clarity, not a sales pitch.</p>
+          <p>This is not a clinical assessment. It is a structured reflection tool. The results are directional and based on common bottleneck patterns in small expert businesses. Use your judgment.</p>
+        </div>
+
+      </section>
+
+      <!-- SCREEN 2: QUESTIONS ================================= -->
+      <section class="screen" id="screen-question" aria-labelledby="question-text-el" role="region">
+
+        <div>
+          <div class="progress-label">
+            <span class="progress-label-text" id="progress-text">Question 1 of 8</span>
+            <span class="progress-label-text" id="progress-pct">0%</span>
+          </div>
+          <div class="progress-bar-wrap" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="progress-bar-region">
+            <div class="progress-bar-fill" id="progress-bar" style="width: 0%"></div>
+          </div>
+        </div>
+
+        <div>
+          <p class="question-number" id="question-number-el">Question 1</p>
+          <h2 class="question-text" id="question-text-el">Loading...</h2>
+        </div>
+
+        <ul class="options-list" id="options-list" role="list">
+          <!-- injected by JS -->
+        </ul>
+
+      </section>
+
+      <!-- SCREEN 3: EMAIL GATE ================================ -->
+      <section class="screen" id="screen-email" aria-labelledby="gate-heading" role="region">
+
+        <div>
+          <p class="gate-eyebrow">Your diagnosis is ready</p>
+          <h2 class="gate-headline" id="gate-heading">Want a copy sent to you?</h2>
+          <p class="gate-body">
+            Leave your email and your results will arrive in your inbox along with resources matched to your specific bottleneck. Or skip straight through — no friction, no strings.
+          </p>
+        </div>
+
+        <form class="email-form" id="email-form" onsubmit="submitEmail(event)">
+          <div class="form-field">
+            <label class="form-label" for="email-input">Email address</label>
+            <input class="form-input" type="email" id="email-input" name="email"
+                   placeholder="you@example.com" autocomplete="email" />
+          </div>
+          <button type="submit" class="btn btn-primary">Send me my results</button>
+        </form>
+
+        <button class="skip-link" onclick="showResults()">Skip — show me the results now</button>
+
+      </section>
+
+      <!-- SCREEN 4: RESULTS =================================== -->
+      <!-- All content injected by JS into #results-container -->
+      <section class="screen" id="screen-results" aria-labelledby="result-path-name-el" role="region">
+        <div id="results-container">
+          <!-- JS renders here -->
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- FOOTER ================================================= -->
+  <footer class="site-footer">
+    <p>A diagnostic tool by <a href="#" id="footer-brand-link">Quietly Influential</a> &mdash; for introverted experts who are done buying the wrong solutions.</p>
+  </footer>
+
+</div><!-- /.app-wrapper -->
+
+<script>
+/* ============================================================
+   DARK / LIGHT MODE TOGGLE
+============================================================ */
+(function () {
+  const toggle = document.querySelector('[data-theme-toggle]');
+  const root   = document.documentElement;
+  const MOON = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
+  const SUN  = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>';
+
+  let theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  root.setAttribute('data-theme', theme);
+  if (toggle) toggle.innerHTML = theme === 'dark' ? SUN : MOON;
+
+  if (toggle) {
+    toggle.addEventListener('click', () => {
+      theme = theme === 'dark' ? 'light' : 'dark';
+      root.setAttribute('data-theme', theme);
+      toggle.innerHTML = theme === 'dark' ? SUN : MOON;
+      toggle.setAttribute('aria-label', 'Switch to ' + (theme === 'dark' ? 'light' : 'dark') + ' mode');
+    });
+  }
+})();
+
+
+/* ============================================================
+   ┌─────────────────────────────────────────────────────────┐
+   │  CUSTOMIZATION SECTION — EDIT THIS BLOCK                │
+   │  Everything below is designed so you can swap copy,     │
+   │  links, affiliate URLs, and CTAs without touching       │
+   │  anything else in the file.                             │
+   └─────────────────────────────────────────────────────────┘
+============================================================ */
+
+
+/* ------------------------------------------------------------
+   BRAND CONFIG
+   Update your name and website URL here.
+------------------------------------------------------------ */
+const BRAND = {
+  name: 'Quietly Influential',
+  url:  'https://guinwhite.com',  // ← your site
+};
+document.getElementById('footer-brand-link').href = BRAND.url;
+
+
+/* ------------------------------------------------------------
+   RESULT TRACKER — Google Sheets
+   Paste your Apps Script Web App URL below after deploying
+   the tracker script (see tracker-script.js for instructions).
+   Leave as '' to disable tracking silently.
+------------------------------------------------------------ */
+const TRACKER_ENDPOINT = '';  // ← PASTE your Apps Script Web App URL here
+
+
+/* ------------------------------------------------------------
+   DISCLOSURE COPY
+   Edit these two strings. The short version appears inline.
+   The long version is available if you add more detail later.
+------------------------------------------------------------ */
+const DISCLOSURE = {
+  short: 'Some recommendations on this page may be affiliate links. If you choose them, I may earn a referral commission at no extra cost to you.',
+  long:  'I only recommend tools and resources I believe are genuinely relevant to this result. Some links may be affiliate links, which means I may earn a commission if you decide to buy through them, at no additional cost to you.',
+};
+
+
+/* ------------------------------------------------------------
+   GLOBAL MONETIZATION CONFIG
+   Swap '#' for your real URLs. Title fields appear as copy.
+   Leave url: '#' to disable a block — it will be hidden.
+
+   PATH-SPECIFIC SLOTS are inside each DIAGNOSES entry below.
+   Global slots here are for shared resources across paths.
+------------------------------------------------------------ */
+const OFFERS = {
+  // A free resource shown on every result page
+  freeResource: {
+    title: 'Free Resource',           // ← e.g. "The Bottleneck Audit Worksheet"
+    url:   '#',                       // ← SWAP: Substack post, Gumroad freebie, etc.
+    body:  'A short, free resource to help you take one grounded next step based on your diagnosis.',
+  },
+
+  // Your flagship paid diagnostic or session
+  paidDiagnostic: {
+    title: 'Paid Diagnostic Session', // ← e.g. "60-Minute Clarity Session"
+    url:   '#',                       // ← SWAP: Calendly, TidyCal, etc.
+    body:  'A focused session to look at your specific situation and identify the clearest path forward.',
+  },
+
+  // Done-for-you AI build (relevant for implementation + sales_system paths)
+  customBuild: {
+    title: 'Done-For-You AI Build',   // ← e.g. "AI Biz Connection Build Sprint"
+    url:   '#',                       // ← SWAP: your DFY service or AI Biz Connection page
+    body:  'If what you need is a working system, sequence, or tool — not more advice — this is where to start.',
+  },
+
+  // A secondary offer (course, cohort, etc.)
+  secondaryOffer: {
+    title: 'Secondary Offer',         // ← e.g. "Quietly Influential Cohort"
+    url:   '#',                       // ← SWAP: your cohort, course, or group program page
+    body:  'A structured program for introverted experts ready to build sustainably.',
+  },
+};
+
+
+/* ------------------------------------------------------------
+   DIAGNOSES + PATH-SPECIFIC MONETIZATION
+   Each key maps to one result path.
+
+   Fields to edit:
+     label          short badge text (keep short)
+     pathName       the headline shown at top of results
+     shortDiagnosis one-sentence diagnosis
+     explanation    longer paragraph
+     dontNeed       what they probably don't need (full sentence)
+     doNeed         what they likely need (full sentence)
+     bestNextMove   action-oriented sentence for this week
+     ctaLabel       primary button text
+     ctaUrl         ← SWAP: the primary CTA destination
+     ctaSupportText short note under the CTA button
+
+   Monetization slots (swap '#' for real links):
+     primaryOffer   primary paid recommendation
+     secondaryRec   secondary recommendation shown below CTA
+     affiliateRec   tool/platform affiliate recommendation
+     showAffiliate  true = show affiliate block + disclosure
+     freeResourceOverride  optional path-specific free resource
+                    (leave null to use OFFERS.freeResource)
+------------------------------------------------------------ */
+const DIAGNOSES = {
+
+  /* ── OFFER CLARITY ──────────────────────────────────────── */
+  offer_clarity: {
+    id:             'offer_clarity',
+    label:          'Offer Clarity',
+    pathName:       'Your business is not broken. Your offer is blurred.',
+    shortDiagnosis: 'You likely do not have a motivation problem. You have an articulation problem. People cannot trust what they cannot quickly understand.',
+    explanation:    'Right now, your work may be more powerful than your messaging. That creates drag. People feel some interest, but they cannot orient fast enough to know whether this is for them, why it matters now, or what exactly they would be buying. So they pause. Or they drift. Or they say, "This sounds interesting," and never move.',
+    dontNeed:       'More content, more traffic, or more time forcing yourself to be visible before the offer is clear.',
+    doNeed:         'Sharper positioning, cleaner language, and a more precise bridge between what you do and what your buyer already knows they need.',
+    bestNextMove:   'Refine the offer before you amplify it. Tighten the problem, the promise, the buyer, and the buying moment.',
+    ctaLabel:       'Clarify the offer',
+    ctaUrl:         '#',   // ← SWAP: messaging audit, offer clarity session, positioning workbook
+    ctaSupportText: 'Start with the message before you push harder on marketing.',
+
+    // PATH-SPECIFIC MONETIZATION
+    primaryOffer: {                                       // emphasize paid diagnostic first
+      title: 'Offer Clarity Diagnostic',
+      url:   '#',                                         // ← SWAP: booking link for offer audit
+      body:  'A focused session to clarify exactly what you sell, who it is for, and how to say it in a way that lands.',
+    },
+    secondaryRec: {                                       // prompt pack / workbook second
+      title: 'Offer Positioning Prompt Pack',
+      url:   '#',                                         // ← SWAP: Gumroad, Payhip, or Substack
+      body:  'A set of guided prompts to help you identify the sharpest version of your offer language — on your own, at your own pace.',
+    },
+    affiliateRec: {
+      title: 'Voice-of-Customer Research Tool',
+      url:   '#',                                         // ← SWAP: affiliate link (e.g., Wynter, Hotjar, etc.)
+      body:  'Understand what your buyers actually say before you decide what to write.',
+    },
+    showAffiliate: false,                                 // ← set true when you have an affiliate link
+    freeResourceOverride: null,                           // ← or { title, url, body } for path-specific freebie
+  },
+
+  /* ── VISIBILITY ─────────────────────────────────────────── */
+  visibility: {
+    id:             'visibility',
+    label:          'Visibility',
+    pathName:       'The issue is not your brilliance. It is your discoverability.',
+    shortDiagnosis: 'You may already have something valuable. The problem is that too few right people are consistently encountering it.',
+    explanation:    'This usually means the offer is good enough to work, but the trust pathway is too thin. You may be hidden, inconsistent, too referral-dependent, or trying to use visibility strategies that feel unnatural enough to sabotage consistency. The issue is not that you have nothing to say. The issue is that the right people are not meeting your work often enough, clearly enough, or in the right context.',
+    dontNeed:       'To reinvent your whole business, become louder, or copy someone else\'s content rhythm.',
+    doNeed:         'A visibility rhythm that fits your nervous system, your capacity, and the way your buyers actually build trust.',
+    bestNextMove:   'Choose one trust-building channel and one repeatable visibility rhythm you can sustain without resentment.',
+    ctaLabel:       'Build a visibility rhythm',
+    ctaUrl:         '#',   // ← SWAP: visibility planning product, workshop, or resource
+    ctaSupportText: 'More exposure is not the goal. Right-fit discoverability is.',
+
+    primaryOffer: {                                       // affiliate tool or platform recommendation first
+      title: 'Email Platform for Relationship-First Visibility',
+      url:   '#',                                         // ← SWAP: ConvertKit, Kit, or Substack affiliate
+      body:  'An email list is the most sustainable visibility asset you can own. This is where to start.',
+    },
+    secondaryRec: {                                       // low-ticket visibility planning product second
+      title: 'Visibility Planning Session',
+      url:   '#',                                         // ← SWAP: low-ticket offer or planning worksheet
+      body:  'A structured session to build a visibility rhythm that fits your energy and your buyers\' trust timeline.',
+    },
+    affiliateRec: {
+      title: 'Content Repurposing Tool',
+      url:   '#',                                         // ← SWAP: affiliate link (e.g., Repurpose.io, Castmagic)
+      body:  'One piece of content, many placements — without doubling the effort.',
+    },
+    showAffiliate: false,
+    freeResourceOverride: null,
+  },
+
+  /* ── SALES SYSTEM ───────────────────────────────────────── */
+  sales_system: {
+    id:             'sales_system',
+    label:          'Follow-Up & Sales System',
+    pathName:       'You do not have a sales problem. You have a follow-through problem.',
+    shortDiagnosis: 'Interest is likely leaking after the first conversation, click, inquiry, or moment of resonance. The gap is not persuasion. It is structure.',
+    explanation:    'A lot of business owners think they need better selling when what they really need is a better handoff. If leads go quiet, if inquiries stall, if warm people never get a clean next step, or if follow-up depends on memory, mood, or courage, revenue gets left behind. Not because you are bad at sales. Because the path forward is too loose.',
+    dontNeed:       'A more aggressive script, a more extroverted personality, or more pressure on already-warm people.',
+    doNeed:         'A humane sales system. Usually that means follow-up structure, sequencing, clear invitations, and a process you can trust even when your energy dips.',
+    bestNextMove:   'Map the gap between interest and decision, then install one simple follow-up sequence that closes the leak.',
+    ctaLabel:       'Fix the follow-up system',
+    ctaUrl:         '#',   // ← SWAP: AI build service, DFY follow-up setup, or CRM referral
+    ctaSupportText: 'Make it easier for the right people to move forward.',
+
+    primaryOffer: {                                       // affiliate CRM / automation first
+      title: 'CRM for Solo Operators',
+      url:   '#',                                         // ← SWAP: HoneyBook, Dubsado, or other CRM affiliate
+      body:  'A lightweight CRM designed for service-based solopreneurs who need structure without bureaucracy.',
+    },
+    secondaryRec: {                                       // done-for-you build second
+      title: 'Done-For-You Follow-Up System',
+      url:   '#',                                         // ← SWAP: your AI Biz Connection or DFY service page
+      body:  'A custom follow-up sequence, installed and ready to use — without you building it from scratch.',
+    },
+    affiliateRec: {
+      title: 'Email Sequence & Automation Tool',
+      url:   '#',                                         // ← SWAP: Kit, ActiveCampaign, or Flodesk affiliate
+      body:  'Set up one follow-up sequence and let it run — so leads stop falling through the cracks.',
+    },
+    showAffiliate: false,
+    freeResourceOverride: null,
+  },
+
+  /* ── OVERWHELM ──────────────────────────────────────────── */
+  overwhelm: {
+    id:             'overwhelm',
+    label:          'Overwhelm & Decision Fatigue',
+    pathName:       'You are not behind. You are overextended.',
+    shortDiagnosis: 'You may be carrying too many inputs, too many options, or too many open loops. That creates drag, second-guessing, and false urgency.',
+    explanation:    'This often looks like inconsistency from the outside, but inside it feels like cognitive overload. You are not lazy. You are overfull. When everything feels important, nothing resolves. So you keep researching, circling, postponing, and trying to force clarity from a nervous system that is already saturated.',
+    dontNeed:       'Another strategy download, another dashboard, another expert to follow, or another giant framework to maintain.',
+    doNeed:         'Reduction, triage, and a simpler operating rhythm so your next move becomes obvious again.',
+    bestNextMove:   'Cut active priorities in half. Choose one revenue move, one support system, and one thing to stop carrying.',
+    ctaLabel:       'Reduce the noise',
+    ctaUrl:         '#',   // ← SWAP: triage session, clarity call booking, simplicity offer
+    ctaSupportText: 'Simpler is often smarter.',
+
+    primaryOffer: {                                       // paid diagnostic or simplification offer first
+      title: 'Reset Diagnostic Session',
+      url:   '#',                                         // ← SWAP: clarity session / paid diagnostic booking
+      body:  'A focused session to identify what to stop, what to simplify, and what your next 30 days actually need to include.',
+    },
+    secondaryRec: {                                       // planning template second
+      title: 'Simplicity-Focused Planning Template',
+      url:   '#',                                         // ← SWAP: Gumroad, Notion template, or Payhip
+      body:  'A lean planning structure designed for solo operators who need clarity, not complexity.',
+    },
+    affiliateRec: {
+      title: 'Focus & Task Management Tool',
+      url:   '#',                                         // ← SWAP: Notion, Linear, or Sunsama affiliate
+      body:  'One place for your priorities. Less scattered. More decisive.',
+    },
+    showAffiliate: false,
+    freeResourceOverride: null,
+  },
+
+  /* ── IMPLEMENTATION ─────────────────────────────────────── */
+  implementation: {
+    id:             'implementation',
+    label:          'Implementation Gap',
+    pathName:       'You already know enough. The issue is execution friction.',
+    shortDiagnosis: 'You likely understand what to do. The problem is that the plan is not translating into action with enough ease, structure, or support.',
+    explanation:    'This is what happens when insight outpaces infrastructure. You may have good ideas, good instincts, and even a solid plan, but the thing still is not getting built, published, installed, or operationalized. The issue is not lack of intelligence. It is the absence of enough scaffolding to convert knowing into movement.',
+    dontNeed:       'More information.',
+    doNeed:         'Build support, better scaffolding, faster activation, or someone to turn the idea into a working asset, workflow, or tool.',
+    bestNextMove:   'Pick the smallest build that would create momentum, then get that implemented before consuming anything else.',
+    ctaLabel:       'Get it built',
+    ctaUrl:         '#',   // ← SWAP: your AI build sprint, DFY implementation offer, or AI Coach Connection
+    ctaSupportText: 'Knowledge is not the bottleneck now. Activation is.',
+
+    primaryOffer: {                                       // custom AI build offer first
+      title: 'AI Build Sprint',
+      url:   '#',                                         // ← SWAP: AI Biz Connection or custom build page
+      body:  'Turn your idea, system, or workflow into a working tool — built with AI, delivered fast.',
+    },
+    secondaryRec: {                                       // tool stack recommendation second
+      title: 'Tech Stack Recommendation for Solo Operators',
+      url:   '#',                                         // ← SWAP: curated affiliate resource page or AI Coach Connection
+      body:  'A curated set of tools that remove friction for solo business owners — no bloat, no overwhelm.',
+    },
+    affiliateRec: {
+      title: 'Automation & Workflow Platform',
+      url:   '#',                                         // ← SWAP: Make, Zapier, or n8n affiliate
+      body:  'Connect what you already have so the execution happens without you having to push it every time.',
+    },
+    showAffiliate: false,
+    freeResourceOverride: null,
+  },
+};
+
+
+/* ------------------------------------------------------------
+   QUESTIONS
+   Exact text preserved. Do not edit answer text without
+   re-testing the scoring logic.
+
+   Scoring key:
+     A → offer_clarity
+     B → visibility
+     C → sales_system
+     D on Q1, Q5, Q7 → overwhelm
+     D on Q2, Q3, Q4, Q6, Q8 → implementation
+------------------------------------------------------------ */
+const QUESTIONS = [
+  // Q1 — D = overwhelm
+  {
+    text: 'When you think about getting more revenue right now, what feels most true?',
+    options: [
+      { text: 'I am not sure my offer is clear or compelling enough.',               scores: { offer_clarity: 3 } },
+      { text: 'I think the right people are not seeing me often enough.',            scores: { visibility: 3 } },
+      { text: 'I get interest, but too little of it turns into actual sales.',       scores: { sales_system: 3 } },
+      { text: 'I know too many things I could do and cannot tell what matters most.',scores: { overwhelm: 3 } },
+    ]
+  },
+  // Q2 — D = implementation
+  {
+    text: 'What happens most often after someone shows interest in your work?',
+    options: [
+      { text: 'They seem interested, but I do not think they fully understand what I do.',  scores: { offer_clarity: 3 } },
+      { text: 'They disappear because I do not stay visible or top of mind.',               scores: { visibility: 3 } },
+      { text: 'I mean to follow up, but the process is inconsistent or awkward.',          scores: { sales_system: 3 } },
+      { text: 'I get stalled because I am not sure what to send, say, or build next.',    scores: { implementation: 3 } },
+    ]
+  },
+  // Q3 — D = implementation
+  {
+    text: 'Which sentence feels the most painfully familiar?',
+    options: [
+      { text: 'I do a lot, but it is hard to explain cleanly.',                                      scores: { offer_clarity: 3 } },
+      { text: 'I know I need to be seen more, but most visibility advice feels distorting.',         scores: { visibility: 3 } },
+      { text: 'I have leads, conversations, or inquiries, but the handoff is loose.',               scores: { sales_system: 3 } },
+      { text: 'I have ideas and intentions, but too little gets implemented.',                       scores: { implementation: 3 } },
+    ]
+  },
+  // Q4 — D = implementation
+  {
+    text: 'If someone asked you to describe exactly what you sell and why it matters, what would most likely happen?',
+    options: [
+      { text: 'I would say too much and lose the thread.',                                                      scores: { offer_clarity: 3 } },
+      { text: 'I could explain it, but not enough people are hearing it.',                                      scores: { visibility: 3 } },
+      { text: 'I could explain it, but I do not have a reliable process for moving people forward.',            scores: { sales_system: 3 } },
+      { text: 'I could explain it, but I still would not trust myself to execute the next steps consistently.',scores: { implementation: 3 } },
+    ]
+  },
+  // Q5 — D = overwhelm
+  {
+    text: 'What kind of support would feel most relieving right now?',
+    options: [
+      { text: 'Help making the offer simpler, sharper, and easier to buy.',                       scores: { offer_clarity: 3 } },
+      { text: 'A visibility system that does not require me to perform all the time.',            scores: { visibility: 3 } },
+      { text: 'A sales and follow-up structure that feels natural and repeatable.',               scores: { sales_system: 3 } },
+      { text: 'Someone to reduce the noise and tell me what actually matters first.',            scores: { overwhelm: 3 } },
+    ]
+  },
+  // Q6 — D = implementation
+  {
+    text: 'What do you most often buy when things feel stuck?',
+    options: [
+      { text: 'Messaging, branding, or offer help.',                              scores: { offer_clarity: 3 } },
+      { text: 'Content, audience growth, or visibility advice.',                  scores: { visibility: 3 } },
+      { text: 'Sales trainings, scripts, or CRM tools.',                          scores: { sales_system: 3 } },
+      { text: 'Courses, templates, or systems I do not fully implement.',         scores: { implementation: 3 } },
+    ]
+  },
+  // Q7 — D = overwhelm
+  {
+    text: 'Which of these is the clearest sign that something is off?',
+    options: [
+      { text: 'People seem interested, but they do not move because the value feels diffuse.',               scores: { offer_clarity: 3 } },
+      { text: 'I know my work helps, but I am too hidden or inconsistent to create momentum.',              scores: { visibility: 3 } },
+      { text: 'I get warm signals, but there is no dependable pathway from interest to decision.',          scores: { sales_system: 3 } },
+      { text: 'I keep circling the same priorities without fully activating any of them.',                  scores: { overwhelm: 3 } },
+    ]
+  },
+  // Q8 — D = implementation
+  {
+    text: 'If the right solution landed this week, what would it do first?',
+    options: [
+      { text: 'Help me articulate exactly what I sell and for whom.',                        scores: { offer_clarity: 3 } },
+      { text: 'Help the right people find and trust me more consistently.',                 scores: { visibility: 3 } },
+      { text: 'Help me convert interest into clean next steps and real revenue.',           scores: { sales_system: 3 } },
+      { text: 'Help me finally turn decisions into execution.',                             scores: { implementation: 3 } },
+    ]
+  },
+];
+
+
+/* ============================================================
+   APP STATE
+============================================================ */
+let currentQuestion  = 0;
+let scores           = { offer_clarity: 0, visibility: 0, sales_system: 0, overwhelm: 0, implementation: 0 };
+let selectedIndex    = null;
+
+
+/* ============================================================
+   SCREEN NAVIGATION
+============================================================ */
+function showScreen(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  const target = document.getElementById('screen-' + id);
+  if (!target) return;
+  target.classList.add('active');
+  target.style.animation = 'none';
+  target.offsetHeight; // force reflow
+  target.style.animation = '';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+
+/* ============================================================
+   QUIZ FLOW
+============================================================ */
+function startQuiz() {
+  currentQuestion = 0;
+  scores = { offer_clarity: 0, visibility: 0, sales_system: 0, overwhelm: 0, implementation: 0 };
+  selectedIndex = null;
+  renderQuestion();
+  showScreen('question');
+}
+
+function renderQuestion() {
+  const q     = QUESTIONS[currentQuestion];
+  const total = QUESTIONS.length;
+  const pct   = Math.round((currentQuestion / total) * 100);
+
+  document.getElementById('progress-text').textContent = 'Question ' + (currentQuestion + 1) + ' of ' + total;
+  document.getElementById('progress-pct').textContent  = pct + '%';
+  document.getElementById('progress-bar').style.width  = pct + '%';
+  document.getElementById('progress-bar-region').setAttribute('aria-valuenow', pct);
+  document.getElementById('question-number-el').textContent = 'Question ' + (currentQuestion + 1);
+  document.getElementById('question-text-el').textContent   = q.text;
+
+  const list = document.getElementById('options-list');
+  list.innerHTML = '';
+  selectedIndex  = null;
+
+  q.options.forEach(function(opt, i) {
+    const li  = document.createElement('li');
+    const btn = document.createElement('button');
+    btn.className = 'option-btn';
+    btn.setAttribute('type', 'button');
+    btn.setAttribute('role', 'radio');
+    btn.setAttribute('aria-checked', 'false');
+    btn.innerHTML =
+      '<span class="option-indicator" aria-hidden="true"></span>' +
+      '<span class="option-label">' + opt.text + '</span>';
+    btn.addEventListener('click', function() { selectOption(i, btn); });
+    li.appendChild(btn);
+    list.appendChild(li);
+  });
+}
+
+function selectOption(index, btn) {
+  document.querySelectorAll('.option-btn').forEach(function(b) {
+    b.classList.remove('selected');
+    b.setAttribute('aria-checked', 'false');
+  });
+  btn.classList.add('selected');
+  btn.setAttribute('aria-checked', 'true');
+  selectedIndex = index;
+
+  setTimeout(function() {
+    var scoreMap = QUESTIONS[currentQuestion].options[index].scores;
+    for (var key in scoreMap) {
+      if (scores.hasOwnProperty(key)) scores[key] += scoreMap[key];
+    }
+    currentQuestion++;
+
+    if (currentQuestion < QUESTIONS.length) {
+      var screen = document.getElementById('screen-question');
+      screen.style.animation = 'none';
+      screen.offsetHeight;
+      screen.style.animation = 'fadeUp 0.35s cubic-bezier(0.16,1,0.3,1) both';
+      renderQuestion();
+    } else {
+      showScreen('email');
+    }
+  }, 380);
+}
+
+
+/* ============================================================
+   EMAIL GATE
+============================================================ */
+function submitEmail(e) {
+  e.preventDefault();
+  // ← TO CONNECT: POST to Mailchimp, Kit, ConvertKit, etc.
+  // Example: fetch('/api/subscribe', { method:'POST', body: JSON.stringify({ email: document.getElementById('email-input').value }) });
+  showResults();
+}
+
+
+/* ============================================================
+   DIAGNOSIS SCORING
+============================================================ */
+function getDiagnosis() {
+  var PRIORITY = ['offer_clarity', 'visibility', 'sales_system', 'overwhelm', 'implementation'];
+  var topKey = null, topVal = -Infinity;
+  PRIORITY.forEach(function(key) {
+    var val = scores[key] || 0;
+    if (val > topVal) { topVal = val; topKey = key; }
+  });
+  return DIAGNOSES[topKey] || DIAGNOSES.offer_clarity;
+}
+
+
+/* ============================================================
+   RESULTS RENDERER
+   Builds the full results page dynamically so each path
+   gets the correct copy and monetization blocks.
+============================================================ */
+function showResults() {
+  var d       = getDiagnosis();
+  var free    = d.freeResourceOverride || OFFERS.freeResource;
+  var html    = '';
+
+  // ── Badge + headline
+  html += '<div style="display:flex;flex-direction:column;gap:var(--space-4)">';
+  html += '<div class="result-badge">' + escHtml(d.label) + '</div>';
+  html += '<h2 class="result-path-name" id="result-path-name-el">' + escHtml(d.pathName) + '</h2>';
+  html += '<p class="result-short-diagnosis">' + escHtml(d.shortDiagnosis) + '</p>';
+  html += '</div>';
+
+  // ── Divider
+  html += '<div class="result-divider"></div>';
+
+  // ── Longer explanation
+  html += '<p class="result-explanation">' + escHtml(d.explanation) + '</p>';
+
+  // ── Don't need / Do need cards
+  html += '<div class="result-cards">';
+  html += '<div class="result-card">';
+  html += '<p class="result-card-label dont-need">';
+  html += '<svg class="label-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="8" y1="12" x2="16" y2="12"/></svg>';
+  html += 'You probably do not need</p>';
+  html += '<p class="result-card-text">' + escHtml(d.dontNeed) + '</p>';
+  html += '</div>';
+  html += '<div class="result-card">';
+  html += '<p class="result-card-label do-need">';
+  html += '<svg class="label-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>';
+  html += 'You likely need next</p>';
+  html += '<p class="result-card-text">' + escHtml(d.doNeed) + '</p>';
+  html += '</div>';
+  html += '</div>'; // /.result-cards
+
+  // ── Best next move this week
+  html += '<div class="result-next-move">';
+  html += '<p class="result-next-move-label">Best next move this week</p>';
+  html += '<p class="result-next-move-text">' + escHtml(d.bestNextMove) + '</p>';
+  html += '</div>';
+
+  // ── Divider
+  html += '<div class="result-divider"></div>';
+
+  // ── Primary CTA
+  html += '<div class="cta-primary-section">';
+  html += '<p class="result-next-move-label" style="color:var(--color-text-muted);margin-bottom:0">Recommended next step</p>';
+  html += '<h3 style="font-family:var(--font-display);font-size:var(--text-lg);font-weight:500;color:var(--color-text);line-height:1.3;">' + escHtml(d.primaryOffer.title) + '</h3>';
+  html += '<p class="cta-support-text">' + escHtml(d.primaryOffer.body) + '</p>';
+  // Primary CTA button — use <a> with target blank only when it is a real URL, otherwise use button
+  if (d.ctaUrl && d.ctaUrl !== '#') {
+    html += '<a href="' + escAttr(d.ctaUrl) + '" class="btn btn-primary btn-lg" target="_blank" rel="noopener noreferrer">' + escHtml(d.ctaLabel) + '</a>';
+  } else {
+    html += '<a href="' + escAttr(d.primaryOffer.url !== '#' ? d.primaryOffer.url : '#') + '" class="btn btn-primary btn-lg" ' + (d.primaryOffer.url !== '#' ? 'target="_blank" rel="noopener noreferrer"' : 'onclick="return false;"') + '>' + escHtml(d.ctaLabel) + '</a>';
+  }
+  html += '<p style="font-size:var(--text-xs);color:var(--color-text-faint);">' + escHtml(d.ctaSupportText) + '</p>';
+  html += '</div>';
+
+  // ── Free resource block
+  if (free && free.url) {
+    html += '<div class="free-resource-block">';
+    html += '<p class="free-resource-label">Free resource</p>';
+    html += '<p class="free-resource-title">' + escHtml(free.title) + '</p>';
+    html += '<p style="font-size:var(--text-sm);color:var(--color-text-muted);line-height:1.65;margin-bottom:var(--space-4);max-width:none">' + escHtml(free.body) + '</p>';
+    if (free.url !== '#') {
+      html += '<a href="' + escAttr(free.url) + '" class="secondary-block-link" target="_blank" rel="noopener noreferrer">Access free resource <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>';
+    } else {
+      html += '<span style="font-size:var(--text-xs);color:var(--color-text-faint)">Coming soon</span>';
+    }
+    html += '</div>';
+  }
+
+  // ── Secondary recommendation
+  if (d.secondaryRec) {
+    html += '<div class="secondary-block">';
+    html += '<p class="secondary-block-label">Also worth considering</p>';
+    html += '<p class="secondary-block-title">' + escHtml(d.secondaryRec.title) + '</p>';
+    html += '<p class="secondary-block-body">' + escHtml(d.secondaryRec.body) + '</p>';
+    if (d.secondaryRec.url !== '#') {
+      html += '<a href="' + escAttr(d.secondaryRec.url) + '" class="secondary-block-link" target="_blank" rel="noopener noreferrer">Learn more <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>';
+    } else {
+      html += '<span style="font-size:var(--text-xs);color:var(--color-text-faint)">Link coming soon</span>';
+    }
+    html += '</div>';
+  }
+
+  // ── Affiliate recommendation + disclosure (only if showAffiliate is true)
+  if (d.showAffiliate && d.affiliateRec) {
+    html += '<div class="disclosure-block">';
+    html += '<p class="disclosure-text">' + escHtml(DISCLOSURE.short) + '</p>';
+    html += '</div>';
+    html += '<div class="secondary-block">';
+    html += '<p class="secondary-block-label">Recommended tool</p>';
+    html += '<p class="secondary-block-title">' + escHtml(d.affiliateRec.title) + '</p>';
+    html += '<p class="secondary-block-body">' + escHtml(d.affiliateRec.body) + '</p>';
+    if (d.affiliateRec.url !== '#') {
+      html += '<a href="' + escAttr(d.affiliateRec.url) + '" class="secondary-block-link" target="_blank" rel="noopener noreferrer">See recommendation <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>';
+    }
+    html += '</div>';
+  }
+
+  // ── Restart
+  html += '<div class="result-restart">';
+  html += '<button class="restart-btn" onclick="restartQuiz()">Start over</button>';
+  html += '</div>';
+
+  document.getElementById('results-container').innerHTML = html;
+
+  // Log the result to Google Sheets (non-blocking)
+  var emailVal = document.getElementById('email-input') ? document.getElementById('email-input').value : '';
+  logResult(d, emailVal);
+
+  showScreen('results');
+}
+
+
+/* ============================================================
+   RESTART
+============================================================ */
+function restartQuiz() {
+  document.getElementById('email-input').value = '';
+  showScreen('intro');
+}
+
+
+/* ============================================================
+   RESULT TRACKER
+   Called automatically when results are shown.
+   Logs: timestamp, diagnosis key, label, score breakdown, email.
+   Fails silently if TRACKER_ENDPOINT is empty or unreachable.
+============================================================ */
+function logResult(diagnosis, email) {
+  if (!TRACKER_ENDPOINT || TRACKER_ENDPOINT === '') return;
+
+  var scoreDetails = Object.keys(scores)
+    .map(function(k) { return k + ':' + scores[k]; })
+    .join(' | ');
+
+  var payload = {
+    diagnosis: diagnosis.id,
+    label:     diagnosis.label,
+    scores:    scoreDetails,
+    email:     email || '',
+  };
+
+  fetch(TRACKER_ENDPOINT, {
+    method:  'POST',
+    mode:    'no-cors',          // Apps Script does not support CORS preflight
+    headers: { 'Content-Type': 'text/plain' },
+    body:    JSON.stringify(payload),
+  }).catch(function() {
+    // Fail silently — tracking should never block or break the UX
+  });
+}
+
+
+/* ============================================================
+   UTILITIES
+============================================================ */
+function escHtml(str) {
+  if (!str) return '';
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;');
+}
+
+function escAttr(str) {
+  if (!str) return '#';
+  return String(str).replace(/"/g, '&quot;');
+}
+
+</script>
+
+</body>
+</html>
+<!--
+  ╔══════════════════════════════════════════════════════════╗
+  ║  HOW TO CUSTOMIZE THIS APP                              ║
+  ╚══════════════════════════════════════════════════════════╝
+
+  Open the <script> block and look for the section labeled:
+  "CUSTOMIZATION SECTION — EDIT THIS BLOCK"
+
+  ── 1. BRAND NAME & URL
+    const BRAND = { name, url }
+
+  ── 2. DISCLOSURE COPY
+    const DISCLOSURE = { short, long }
+    Edit the two strings. The short version appears inline
+    above any affiliate block when showAffiliate is set to true.
+
+  ── 3. GLOBAL OFFERS
+    const OFFERS = { freeResource, paidDiagnostic, customBuild, secondaryOffer }
+    These are shared across paths. Swap url: '#' for real links.
+    freeResource appears on every result page.
+
+  ── 4. PATH-SPECIFIC DIAGNOSES & MONETIZATION
+    const DIAGNOSES = { offer_clarity, visibility, sales_system, overwhelm, implementation }
+    Each path has:
+      ctaUrl          ← PRIMARY button link (main CTA per path)
+      primaryOffer    ← title, url, body shown in the CTA section
+      secondaryRec    ← title, url, body shown below CTA
+      affiliateRec    ← title, url, body for affiliate block
+      showAffiliate   ← set to true to show affiliate block + disclosure
+      freeResourceOverride ← null uses global, or { title, url, body }
+
+  ── 5. WHERE TO EDIT MONETIZATION LINKS
+    Search for: ← SWAP:
+    Every link that needs to be replaced has this comment next to it.
+    There are approximately 15–20 link slots in total.
+
+  ── 6. QUESTIONS (do not edit without testing scoring)
+    const QUESTIONS = [ ... ]
+    Keep answer text consistent with scoring keys.
+
+  ── 7. COLORS
+    :root [data-theme="light"] { --color-primary: #8e4f6a; }
+    Swap hex values to match your brand.
+
+  ── 8. EMAIL INTEGRATION
+    function submitEmail(e) — add your POST request here.
+-->
