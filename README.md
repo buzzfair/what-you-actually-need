@@ -183,17 +183,32 @@ Email copy lives in the `EMAIL_SEQUENCES` block inside `tracker-script.js`.
 
 ## Deployment
 
+### Live URLs
+
+| URL | Status |
+|---|---|
+| **https://www.guinwhite.com** | Custom domain (canonical) — active once DNS is configured |
+| **https://buzzfair.github.io/what-you-actually-need/** | Default GitHub Pages URL — live now |
+
 ### Static hosting (any provider)
 
 Upload `index.html` to any static host — Netlify, Vercel, Cloudflare Pages, GitHub Pages, or S3.
 
 ### GitHub Pages
 
-If GitHub Pages is enabled on this repo, the live site is available at:
+This repository is published via GitHub Pages from the `main` branch root. The default Pages URL is:
 
-**https://guinwhite.github.io/what-you-actually-need/**
+**https://buzzfair.github.io/what-you-actually-need/**
 
-To enable manually: Settings → Pages → Source: Deploy from branch → Branch: `main` → Folder: `/ (root)` → Save.
+The custom domain `www.guinwhite.com` is configured in GitHub Pages settings and via the `CNAME` file in the repo root. Once DNS is pointed correctly, `www.guinwhite.com` will serve the app and `guinwhite.com` will redirect to `www.guinwhite.com`.
+
+### Domain configuration
+
+The custom domain is set in two places:
+- `CNAME` file in the repo root (contains `www.guinwhite.com`)
+- GitHub Pages settings under Settings → Pages → Custom domain
+
+To verify or update: go to [github.com/buzzfair/what-you-actually-need/settings/pages](https://github.com/buzzfair/what-you-actually-need/settings/pages).
 
 ---
 
