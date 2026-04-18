@@ -187,8 +187,8 @@ Email copy lives in the `EMAIL_SEQUENCES` block inside `tracker-script.js`.
 
 | URL | Status |
 |---|---|
-| **https://app.guinwhite.com** | Custom subdomain — active once DNS CNAME record is added |
-| **https://buzzfair.github.io/what-you-actually-need/** | Default GitHub Pages URL — live now |
+| **https://app.guinwhite.com** | Custom domain — canonical live URL |
+| **https://buzzfair.github.io/what-you-actually-need/** | Default GitHub Pages URL (fallback) |
 
 This app is deployed on the subdomain `app.guinwhite.com` so it lives independently from the main website at `guinwhite.com`. The main website DNS is not affected.
 
@@ -200,7 +200,7 @@ Upload `index.html` to any static host — Netlify, Vercel, Cloudflare Pages, Gi
 
 This repository is published via GitHub Pages from the `main` branch root. The default Pages URL is:
 
-**https://buzzfair.github.io/what-you-actually-need/**
+**https://app.guinwhite.com**
 
 The custom domain `app.guinwhite.com` is configured in GitHub Pages settings and via the `CNAME` file in the repo root. Once the DNS CNAME record is added at your registrar, `app.guinwhite.com` will serve the app.
 
