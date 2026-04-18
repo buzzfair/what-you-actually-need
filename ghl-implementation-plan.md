@@ -1,8 +1,33 @@
 # GoHighLevel Implementation Plan — "What You Actually Need"
 
-**Last updated:** June 2025  
-**External app:** app.guinwhite.com (GitHub Pages — handles diagnosis and routing; does not move into GHL)  
-**GHL handles:** Booking, payment, CRM, segmentation, automation, nurture, reminders, post-session follow-up
+**Last updated:** April 2026  
+**External app:** app.guinwhite.com (GitHub Pages)
+
+---
+
+## Architecture Rule
+
+**The app owns the user experience. GHL owns backend relationship infrastructure.**
+
+| App owns | GHL owns |
+|---|---|
+| Diagnosis flow | Contacts and segmentation |
+| Result pages | Tags |
+| Free resource pages | Email sequences and nurture |
+| Offer / sales pages | Booking links |
+| Intake form UI | Payment collection |
+| Thank-you / confirmation pages | Booking confirmation and reminder workflows |
+| Routing and upsell presentation | Form submission handling and follow-up automation |
+| Post-session recommendation sections | Post-session follow-up workflows |
+
+**Do not rebuild the app experience inside GHL.** GHL pages and funnels are not needed. The app handles everything the user sees. GHL handles everything that happens after a booking or form submission.
+
+The three outbound connections from the app to GHL:
+1. `CONFIG.visibilitySession.bookingUrl` — already live
+2. `CONFIG.diagnosticSession.bookingUrl` — add when calendar is created
+3. `CONFIG.aiBuild.inquiryUrl` — add when AI Build inquiry form is created in GHL
+
+---
 
 ---
 

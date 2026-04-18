@@ -938,72 +938,106 @@ const DISCLOSURE = {
 };
 
 
-/* ------------------------------------------------------------
-   GLOBAL MONETIZATION CONFIG
-   Swap '#' for your real URLs. Title fields appear as copy.
-   Leave url: '#' to disable a block — it will be hidden.
+/* ============================================================
+   OFFER CONFIG
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   Architecture rule:
+   The APP owns the user experience.
+   GoHighLevel (GHL) owns backend relationship infrastructure.
 
-   PATH-SPECIFIC SLOTS are inside each DIAGNOSES entry below.
-   Global slots here are for shared resources across paths.
------------------------------------------------------------- */
-const OFFERS = {
-  // A free resource shown on every result page
+   APP owns: diagnosis, results, free resources, offer pages,
+   intake forms, confirmation pages, routing, upsell UI.
+
+   GHL owns: contacts, tags, email sequences, booking links,
+   reminder workflows, form submission handling.
+
+   Only replace URLs marked EDIT THIS — everything else is
+   already wired. GHL booking links are the main thing you
+   need to add.
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+   BOOKING LINKS (GHL outbound — only external URLs needed)
+   ─────────────────────────────────────────────────────────
+   EDIT THIS: GHL booking link — Visibility Planning Session
+   EDIT THIS: GHL booking link — Diagnostic Strategy Session
+   EDIT THIS: GHL form endpoint — AI Build Sprint inquiry
+   ============================================================ */
+const CONFIG = {
+
+  /* ----------------------------------------------------------
+     Visibility Planning Session
+     App page: visibility-planning-session.html (app-native)
+     GHL owns: booking, payment, confirmation email, reminders
+  ---------------------------------------------------------- */
+  visibilitySession: {
+    title:    'Visibility Planning Session',
+    price:    '$297',
+    format:   '60 minutes · $297 · virtual',
+    page:     'visibility-planning-session.html',          // app-native sales + booking prep page
+    bookingUrl: 'https://link.aibizconnection.com/widget/bookings/visibility-planning-session', // EDIT THIS: GHL booking link — Visibility Planning Session
+    body:     'A focused strategic planning session for business owners whose work is strong but whose discoverability is too thin or inconsistent.',
+  },
+
+  /* ----------------------------------------------------------
+     Diagnostic Strategy Session
+     App page: diagnostic-strategy-session.html (app-native)
+     GHL owns: booking, payment, confirmation email, reminders
+  ---------------------------------------------------------- */
+  diagnosticSession: {
+    title:    'Diagnostic Strategy Session',
+    price:    '$297',
+    format:   '60 minutes · $297 · virtual',
+    page:     'diagnostic-strategy-session.html',          // app-native sales + intake form page
+    bookingUrl: '#',                                        // EDIT THIS: GHL booking link — Diagnostic Strategy Session
+    body:     'A focused 60-minute session to identify your real bottleneck, rule out the wrong fixes, and set a clear next step. $297.',
+  },
+
+  /* ----------------------------------------------------------
+     AI Build Sprint
+     App page: ai-build-sprint.html (app-native)
+     GHL owns: inquiry form endpoint, follow-up workflow
+  ---------------------------------------------------------- */
+  aiBuild: {
+    title:    'AI Build Sprint',
+    price:    'Starting at $750',
+    format:   'Fixed-scope · starting at $750 · virtual',
+    page:     'ai-build-sprint.html',                      // app-native sales + inquiry form page
+    inquiryUrl: '#',                                        // EDIT THIS: GHL form endpoint — AI Build Sprint inquiry
+    body:     'Turn one stuck idea into one working implementation. Fast, focused, and scoped for momentum.',
+  },
+
+  /* ----------------------------------------------------------
+     Free resource (global fallback — each path overrides this
+     via freeResourceOverride in DIAGNOSES below)
+  ---------------------------------------------------------- */
   freeResource: {
-    title: 'Free Resource',           // ← e.g. "The Bottleneck Audit Worksheet"
-    url:   '#',                       // ← SWAP: Substack post, Gumroad freebie, etc.
+    title: 'Free Resource',
+    url:   '#',
     body:  'A short, free resource to help you take one grounded next step based on your diagnosis.',
   },
 
-  // Your flagship paid diagnostic or session
-  paidDiagnostic: {
-    title: 'Diagnostic Strategy Session', // ← e.g. "60-Minute Clarity Session"
-    url:   '#',                       // ← SWAP: Calendly, TidyCal, etc.
-    body:  'A focused 60-minute session to identify your real bottleneck, rule out the wrong fixes, and set a clear next step. $297.',
-  },
-
-  // Done-for-you AI build (relevant for implementation + sales_system paths)
-  customBuild: {
-    title: 'Done-For-You AI Build',   // ← e.g. "AI Biz Connection Build Sprint"
-    url:   '#',                       // ← SWAP: your DFY service or AI Biz Connection page
-    body:  'If what you need is a working system, sequence, or tool — not more advice — this is where to start.',
-  },
-
-  // A secondary offer (course, cohort, etc.)
+  /* ----------------------------------------------------------
+     Secondary offer (optional — used as a fallback slot)
+     EDIT THIS: secondary offer URL if you have one
+  ---------------------------------------------------------- */
   secondaryOffer: {
-    title: 'Secondary Offer',         // ← e.g. "Quietly Influential Cohort"
-    url:   '#',                       // ← SWAP: your cohort, course, or group program page
+    title: 'Secondary Offer',
+    url:   '#',                                             // EDIT THIS: cohort, course, or group program page
     body:  'A structured program for introverted experts ready to build sustainably.',
   },
 };
 
-
-/* ------------------------------------------------------------
-   SESSION + BUILD OFFERS
-   These are your primary paid offerings. Edit URLs here.
-
-   EDIT THIS: visibility session booking link
-   EDIT THIS: paid diagnostic session booking link
-   EDIT THIS: AI build offer page link
------------------------------------------------------------- */
+// Backwards-compat aliases so existing DIAGNOSES references keep working
+const OFFERS = {
+  freeResource:   CONFIG.freeResource,
+  paidDiagnostic: { title: CONFIG.diagnosticSession.title, url: CONFIG.diagnosticSession.page, body: CONFIG.diagnosticSession.body },
+  customBuild:    { title: CONFIG.aiBuild.title,           url: CONFIG.aiBuild.page,           body: CONFIG.aiBuild.body },
+  secondaryOffer: CONFIG.secondaryOffer,
+};
 const SESSION_OFFERS = {
-  visibilitySession: {
-    title: 'Visibility Planning Session',
-    url:   'https://link.aibizconnection.com/widget/bookings/visibility-planning-session',  // EDIT THIS: visibility session booking link
-    price: '60 minutes · $297',
-    body:  'A focused strategic planning session for business owners whose work is strong but whose discoverability is too thin or inconsistent.',
-  },
-  diagnosticSession: {
-    title: 'Diagnostic Strategy Session',
-    url:   'diagnostic-strategy-session.html',  // EDIT THIS: paid diagnostic session booking link (e.g. Calendly or GoHighLevel)
-    price: '60 minutes · $297',
-    body:  'A focused 60-minute session to identify your real bottleneck, rule out the wrong fixes, and set a clear next step. $297.',
-  },
-  aiBuild: {
-    title: 'Done-For-You AI Build',
-    url:   '#',  // EDIT THIS: AI build offer page link (e.g. AI Biz Connection service page)
-    price: 'Starting at $750',
-    body:  'Turn your idea, system, or workflow into a working tool — built with AI, delivered fast.',
-  },
+  visibilitySession: { title: CONFIG.visibilitySession.title, url: CONFIG.visibilitySession.bookingUrl, price: CONFIG.visibilitySession.format, body: CONFIG.visibilitySession.body },
+  diagnosticSession: { title: CONFIG.diagnosticSession.title, url: CONFIG.diagnosticSession.page,      price: CONFIG.diagnosticSession.format, body: CONFIG.diagnosticSession.body },
+  aiBuild:           { title: CONFIG.aiBuild.title,           url: CONFIG.aiBuild.page,                price: CONFIG.aiBuild.format,           body: CONFIG.aiBuild.body },
 };
 
 
@@ -1635,10 +1669,23 @@ function escAttr(str) {
     Edit the two strings. The short version appears inline
     above any affiliate block when showAffiliate is set to true.
 
-  ── 3. GLOBAL OFFERS
-    const OFFERS = { freeResource, paidDiagnostic, customBuild, secondaryOffer }
-    These are shared across paths. Swap url: '#' for real links.
-    freeResource appears on every result page.
+  ── 3. OFFER CONFIG (single block for all paid offers)
+    const CONFIG = { visibilitySession, diagnosticSession, aiBuild, freeResource, secondaryOffer }
+
+    Each paid offer has:
+      page        ← app-native HTML page (already wired — do not change)
+      bookingUrl  ← GHL booking link (EDIT THIS when you have one)
+      inquiryUrl  ← GHL form endpoint (EDIT THIS when you have one)
+      price, format, title, body
+
+    Architecture rule:
+      App owns: all pages, forms, CTAs, thank-you states, routing
+      GHL owns: booking, payment, email sequences, automations
+
+    The three things you will add to CONFIG when ready:
+      CONFIG.visibilitySession.bookingUrl  ← already live
+      CONFIG.diagnosticSession.bookingUrl  ← replace '#' with GHL link
+      CONFIG.aiBuild.inquiryUrl            ← replace '#' with GHL form endpoint
 
   ── 4. PATH-SPECIFIC DIAGNOSES & MONETIZATION
     const DIAGNOSES = { offer_clarity, visibility, sales_system, overwhelm, implementation }
@@ -1650,10 +1697,13 @@ function escAttr(str) {
       showAffiliate   ← set to true to show affiliate block + disclosure
       freeResourceOverride ← null uses global, or { title, url, body }
 
-  ── 5. WHERE TO EDIT MONETIZATION LINKS
-    Search for: ← SWAP:
-    Every link that needs to be replaced has this comment next to it.
-    There are approximately 15–20 link slots in total.
+  ── 5. WHERE TO EDIT OFFER LINKS
+    Search for: EDIT THIS
+    Three main slots:
+      CONFIG.visibilitySession.bookingUrl  (line ~977)
+      CONFIG.diagnosticSession.bookingUrl  (line ~991)
+      CONFIG.aiBuild.inquiryUrl            (line ~1005)
+    Path-specific affiliate/secondary links: search ← SWAP:
 
   ── 6. QUESTIONS (do not edit without testing scoring)
     const QUESTIONS = [ ... ]
