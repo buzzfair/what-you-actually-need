@@ -3,10 +3,19 @@
  *  WHAT YOU ACTUALLY NEED — Tracker + Email + Notion Summary
  *  Google Apps Script Web App
  *
- *  This file does three things:
- *    1. doPost()               — receives quiz results, logs to sheet
- *    2. sendFollowUpEmail()    — sends diagnosis-specific email via Gmail
- *    3. weeklyNotionSummary()  — writes weekly distribution to Notion DB
+ *  This file does four things:
+ *    1. doPost()                   — receives quiz results OR intake submissions, routes by form_type
+ *    2. sendFollowUpEmail()        — sends diagnosis-specific email via Gmail
+ *    3. weeklyNotionSummary()      — writes weekly distribution to Notion DB
+ *    4. notifyOwnerIntake()        — emails owner when a new intake form is submitted
+ *
+ *  TWO-STAGE INTAKE ARCHITECTURE
+ *  ──────────────────────────────
+ *  Stage 1 (GHL):  Short 6-question intake collected at booking (inside GoHighLevel)
+ *  Stage 2 (App):  12-question pre-session intake at diagnostic-intake.html
+ *                  → POSTs to this script with form_type: 'diagnostic_intake'
+ *                  → Logged to a separate sheet tab (INTAKE_SHEET_NAME)
+ *                  → Owner receives notification email immediately
  *
  * ============================================================
  *  SETUP INSTRUCTIONS (one-time, ~5 minutes)
@@ -52,15 +61,20 @@
 var CONFIG = {
 
   // ── Sheet settings
-  SHEET_NAME:        'Results',          // tab name in your spreadsheet
+  SHEET_NAME:        'Results',           // tab name in your spreadsheet (quiz results)
+  INTAKE_SHEET_NAME: 'Diagnostic Intake', // tab name for pre-session long-form intake responses
+                                          // ← create this tab in your sheet before deploying
+
+  // ── Owner notification
+  OWNER_EMAIL: 'guin.white@gmail.com',    // ← EDIT: email address to notify when a new intake is submitted
 
   // ── Sender settings (used in follow-up emails)
-  SENDER_NAME:       'Guin',             // ← your name as shown in From field
-  SENDER_SUBJECT_PREFIX: '',             // ← optional prefix, e.g. '[WYAN] ' — leave '' to omit
+  SENDER_NAME:       'Guin',              // ← your name as shown in From field
+  SENDER_SUBJECT_PREFIX: '',              // ← optional prefix, e.g. '[WYAN] ' — leave '' to omit
 
   // ── Notion integration (for weekly summary)
   // Get token at https://www.notion.so/my-integrations
-  NOTION_TOKEN:       '',                // ← PASTE your Notion Internal Integration token
+  NOTION_TOKEN:       '',                 // ← PASTE your Notion Internal Integration token
   NOTION_DATABASE_ID: 'dbd6723d28b44944842f6ecd3797bc5e', // ← your Weekly Bottleneck Summary DB
 
   // ── Email delay settings (in days)
@@ -428,7 +442,31 @@ var EMAIL_SEQUENCES = {
 
 function doPost(e) {
   try {
-    var data       = JSON.parse(e.postData.contents);
+    var data = JSON.parse(e.postData.contents);
+
+    // Route by form_type
+    if (data.form_type === 'diagnostic_intake') {
+      return handleIntakeSubmission(data);
+    }
+
+    // Default: quiz result
+    return handleQuizResult(data);
+
+  } catch (err) {
+    return ContentService
+      .createTextOutput(JSON.stringify({ success: false, error: err.message }))
+      .setMimeType(ContentService.MimeType.JSON);
+  }
+}
+
+
+/* ============================================================
+   HANDLER A — handleQuizResult()
+   Receives quiz results from index.html, logs to Results sheet,
+   and schedules follow-up emails.
+============================================================ */
+function handleQuizResult(data) {
+  try {
     var sheet      = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(CONFIG.SHEET_NAME);
     var timestamp  = new Date().toISOString();
     var diagnosis  = data.diagnosis  || '';
@@ -452,6 +490,144 @@ function doPost(e) {
     return ContentService
       .createTextOutput(JSON.stringify({ success: false, error: err.message }))
       .setMimeType(ContentService.MimeType.JSON);
+  }
+}
+
+
+/* ============================================================
+   HANDLER B — handleIntakeSubmission()
+   Receives 12-question pre-session intake from diagnostic-intake.html.
+   1. Logs all fields to the 'Diagnostic Intake' sheet tab.
+   2. Sends an immediate notification email to the owner.
+
+   SETUP:
+   ──────
+   In your Google Sheet, add a tab called 'Diagnostic Intake'.
+   The script will create headers on the first submission if the
+   sheet is empty, or append rows if headers already exist.
+============================================================ */
+function handleIntakeSubmission(data) {
+  try {
+    var ss    = SpreadsheetApp.getActiveSpreadsheet();
+    var sheet = ss.getSheetByName(CONFIG.INTAKE_SHEET_NAME);
+
+    // Create sheet if it does not exist yet
+    if (!sheet) {
+      sheet = ss.insertSheet(CONFIG.INTAKE_SHEET_NAME);
+    }
+
+    // Add header row if the sheet is empty
+    if (sheet.getLastRow() === 0) {
+      sheet.appendRow([
+        'Timestamp',
+        'Full Name',
+        'Email',
+        'Website',
+        'What Feels Stuck',
+        'Session Goal',
+        'Bottleneck',
+        'Already Tried',
+        'Why Now',
+        'Business Stage',
+        'Session Need',
+        'Urgency',
+        'Support Level',
+      ]);
+      // Bold the header row
+      sheet.getRange(1, 1, 1, 13).setFontWeight('bold');
+    }
+
+    var timestamp = data.timestamp || new Date().toISOString();
+
+    // Log the intake row
+    sheet.appendRow([
+      timestamp,
+      data.full_name       || '',
+      data.email           || '',
+      data.website         || '',
+      data.what_feels_stuck || '',
+      data.session_goal    || '',
+      data.bottleneck      || '',
+      data.already_tried   || '',
+      data.why_now         || '',
+      data.business_stage  || '',
+      data.session_need    || '',
+      data.urgency         || '',
+      data.support_level   || '',
+    ]);
+
+    // Notify the owner
+    notifyOwnerIntake(data);
+
+    return ContentService
+      .createTextOutput(JSON.stringify({ success: true }))
+      .setMimeType(ContentService.MimeType.JSON);
+
+  } catch (err) {
+    return ContentService
+      .createTextOutput(JSON.stringify({ success: false, error: err.message }))
+      .setMimeType(ContentService.MimeType.JSON);
+  }
+}
+
+
+/* ============================================================
+   HANDLER B helper — notifyOwnerIntake()
+   Sends a plain-text summary email to CONFIG.OWNER_EMAIL when
+   a new pre-session intake is submitted.
+============================================================ */
+function notifyOwnerIntake(data) {
+  if (!CONFIG.OWNER_EMAIL) return;
+
+  var name      = data.full_name        || '(no name)';
+  var email     = data.email            || '(no email)';
+  var website   = data.website          || '(not provided)';
+  var stuck     = data.what_feels_stuck || '(not provided)';
+  var goal      = data.session_goal     || '(not provided)';
+  var bottleneck = data.bottleneck      || '(not provided)';
+  var tried     = data.already_tried    || '(not provided)';
+  var whyNow    = data.why_now          || '(not provided)';
+  var stage     = data.business_stage   || '(not provided)';
+  var need      = data.session_need     || '(not provided)';
+  var urgency   = data.urgency          || '(not provided)';
+  var support   = data.support_level    || '(not provided)';
+
+  var subject = 'New pre-session intake: ' + name;
+
+  var body = [
+    'A new Diagnostic Strategy Session intake has been submitted.',
+    '',
+    'Name:     ' + name,
+    'Email:    ' + email,
+    'Website:  ' + website,
+    '',
+    'What feels stuck:',
+    stuck,
+    '',
+    'Session goal:',
+    goal,
+    '',
+    'Bottleneck:    ' + bottleneck,
+    'Business stage: ' + stage,
+    'Session need:  ' + need,
+    'Urgency:       ' + urgency,
+    'Support level: ' + support,
+    '',
+    'What they have tried:',
+    tried,
+    '',
+    'Why now:',
+    whyNow,
+    '',
+    '---',
+    'View all responses: https://docs.google.com/spreadsheets/d/1VN7oqBFcjxT4MmiLOR4D09upGW8KzqREZWHslmyQZt4/edit',
+  ].join('\n');
+
+  try {
+    GmailApp.sendEmail(CONFIG.OWNER_EMAIL, subject, body);
+  } catch (err) {
+    // Fail silently — the sheet row was already saved
+    Logger.log('notifyOwnerIntake email error: ' + err.message);
   }
 }
 

@@ -1,0 +1,1147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pre-Session Intake · Diagnostic Strategy Session</title>
+  <meta name="description" content="Complete your pre-session intake for the Diagnostic Strategy Session. This helps me prepare well so our time is useful from the first minute." />
+
+  <!-- FONTS: Zodiak (display) + Work Sans (body) -->
+  <link href="https://api.fontshare.com/v2/css?f[]=zodiak@400,500,700&display=swap" rel="stylesheet" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300..700&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ============================================================
+       DESIGN TOKENS — Warm stone palette + dusty rose accent
+    ============================================================ */
+    :root,
+    [data-theme="light"] {
+      --color-bg:               #f5f3ef;
+      --color-surface:          #faf9f7;
+      --color-surface-2:        #fdfcfb;
+      --color-surface-offset:   #eeebe6;
+      --color-surface-offset-2: #e8e4de;
+      --color-divider:          #dedad3;
+      --color-border:           #d6d2ca;
+
+      --color-text:         #2a2520;
+      --color-text-muted:   #7c7872;
+      --color-text-faint:   #b5b2ac;
+      --color-text-inverse: #faf9f7;
+
+      --color-primary:           #8e4f6a;
+      --color-primary-hover:     #703d54;
+      --color-primary-active:    #542c3e;
+      --color-primary-highlight: #f0e1e8;
+
+      --color-secondary:           #5a7462;
+      --color-secondary-hover:     #445a4b;
+      --color-secondary-highlight: #dae5db;
+
+      --color-success:            #3d7a5a;
+      --color-success-highlight:  #d6ede3;
+
+      --color-warning:           #956740;
+      --color-warning-highlight: #f0e4d6;
+
+      --radius-sm:   0.375rem;
+      --radius-md:   0.5rem;
+      --radius-lg:   0.75rem;
+      --radius-xl:   1rem;
+      --radius-2xl:  1.5rem;
+      --radius-full: 9999px;
+
+      --shadow-sm: 0 1px 3px oklch(0.2 0.01 50 / 0.07);
+      --shadow-md: 0 4px 16px oklch(0.2 0.01 50 / 0.09);
+      --shadow-lg: 0 12px 40px oklch(0.2 0.01 50 / 0.13);
+
+      --font-display: 'Zodiak', 'Georgia', serif;
+      --font-body:    'Work Sans', 'Helvetica Neue', sans-serif;
+
+      --text-xs:   clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem);
+      --text-sm:   clamp(0.875rem, 0.8rem + 0.35vw, 1rem);
+      --text-base: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
+      --text-lg:   clamp(1.125rem, 1rem + 0.75vw, 1.5rem);
+      --text-xl:   clamp(1.5rem, 1.2rem + 1.25vw, 2.25rem);
+      --text-2xl:  clamp(2rem, 1.2rem + 2.5vw, 3.5rem);
+
+      --space-1:  0.25rem;
+      --space-2:  0.5rem;
+      --space-3:  0.75rem;
+      --space-4:  1rem;
+      --space-5:  1.25rem;
+      --space-6:  1.5rem;
+      --space-8:  2rem;
+      --space-10: 2.5rem;
+      --space-12: 3rem;
+      --space-16: 4rem;
+      --space-20: 5rem;
+      --space-24: 6rem;
+
+      --content-narrow:  560px;
+      --content-default: 720px;
+
+      --transition-fast:        150ms cubic-bezier(0.16, 1, 0.3, 1);
+      --transition-interactive: 180ms cubic-bezier(0.16, 1, 0.3, 1);
+      --transition-slow:        400ms cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    [data-theme="dark"] {
+      --color-bg:               #18150f;
+      --color-surface:          #1d1a14;
+      --color-surface-2:        #211d17;
+      --color-surface-offset:   #1a1710;
+      --color-surface-offset-2: #1f1c15;
+      --color-divider:          #2a271f;
+      --color-border:           #3a3730;
+      --color-text:             #d4d0c8;
+      --color-text-muted:       #7e7b74;
+      --color-text-faint:       #5a5852;
+      --color-text-inverse:     #1d1a14;
+      --color-primary:          #c48da8;
+      --color-primary-hover:    #d4a8be;
+      --color-primary-active:   #e0c2d0;
+      --color-primary-highlight: #3a2830;
+      --color-secondary:        #7da886;
+      --color-secondary-hover:  #9bbfa4;
+      --color-secondary-highlight: #1e2e22;
+      --color-success:            #7da886;
+      --color-success-highlight:  #1a2e22;
+      --color-warning:          #c49060;
+      --color-warning-highlight: #3a2c1c;
+      --shadow-sm: 0 1px 3px oklch(0 0 0 / 0.25);
+      --shadow-md: 0 4px 16px oklch(0 0 0 / 0.35);
+      --shadow-lg: 0 12px 40px oklch(0 0 0 / 0.45);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme]) {
+        --color-bg:               #18150f;
+        --color-surface:          #1d1a14;
+        --color-surface-2:        #211d17;
+        --color-surface-offset:   #1a1710;
+        --color-divider:          #2a271f;
+        --color-border:           #3a3730;
+        --color-text:             #d4d0c8;
+        --color-text-muted:       #7e7b74;
+        --color-text-faint:       #5a5852;
+        --color-text-inverse:     #1d1a14;
+        --color-primary:          #c48da8;
+        --color-primary-hover:    #d4a8be;
+        --color-primary-highlight: #3a2830;
+        --color-secondary:        #7da886;
+        --color-secondary-hover:  #9bbfa4;
+        --color-secondary-highlight: #1e2e22;
+        --color-success:            #7da886;
+        --color-success-highlight:  #1a2e22;
+        --color-warning:          #c49060;
+        --color-warning-highlight: #3a2c1c;
+        --shadow-sm: 0 1px 3px oklch(0 0 0 / 0.25);
+        --shadow-md: 0 4px 16px oklch(0 0 0 / 0.35);
+        --shadow-lg: 0 12px 40px oklch(0 0 0 / 0.45);
+      }
+    }
+
+    /* ============================================================
+       BASE RESET
+    ============================================================ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html {
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-rendering: optimizeLegibility;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      min-height: 100dvh;
+      line-height: 1.65;
+      font-family: var(--font-body);
+      font-size: var(--text-base);
+      color: var(--color-text);
+      background-color: var(--color-bg);
+      transition: background-color var(--transition-slow), color var(--transition-slow);
+    }
+
+    img, picture, video, canvas, svg { display: block; max-width: 100%; }
+    input, button, textarea, select { font: inherit; color: inherit; }
+    h1, h2, h3, h4, h5, h6 { text-wrap: balance; line-height: 1.2; font-family: var(--font-display); }
+    p, li { text-wrap: pretty; max-width: 65ch; }
+
+    ::selection { background: var(--color-primary-highlight); color: var(--color-text); }
+    :focus-visible { outline: 2px solid var(--color-primary); outline-offset: 3px; border-radius: var(--radius-sm); }
+    button { cursor: pointer; background: none; border: none; }
+    a { color: inherit; }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+    }
+
+    /* ============================================================
+       LAYOUT
+    ============================================================ */
+    .page-wrapper { min-height: 100dvh; display: flex; flex-direction: column; }
+
+    .site-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: var(--space-5) var(--space-6);
+      border-bottom: 1px solid var(--color-divider);
+      position: sticky;
+      top: 0;
+      background-color: var(--color-bg);
+      z-index: 100;
+      transition: background-color var(--transition-slow);
+    }
+
+    .site-header a {
+      font-family: var(--font-display);
+      font-size: var(--text-sm);
+      font-weight: 500;
+      text-decoration: none;
+      color: var(--color-text);
+      letter-spacing: 0.01em;
+    }
+
+    .site-header a:hover { color: var(--color-primary); }
+
+    .theme-toggle {
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: var(--color-text-muted);
+      display: flex;
+      align-items: center;
+      padding: var(--space-2);
+      border-radius: var(--radius-sm);
+      transition: color var(--transition-fast);
+    }
+
+    .theme-toggle:hover { color: var(--color-primary); }
+
+    main { flex: 1; width: 100%; }
+
+    .site-footer {
+      padding: var(--space-8) var(--space-6);
+      border-top: 1px solid var(--color-divider);
+      text-align: center;
+      font-size: var(--text-xs);
+      color: var(--color-text-faint);
+    }
+
+    .site-footer a {
+      color: var(--color-text-faint);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    .site-footer a:hover { color: var(--color-primary); }
+
+    /* ============================================================
+       HERO
+    ============================================================ */
+    .intake-hero {
+      padding: var(--space-16) var(--space-6) var(--space-12);
+      border-bottom: 1px solid var(--color-divider);
+      background: var(--color-surface);
+    }
+
+    .intake-hero-inner {
+      max-width: var(--content-narrow);
+      margin: 0 auto;
+    }
+
+    .intake-eyebrow {
+      display: inline-block;
+      font-size: var(--text-xs);
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--color-primary);
+      margin-bottom: var(--space-5);
+      padding: var(--space-2) var(--space-4);
+      background: var(--color-primary-highlight);
+      border-radius: var(--radius-full);
+    }
+
+    .intake-title {
+      font-family: var(--font-display);
+      font-size: var(--text-xl);
+      font-weight: 700;
+      color: var(--color-text);
+      margin-bottom: var(--space-5);
+      line-height: 1.2;
+    }
+
+    .intake-lede {
+      font-size: var(--text-base);
+      color: var(--color-text-muted);
+      font-weight: 300;
+      line-height: 1.7;
+      margin-bottom: var(--space-8);
+      max-width: 54ch;
+    }
+
+    .intake-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-3) var(--space-6);
+    }
+
+    .intake-meta-item {
+      font-size: var(--text-xs);
+      color: var(--color-text-faint);
+      font-weight: 500;
+      letter-spacing: 0.04em;
+    }
+
+    .intake-meta-item strong {
+      color: var(--color-text-muted);
+      font-weight: 600;
+    }
+
+    /* ============================================================
+       PROGRESS BAR
+    ============================================================ */
+    .progress-bar-wrap {
+      padding: var(--space-5) var(--space-6);
+      border-bottom: 1px solid var(--color-divider);
+      background: var(--color-bg);
+    }
+
+    .progress-bar-inner {
+      max-width: var(--content-narrow);
+      margin: 0 auto;
+    }
+
+    .progress-label {
+      font-size: var(--text-xs);
+      color: var(--color-text-faint);
+      font-weight: 500;
+      margin-bottom: var(--space-2);
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .progress-track {
+      height: 3px;
+      background: var(--color-divider);
+      border-radius: var(--radius-full);
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: var(--color-primary);
+      border-radius: var(--radius-full);
+      transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      width: 0%;
+    }
+
+    /* ============================================================
+       FORM
+    ============================================================ */
+    .form-wrap {
+      padding: var(--space-12) var(--space-6) var(--space-20);
+    }
+
+    .form-inner {
+      max-width: var(--content-narrow);
+      margin: 0 auto;
+    }
+
+    .form-group {
+      margin-bottom: var(--space-8);
+    }
+
+    .form-group:last-of-type { margin-bottom: 0; }
+
+    .form-label {
+      display: block;
+      font-family: var(--font-display);
+      font-size: var(--text-base);
+      font-weight: 500;
+      color: var(--color-text);
+      margin-bottom: var(--space-2);
+      line-height: 1.4;
+    }
+
+    .form-label-optional {
+      font-family: var(--font-body);
+      font-size: var(--text-xs);
+      font-weight: 400;
+      color: var(--color-text-faint);
+      margin-left: var(--space-2);
+      vertical-align: middle;
+    }
+
+    .form-helper {
+      display: block;
+      font-size: var(--text-sm);
+      color: var(--color-text-muted);
+      margin-bottom: var(--space-4);
+      line-height: 1.5;
+      font-weight: 300;
+    }
+
+    .form-input,
+    .form-textarea {
+      width: 100%;
+      padding: var(--space-4) var(--space-5);
+      background: var(--color-surface);
+      border: 1.5px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      font-size: var(--text-sm);
+      color: var(--color-text);
+      line-height: 1.6;
+      transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+      -webkit-appearance: none;
+      appearance: none;
+    }
+
+    .form-input:focus,
+    .form-textarea:focus {
+      outline: none;
+      border-color: var(--color-primary);
+      box-shadow: 0 0 0 3px var(--color-primary-highlight);
+    }
+
+    .form-textarea {
+      resize: vertical;
+      min-height: 110px;
+    }
+
+    .form-input::placeholder,
+    .form-textarea::placeholder {
+      color: var(--color-text-faint);
+    }
+
+    /* Radio groups */
+    .radio-group {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-2);
+    }
+
+    .radio-option {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--space-3);
+      padding: var(--space-4) var(--space-5);
+      background: var(--color-surface);
+      border: 1.5px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      cursor: pointer;
+      transition: border-color var(--transition-fast), background var(--transition-fast);
+      line-height: 1.5;
+    }
+
+    .radio-option:hover {
+      border-color: var(--color-primary);
+      background: var(--color-surface-2);
+    }
+
+    .radio-option input[type="radio"] {
+      flex-shrink: 0;
+      width: 1.125rem;
+      height: 1.125rem;
+      margin-top: 0.1em;
+      accent-color: var(--color-primary);
+      cursor: pointer;
+    }
+
+    .radio-label {
+      font-size: var(--text-sm);
+      color: var(--color-text);
+      line-height: 1.5;
+    }
+
+    .radio-option:has(input:checked) {
+      border-color: var(--color-primary);
+      background: var(--color-primary-highlight);
+    }
+
+    .radio-option:has(input:checked) .radio-label {
+      color: var(--color-text);
+      font-weight: 500;
+    }
+
+    /* Divider */
+    .form-divider {
+      border: none;
+      border-top: 1px solid var(--color-divider);
+      margin: var(--space-10) 0;
+    }
+
+    /* Section heading within form */
+    .form-section-heading {
+      font-family: var(--font-display);
+      font-size: var(--text-lg);
+      font-weight: 500;
+      color: var(--color-text);
+      margin-bottom: var(--space-2);
+    }
+
+    .form-section-intro {
+      font-size: var(--text-sm);
+      color: var(--color-text-muted);
+      line-height: 1.7;
+      margin-bottom: var(--space-8);
+      max-width: 100%;
+    }
+
+    /* Callout note */
+    .form-callout {
+      padding: var(--space-5) var(--space-6);
+      background: var(--color-warning-highlight);
+      border-radius: var(--radius-lg);
+      border-left: 3px solid var(--color-warning);
+      font-size: var(--text-sm);
+      color: var(--color-text-muted);
+      line-height: 1.7;
+      margin-bottom: var(--space-10);
+      max-width: 100%;
+    }
+
+    /* Submit */
+    .form-submit-wrap {
+      margin-top: var(--space-12);
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: var(--space-4);
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-2);
+      padding: var(--space-4) var(--space-8);
+      border-radius: var(--radius-full);
+      font-family: var(--font-body);
+      font-size: var(--text-sm);
+      font-weight: 500;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all var(--transition-interactive);
+      border: 2px solid transparent;
+      letter-spacing: 0.01em;
+    }
+
+    .btn-primary {
+      background: var(--color-primary);
+      color: var(--color-text-inverse);
+      border-color: var(--color-primary);
+    }
+
+    .btn-primary:hover {
+      background: var(--color-primary-hover);
+      border-color: var(--color-primary-hover);
+      transform: translateY(-1px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .btn-primary:active {
+      background: var(--color-primary-active);
+      border-color: var(--color-primary-active);
+      transform: translateY(0);
+    }
+
+    .btn-lg {
+      padding: var(--space-5) var(--space-10);
+      font-size: var(--text-base);
+    }
+
+    .btn:disabled,
+    .btn[aria-busy="true"] {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+
+    .form-smallprint {
+      font-size: var(--text-xs);
+      color: var(--color-text-faint);
+      line-height: 1.6;
+      max-width: 44ch;
+    }
+
+    /* Error state */
+    .field-error {
+      display: block;
+      font-size: var(--text-xs);
+      color: #b04040;
+      margin-top: var(--space-2);
+      font-weight: 500;
+    }
+
+    .form-input.has-error,
+    .form-textarea.has-error {
+      border-color: #b04040;
+    }
+
+    /* ============================================================
+       SUCCESS STATE
+    ============================================================ */
+    .success-screen {
+      display: none;
+      padding: var(--space-20) var(--space-6);
+    }
+
+    .success-screen.visible {
+      display: block;
+    }
+
+    .success-inner {
+      max-width: var(--content-narrow);
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .success-icon {
+      width: 3.5rem;
+      height: 3.5rem;
+      background: var(--color-success-highlight);
+      border-radius: var(--radius-full);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto var(--space-8);
+      color: var(--color-success);
+    }
+
+    .success-title {
+      font-family: var(--font-display);
+      font-size: var(--text-xl);
+      font-weight: 600;
+      color: var(--color-text);
+      margin-bottom: var(--space-5);
+    }
+
+    .success-body {
+      font-size: var(--text-base);
+      color: var(--color-text-muted);
+      line-height: 1.7;
+      margin-bottom: var(--space-8);
+      max-width: 48ch;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .success-link {
+      font-size: var(--text-sm);
+      color: var(--color-primary);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    .success-link:hover { color: var(--color-primary-hover); }
+
+  </style>
+</head>
+<body>
+
+  <!-- ============================================================
+       HEADER
+  ============================================================ -->
+  <div class="page-wrapper">
+
+    <header class="site-header">
+      <a href="index.html">What You Actually Need</a>
+      <button class="theme-toggle" data-theme-toggle aria-label="Toggle dark mode"></button>
+    </header>
+
+    <main>
+
+      <!-- ============================================================
+           HERO
+      ============================================================ -->
+      <div class="intake-hero">
+        <div class="intake-hero-inner">
+          <span class="intake-eyebrow">Pre-session intake</span>
+          <h1 class="intake-title">Before we meet</h1>
+          <p class="intake-lede">This form helps me prepare well so the session is useful from the first minute. It takes about 10 minutes to complete. I read every submission personally before we meet.</p>
+          <div class="intake-meta">
+            <span class="intake-meta-item"><strong>Session:</strong> Diagnostic Strategy Session</span>
+            <span class="intake-meta-item"><strong>Length:</strong> 12 questions</span>
+            <span class="intake-meta-item"><strong>Time:</strong> About 10 minutes</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ============================================================
+           PROGRESS
+      ============================================================ -->
+      <div class="progress-bar-wrap" id="progress-wrap" aria-hidden="true">
+        <div class="progress-bar-inner">
+          <div class="progress-label">
+            <span id="progress-text">Getting started</span>
+            <span id="progress-count">0 / 12</span>
+          </div>
+          <div class="progress-track">
+            <div class="progress-fill" id="progress-fill"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ============================================================
+           INTAKE FORM
+      ============================================================ -->
+      <div class="form-wrap" id="form-wrap">
+        <div class="form-inner">
+
+          <div class="form-callout">
+            If your situation looks like a better fit for a different offer or next step, I will say so before we meet. This is not a sales qualification screen — it is preparation.
+          </div>
+
+          <!-- ============================================================
+               SECTION A: CONTACT
+          ============================================================ -->
+          <h2 class="form-section-heading">About you</h2>
+          <p class="form-section-intro">Basic details so I can reach you and review your work before we meet.</p>
+
+          <form id="intake-form" novalidate>
+
+            <!-- Q1: Full name -->
+            <div class="form-group">
+              <label class="form-label" for="field-name">Full name</label>
+              <input class="form-input" type="text" id="field-name" name="full_name" required placeholder="Your full name" autocomplete="name" />
+            </div>
+
+            <!-- Q2: Best email -->
+            <div class="form-group">
+              <label class="form-label" for="field-email">Best email</label>
+              <input class="form-input" type="email" id="field-email" name="email" required placeholder="you@example.com" autocomplete="email" />
+            </div>
+
+            <!-- Q3: Website -->
+            <div class="form-group">
+              <label class="form-label" for="field-website">
+                Website or primary online presence
+                <span class="form-label-optional">optional</span>
+              </label>
+              <input class="form-input" type="text" id="field-website" name="website" placeholder="https://yoursite.com" autocomplete="url" />
+            </div>
+
+            <hr class="form-divider" />
+
+            <!-- ============================================================
+                 SECTION B: THE SITUATION
+            ============================================================ -->
+            <h2 class="form-section-heading">The situation</h2>
+            <p class="form-section-intro">Help me understand what is actually going on. Clear is more useful than polished.</p>
+
+            <!-- Q4: What feels most stuck -->
+            <div class="form-group">
+              <label class="form-label" for="field-stuck">What feels most stuck right now?</label>
+              <span class="form-helper">A few clear sentences is enough.</span>
+              <textarea class="form-textarea" id="field-stuck" name="what_feels_stuck" required rows="4" placeholder="Describe the situation in your own words..."></textarea>
+            </div>
+
+            <!-- Q5: What would make this session useful -->
+            <div class="form-group">
+              <label class="form-label" for="field-useful">What would make this session feel genuinely useful?</label>
+              <span class="form-helper">What do you want more clarity, traction, or movement around?</span>
+              <textarea class="form-textarea" id="field-useful" name="session_goal" required rows="4" placeholder="What would a good outcome look like for you?"></textarea>
+            </div>
+
+            <hr class="form-divider" />
+
+            <!-- ============================================================
+                 SECTION C: DIAGNOSIS
+            ============================================================ -->
+            <h2 class="form-section-heading">The diagnosis</h2>
+            <p class="form-section-intro">Your best guesses here are useful starting points, even if you are not certain.</p>
+
+            <!-- Q6: Which bottleneck -->
+            <div class="form-group">
+              <p class="form-label">Which bottleneck feels most likely right now?</p>
+              <div class="radio-group" role="radiogroup" aria-labelledby="q6-label">
+                <label class="radio-option">
+                  <input type="radio" name="bottleneck" value="offer_clarity" required />
+                  <span class="radio-label">Offer clarity</span>
+                </label>
+                <label class="radio-option">
+                  <input type="radio" name="bottleneck" value="visibility" />
+                  <span class="radio-label">Visibility</span>
+                </label>
+                <label class="radio-option">
+                  <input type="radio" name="bottleneck" value="sales_system" />
+                  <span class="radio-label">Sales system / follow-up</span>
+                </label>
+                <label class="radio-option">
+                  <input type="radio" name="bottleneck" value="overwhelm" />
+                  <span class="radio-label">Overwhelm / decision fatigue</span>
+                </label>
+                <label class="radio-option">
+                  <input type="radio" name="bottleneck" value="implementation" />
+                  <span class="radio-label">Implementation / execution friction</span>
+                </label>
+                <label class="radio-option">
+                  <input type="radio" name="bottleneck" value="not_sure" />
+                  <span class="radio-label">I am not sure</span>
+                </label>
+              </div>
+            </div>
+
+            <!-- Q7: What have you tried -->
+            <div class="form-group">
+              <label class="form-label" for="field-tried">
+                What have you already tried to solve this?
+                <span class="form-label-optional">optional</span>
+              </label>
+              <span class="form-helper">Include programs, tools, advice, systems, or strategies if relevant.</span>
+              <textarea class="form-textarea" id="field-tried" name="already_tried" rows="4" placeholder="What have you already attempted or invested in?"></textarea>
+            </div>
+
+            <!-- Q8: Why does this matter now -->
+            <div class="form-group">
+              <label class="form-label" for="field-why-now">Why does this matter now?</label>
+              <span class="form-helper">What has made this worth addressing at this point?</span>
+              <textarea class="form-textarea" id="field-why-now" name="why_now" required rows="3" placeholder="What shifted, or what is the cost of leaving this unaddressed?"></textarea>
+            </div>
+
+            <hr class="form-divider" />
+
+            <!-- ============================================================
+                 SECTION D: CONTEXT
+            ============================================================ -->
+            <h2 class="form-section-heading">Context</h2>
+            <p class="form-section-intro">This helps me calibrate what kind of next step actually makes sense for where you are.</p>
+
+            <!-- Q9: Business stage -->
+            <div class="form-group">
+              <p class="form-label">Which best describes your current business stage?</p>
+              <div class="radio-group" role="radiogroup">
+                <label class="radio-option">
+                  <input type="radio" name="business_stage" value="inconsistent_growth" required />
+                  <span class="radio-label">I have an offer and some clients, but growth feels inconsistent</span>
+                </label>
+                <label class="radio-option">
+                  <input type="radio" name="business_stage" value="stalled" />
+                  <span class="radio-label">I have traction, but something important is leaking or stalled</span>
+                </label>
+                <label class="radio-option">
+                  <input type="radio" name="business_stage" value="messy_backend" />
+                  <span class="radio-label">I have demand, but the backend or execution is messy</span>
+                </label>
+                <label class="radio-option">
+                  <input type="radio" name="business_stage" value="established_unclear" />
+                  <span class="radio-label">I am established, but the next move feels unclear</span>
+                </label>
+                <label class="radio-option">
+                  <input type="radio" name="business_stage" value="none_fit" />
+                  <span class="radio-label">None of these fits cleanly</span>
+                </label>
+              </div>
+            </div>
+
+            <!-- Q10: What do you most need -->
+            <div class="form-group">
+              <p class="form-label">What do you most need from this session?</p>
+              <div class="radio-group" role="radiogroup">
+                <label class="radio-option">
+                  <input type="radio" name="session_need" value="diagnosis" required />
+                  <span class="radio-label">Clear diagnosis</span>
+                </label>
+                <label class="radio-option">
+                  <input type="radio" name="session_need" value="prioritization" />
+                  <span class="radio-label">Prioritization</span>
+                </label>
+                <label class="radio-option">
+                  <input type="radio" name="session_need" value="next_step_plan" />
+                  <span class="radio-label">A next-step plan</span>
+                </label>
+                <label class="radio-option">
+                  <input type="radio" name="session_need" value="offer_messaging" />
+                  <span class="radio-label">Offer / messaging clarity</span>
+                </label>
+                <label class="radio-option">
+                  <input type="radio" name="session_need" value="system_rec" />
+                  <span class="radio-label">A better system recommendation</span>
+                </label>
+                <label class="radio-option">
+                  <input type="radio" name="session_need" value="not_sure_yet" />
+                  <span class="radio-label">I am not sure yet</span>
+                </label>
+              </div>
+            </div>
+
+            <!-- Q11: Urgency -->
+            <div class="form-group">
+              <p class="form-label">How urgent is this?</p>
+              <div class="radio-group" role="radiogroup">
+                <label class="radio-option">
+                  <input type="radio" name="urgency" value="immediately" required />
+                  <span class="radio-label">I want to address this immediately</span>
+                </label>
+                <label class="radio-option">
+                  <input type="radio" name="urgency" value="2_weeks" />
+                  <span class="radio-label">Within the next 2 weeks</span>
+                </label>
+                <label class="radio-option">
+                  <input type="radio" name="urgency" value="30_days" />
+                  <span class="radio-label">Within the next 30 days</span>
+                </label>
+                <label class="radio-option">
+                  <input type="radio" name="urgency" value="exploring" />
+                  <span class="radio-label">I am exploring, but not ready yet</span>
+                </label>
+              </div>
+            </div>
+
+            <!-- Q12: Level of support -->
+            <div class="form-group">
+              <p class="form-label">If the right next step becomes clear, which level of support feels most realistic?</p>
+              <div class="radio-group" role="radiogroup">
+                <label class="radio-option">
+                  <input type="radio" name="support_level" value="free_self_guided" required />
+                  <span class="radio-label">Free resource or self-guided support</span>
+                </label>
+                <label class="radio-option">
+                  <input type="radio" name="support_level" value="paid_session" />
+                  <span class="radio-label">A paid strategy or diagnostic session</span>
+                </label>
+                <label class="radio-option">
+                  <input type="radio" name="support_level" value="done_with_for_you" />
+                  <span class="radio-label">A done-with-you or done-for-you build</span>
+                </label>
+                <label class="radio-option">
+                  <input type="radio" name="support_level" value="not_sure" />
+                  <span class="radio-label">I am not sure yet</span>
+                </label>
+              </div>
+            </div>
+
+            <!-- SUBMIT -->
+            <div class="form-submit-wrap">
+              <button type="submit" id="submit-btn" class="btn btn-primary btn-lg">Submit intake form</button>
+              <p class="form-smallprint">Your responses go directly to me. They are used to prepare for your session, not for marketing.</p>
+            </div>
+
+          </form><!-- /#intake-form -->
+
+        </div><!-- /.form-inner -->
+      </div><!-- /.form-wrap -->
+
+      <!-- ============================================================
+           SUCCESS SCREEN
+      ============================================================ -->
+      <div class="success-screen" id="success-screen" role="status" aria-live="polite">
+        <div class="success-inner">
+          <div class="success-icon" aria-hidden="true">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+          </div>
+          <h2 class="success-title">Intake received</h2>
+          <p class="success-body">Your pre-session intake is complete. I will review it before we meet and come prepared. If anything stands out that is worth noting before the session, I will be in touch.</p>
+          <a href="diagnostic-strategy-session.html" class="success-link">Back to the session page</a>
+        </div>
+      </div>
+
+    </main>
+
+    <footer class="site-footer">
+      Part of <a href="index.html">What You Actually Need</a> &middot; <a href="https://guinwhite.com" target="_blank" rel="noopener">guinwhite.com</a>
+    </footer>
+
+  </div><!-- /.page-wrapper -->
+
+  <script>
+    /* ============================================================
+       CONFIG
+       EDIT THESE to update submission endpoint and redirect behaviour.
+    ============================================================ */
+
+    // EDIT THIS: Google Apps Script Web App URL for intake form logging
+    // Deploy the updated tracker-script.js as a new Web App deployment, then paste the URL here.
+    const INTAKE_ENDPOINT = 'https://script.google.com/macros/s/AKfycbyT8bzH-iml7V8mY7aJVMwwODC994tAaxU96_VPuI1YbIgreuKkEKZgu6JYLL065DpvRQ/exec';
+
+    // EDIT THIS: sheet tab name for intake responses (must match INTAKE_SHEET_NAME in Apps Script)
+    const INTAKE_SHEET = 'Diagnostic Intake';
+
+    /* ============================================================
+       PROGRESS TRACKING
+    ============================================================ */
+    const REQUIRED_FIELDS = [
+      'full_name', 'email',
+      'what_feels_stuck', 'session_goal',
+      'bottleneck', 'why_now',
+      'business_stage', 'session_need', 'urgency', 'support_level'
+    ];
+
+    function countCompleted() {
+      let count = 0;
+      REQUIRED_FIELDS.forEach(function(name) {
+        const els = document.querySelectorAll('[name="' + name + '"]');
+        if (!els.length) return;
+        if (els[0].type === 'radio') {
+          const checked = document.querySelector('[name="' + name + '"]:checked');
+          if (checked) count++;
+        } else {
+          if (els[0].value && els[0].value.trim() !== '') count++;
+        }
+      });
+      return count;
+    }
+
+    function updateProgress() {
+      const completed = countCompleted();
+      const total = REQUIRED_FIELDS.length;
+      const pct = Math.round((completed / total) * 100);
+      const fill = document.getElementById('progress-fill');
+      const text = document.getElementById('progress-text');
+      const countEl = document.getElementById('progress-count');
+      if (fill) fill.style.width = pct + '%';
+      if (countEl) countEl.textContent = completed + ' / ' + total;
+      if (text) {
+        if (pct === 0) text.textContent = 'Getting started';
+        else if (pct < 40) text.textContent = 'Making progress';
+        else if (pct < 80) text.textContent = 'Almost there';
+        else if (pct < 100) text.textContent = 'Nearly complete';
+        else text.textContent = 'Ready to submit';
+      }
+    }
+
+    // Attach change/input listeners for progress
+    document.getElementById('intake-form').addEventListener('input', updateProgress);
+    document.getElementById('intake-form').addEventListener('change', updateProgress);
+
+    /* ============================================================
+       FORM SUBMISSION
+    ============================================================ */
+    document.getElementById('intake-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const form = e.target;
+      const submitBtn = document.getElementById('submit-btn');
+
+      // Client-side validation
+      let valid = true;
+      const requiredTextFields = ['full_name', 'email', 'what_feels_stuck', 'session_goal', 'why_now'];
+      const requiredRadioGroups = ['bottleneck', 'business_stage', 'session_need', 'urgency', 'support_level'];
+
+      // Clear previous errors
+      form.querySelectorAll('.field-error').forEach(function(el) { el.remove(); });
+      form.querySelectorAll('.has-error').forEach(function(el) { el.classList.remove('has-error'); });
+
+      requiredTextFields.forEach(function(name) {
+        const el = form.querySelector('[name="' + name + '"]');
+        if (!el || !el.value.trim()) {
+          valid = false;
+          if (el) {
+            el.classList.add('has-error');
+            const err = document.createElement('span');
+            err.className = 'field-error';
+            err.textContent = 'This field is required.';
+            el.parentNode.insertBefore(err, el.nextSibling);
+          }
+        }
+      });
+
+      requiredRadioGroups.forEach(function(name) {
+        const checked = form.querySelector('[name="' + name + '"]:checked');
+        if (!checked) {
+          valid = false;
+          const firstRadio = form.querySelector('[name="' + name + '"]');
+          if (firstRadio) {
+            const group = firstRadio.closest('.form-group');
+            if (group) {
+              const existing = group.querySelector('.field-error');
+              if (!existing) {
+                const err = document.createElement('span');
+                err.className = 'field-error';
+                err.textContent = 'Please select one option.';
+                group.appendChild(err);
+              }
+            }
+          }
+        }
+      });
+
+      if (!valid) {
+        const firstErr = form.querySelector('.has-error, .field-error');
+        if (firstErr) firstErr.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        return;
+      }
+
+      // Collect data
+      const data = {
+        form_type: 'diagnostic_intake',
+        sheet: INTAKE_SHEET,
+        timestamp: new Date().toISOString(),
+        full_name:       (form.querySelector('[name="full_name"]') || {}).value || '',
+        email:           (form.querySelector('[name="email"]') || {}).value || '',
+        website:         (form.querySelector('[name="website"]') || {}).value || '',
+        what_feels_stuck: (form.querySelector('[name="what_feels_stuck"]') || {}).value || '',
+        session_goal:    (form.querySelector('[name="session_goal"]') || {}).value || '',
+        bottleneck:      ((form.querySelector('[name="bottleneck"]:checked') || {}).value) || '',
+        already_tried:   (form.querySelector('[name="already_tried"]') || {}).value || '',
+        why_now:         (form.querySelector('[name="why_now"]') || {}).value || '',
+        business_stage:  ((form.querySelector('[name="business_stage"]:checked') || {}).value) || '',
+        session_need:    ((form.querySelector('[name="session_need"]:checked') || {}).value) || '',
+        urgency:         ((form.querySelector('[name="urgency"]:checked') || {}).value) || '',
+        support_level:   ((form.querySelector('[name="support_level"]:checked') || {}).value) || '',
+      };
+
+      // Disable submit while in flight
+      submitBtn.disabled = true;
+      submitBtn.setAttribute('aria-busy', 'true');
+      submitBtn.textContent = 'Submitting...';
+
+      // POST to Apps Script
+      fetch(INTAKE_ENDPOINT, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      })
+      .then(function() {
+        showSuccess();
+      })
+      .catch(function(err) {
+        console.error('Intake submission error:', err);
+        // Show success anyway — no-cors means we cannot read the response,
+        // so failures are silent. If you need error handling, use a CORS-enabled endpoint.
+        showSuccess();
+      });
+    });
+
+    function showSuccess() {
+      document.getElementById('form-wrap').style.display = 'none';
+      document.getElementById('progress-wrap').style.display = 'none';
+      const screen = document.getElementById('success-screen');
+      screen.classList.add('visible');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    /* ============================================================
+       DARK MODE
+    ============================================================ */
+    (function(){
+      const root = document.documentElement;
+      let theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      root.setAttribute('data-theme', theme);
+      const toggle = document.querySelector('[data-theme-toggle]');
+      const MOON = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
+      const SUN  = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>';
+      if (toggle) {
+        toggle.innerHTML = theme === 'dark' ? SUN : MOON;
+        toggle.addEventListener('click', function() {
+          theme = theme === 'dark' ? 'light' : 'dark';
+          root.setAttribute('data-theme', theme);
+          toggle.innerHTML = theme === 'dark' ? SUN : MOON;
+        });
+      }
+    })();
+
+  </script>
+</body>
+</html>

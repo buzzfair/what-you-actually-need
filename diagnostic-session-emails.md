@@ -1,4 +1,55 @@
-# Diagnostic Strategy Session — Nurture Email Sequence
+# Diagnostic Strategy Session — Emails
+
+This file contains two sections:
+1. **Post-booking confirmation email** — sent automatically by GoHighLevel immediately after booking. Contains the intake link.
+2. **Nurture email sequence** — sent to quiz result recipients to move them toward booking.
+
+---
+
+## POST-BOOKING EMAIL (GoHighLevel)
+
+This email is sent by GoHighLevel immediately after a booking is confirmed. It contains the link to the long-form pre-session intake in the app.
+
+**Where to set this up in GHL:**
+Calendar → Diagnostic Strategy Session calendar → Notifications → Booking Confirmation → Edit the confirmation email template
+
+**Subject:** Your Diagnostic Strategy Session is confirmed — one short form before we meet
+
+**Preview text:** Takes about 10 minutes. Helps me prepare.
+
+---
+
+**Body copy:**
+
+Your session is confirmed. I will be there and I will come prepared.
+
+Before we meet, I need you to complete a short pre-session intake. It takes about 10 minutes. It covers 12 questions about your current situation, what you have already tried, and what you most want to get out of the session.
+
+This is not optional — it is how I prepare. Without it, I am starting from scratch.
+
+**Complete the pre-session intake here:**
+
+[INTAKE LINK]
+
+https://app.guinwhite.com/diagnostic-intake.html
+
+If you have questions before the session, reply to this email.
+
+Guin
+
+---
+
+**Implementation notes:**
+
+- Replace `[INTAKE LINK]` with your actual intake URL once the domain is live.
+- The canonical URL for the intake form is: `https://app.guinwhite.com/diagnostic-intake.html`
+- The intake form submits to the Google Apps Script endpoint and notifies guin.white@gmail.com on completion.
+- In GHL, set this as the booking confirmation email under: Calendar → Diagnostic Strategy Session → Notifications → Appointment Confirmation.
+- Apply the tag `booked-diagnostic-session` on booking to suppress this contact from the nurture sequence below.
+
+---
+
+## NURTURE EMAIL SEQUENCE
 
 **Scope:** Applies to four diagnosis paths: offer_clarity, sales_system, overwhelm, implementation.  
 **Goal:** Move qualified leads from quiz result to booked Diagnostic Strategy Session ($297).  
@@ -35,7 +86,7 @@ It is 60 minutes. It is $297. It is focused entirely on your situation.
 More on what it actually looks like in a few days. For now, just sit with the result. See if it resonates.
 
 **Primary CTA label:** Book a Diagnostic Strategy Session  
-**Primary CTA link:** [DIAGNOSTIC_BOOKING_URL]
+**Primary CTA link:** https://link.aibizconnection.com/widget/bookings/diagnostic-strategy-session
 
 ---
 
@@ -75,7 +126,7 @@ Misdiagnosis is not a character flaw. It is what happens when you are too close 
 That is exactly what the Diagnostic Strategy Session is designed to cut through.
 
 **Primary CTA label:** Book a Diagnostic Strategy Session  
-**Primary CTA link:** [DIAGNOSTIC_BOOKING_URL]
+**Primary CTA link:** https://link.aibizconnection.com/widget/bookings/diagnostic-strategy-session
 
 ---
 
@@ -115,7 +166,7 @@ But if the quiz flagged a real bottleneck, the question worth sitting with is: h
 A 60-minute session to get that clear is not a big investment relative to another quarter of motion in the wrong direction.
 
 **Primary CTA label:** Book a Diagnostic Strategy Session  
-**Primary CTA link:** [DIAGNOSTIC_BOOKING_URL]
+**Primary CTA link:** https://link.aibizconnection.com/widget/bookings/diagnostic-strategy-session
 
 ---
 
@@ -156,7 +207,7 @@ Before you book something, you should know what you are getting into. Here is ex
 If you have been sitting on this, that is understandable. Most people book within a week or two of the quiz, but there is no expiration on the invitation.
 
 **Primary CTA label:** Book your session  
-**Primary CTA link:** [DIAGNOSTIC_BOOKING_URL]
+**Primary CTA link:** https://link.aibizconnection.com/widget/bookings/diagnostic-strategy-session
 
 ---
 
@@ -194,7 +245,7 @@ If you are not sure whether the session applies to your situation, that uncertai
 There is no follow-up pressure after this email. The booking link stays open. Whenever you are ready, it is there.
 
 **Primary CTA label:** Book the Diagnostic Strategy Session  
-**Primary CTA link:** [DIAGNOSTIC_BOOKING_URL]
+**Primary CTA link:** https://link.aibizconnection.com/widget/bookings/diagnostic-strategy-session
 
 ---
 
@@ -210,7 +261,7 @@ There is no follow-up pressure after this email. The booking link stays open. Wh
 ## Where to edit
 
 ### Booking URL
-All five emails contain the placeholder `[DIAGNOSTIC_BOOKING_URL]`. Replace this with the live GHL calendar link for the Diagnostic Strategy Session once the calendar is published. Confirm the link works end-to-end (calendar shows available times, payment collects $297, confirmation email fires) before activating the sequence.
+All five emails contain the placeholder `https://link.aibizconnection.com/widget/bookings/diagnostic-strategy-session`. Live booking link: https://link.aibizconnection.com/widget/bookings/diagnostic-strategy-session — confirm payment collects $297 and confirmation email fires before activating the sequence.
 
 ### Segmenting by diagnosis path in GoHighLevel
 

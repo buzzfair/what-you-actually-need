@@ -82,15 +82,29 @@ The three outbound connections from the app to GHL:
 
 ---
 
-### Diagnostic Strategy Session Intake
+### Diagnostic Strategy Session Intake — Two-Stage Architecture
+
+The intake is now a two-stage system. GHL owns stage 1 (short form at booking). The app owns stage 2 (long form, post-booking).
+
+**Stage 1 — GHL short intake (6 questions, collected at booking)**
 | Field | Detail |
 |---|---|
-| Name | Diagnostic Strategy Session — Pre-Session Intake |
-| Purpose | Collect context on offer, stage, and previous attempts before the session |
-| Fields | Full name, business/practice name, current offer(s) and price point(s) (open text), current monthly revenue range (dropdown: pre-revenue, under $2k, $2k-$5k, $5k-$10k, $10k+), diagnosis path from quiz (auto-populated if passed via URL param; otherwise dropdown: offer clarity / sales system / overwhelm / implementation), what have you already tried to address this bottleneck (open text), what would a successful outcome from this session look like (open text), anything else relevant (optional open text) |
-| Where used | Attached to Diagnostic Strategy Session calendar; sent automatically after booking confirmation |
+| Purpose | Minimal qualification at the moment of booking. Fast, no friction. |
+| Fields | Full name, email, business/practice name, current monthly revenue range (dropdown: pre-revenue / under $2k / $2k–$5k / $5k–$10k / $10k+), diagnosis path from quiz (dropdown if not auto-populated), is there anything you want me to know before the session (optional open text) |
+| Where used | Attached to Diagnostic Strategy Session calendar in GHL. Submits on booking. |
 | Required now | Yes — attach to calendar before treating as live |
-| Notes | If diagnosis path can be passed from the quiz app via URL parameter (e.g., `?path=offer_clarity`), use a hidden field to auto-populate. Otherwise collect it in the form dropdown. |
+| Notes | Keep this short. The full intake happens in the app after booking. |
+
+**Stage 2 — App long intake (12 questions, post-booking, at `diagnostic-intake.html`)**
+| Field | Detail |
+|---|---|
+| Purpose | Deep preparation. Logged to Google Sheets. Owner notified on submission. |
+| URL | `https://app.guinwhite.com/diagnostic-intake.html` |
+| Fields | Full name, email, website, what feels stuck, session goal, bottleneck (radio), what they have tried, why now, business stage (radio), session need (radio), urgency (radio), support level (radio) |
+| Submission target | Google Apps Script endpoint — logs to ‘Diagnostic Intake’ sheet tab, sends notification email to guin.white@gmail.com |
+| Where used | Link is sent in the GHL booking confirmation email. See diagnostic-session-emails.md for exact email copy. |
+| Required now | App page is live. Wire the intake link into the GHL booking confirmation email. |
+| Notes | App owns the design and UX. GHL owns the contact record and the email sending. The two stages are complementary, not duplicative. |
 
 ---
 

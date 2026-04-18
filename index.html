@@ -987,8 +987,9 @@ const CONFIG = {
     title:    'Diagnostic Strategy Session',
     price:    '$297',
     format:   '60 minutes · $297 · virtual',
-    page:     'diagnostic-strategy-session.html',          // app-native sales + intake form page
-    bookingUrl: '#',                                        // EDIT THIS: GHL booking link — Diagnostic Strategy Session
+    page:     'diagnostic-strategy-session.html',          // app-native sales page
+    bookingUrl: 'https://link.aibizconnection.com/widget/bookings/diagnostic-strategy-session', // EDIT THIS: GHL booking link — Diagnostic Strategy Session
+    intakeUrl:  'diagnostic-intake.html',                  // EDIT THIS: app-native long-form pre-session intake (sent via post-booking email)
     body:     'A focused 60-minute session to identify your real bottleneck, rule out the wrong fixes, and set a clear next step. $297.',
   },
 
@@ -1684,7 +1685,7 @@ function escAttr(str) {
 
     The three things you will add to CONFIG when ready:
       CONFIG.visibilitySession.bookingUrl  ← already live
-      CONFIG.diagnosticSession.bookingUrl  ← replace '#' with GHL link
+      CONFIG.diagnosticSession.bookingUrl  ← live: https://link.aibizconnection.com/widget/bookings/diagnostic-strategy-session
       CONFIG.aiBuild.inquiryUrl            ← replace '#' with GHL form endpoint
 
   ── 4. PATH-SPECIFIC DIAGNOSES & MONETIZATION

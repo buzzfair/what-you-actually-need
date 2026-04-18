@@ -63,7 +63,7 @@ Use the primary finding from the session to determine the recommended next step.
 **Positioning:** The first session did useful work. It also revealed that the situation is more layered than the initial diagnosis suggested. A second session picks up exactly where we left off, with full context, and moves toward a clear recommended path.
 
 **CTA label:** Book a Second Diagnostic Session  
-**Link:** [DIAGNOSTIC_BOOKING_URL]
+**Link:** https://link.aibizconnection.com/widget/bookings/diagnostic-strategy-session
 
 ---
 

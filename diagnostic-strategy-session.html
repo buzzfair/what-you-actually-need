@@ -1275,218 +1275,22 @@
     </section>
 
     <!-- ============================================================
-         SECTION 10: INTAKE FORM
+         SECTION 10: AFTER BOOKING — INTAKE LINK
     ============================================================ -->
     <section class="form-section" id="intake-form-section">
       <div class="form-inner">
-        <p class="section-label">Prepare for your session</p>
-        <h2 class="section-title">Prepare for your session</h2>
-        <p class="form-intro">This form helps me prepare well so the session is useful from the first minute. I review each submission personally. If your situation looks like a better fit for a different offer, I will say so before we meet.</p>
+        <p class="section-label">After you book</p>
+        <h2 class="section-title">After you book</h2>
+        <p class="form-intro">Once your booking is confirmed, you will receive an email with a link to a short pre-session intake form. That form is how I prepare for your specific situation so the session is useful from the first minute.</p>
         <div class="form-callout">
-          This session is directional, not absolute. The goal is to help you stop buying the wrong solution and identify the right next move with more precision.
+          The intake takes about 10 minutes and covers 12 questions about your current situation, what has already been tried, and what you most need from the session. I review every submission personally.
         </div>
 
-        <!-- EDIT THIS: form action URL — replace with GoHighLevel form embed or webhook endpoint -->
-        <!-- EDIT THIS: redirect after submit — replace DIAGNOSTIC_THANKYOU_URL with your confirmation page -->
-        <form action="#" method="POST" id="diagnostic-intake-form">
-
-          <!-- 1. Full name -->
-          <div class="form-group">
-            <label class="form-label" for="field-name">Full name</label>
-            <input class="form-input" type="text" id="field-name" name="full_name" required placeholder="Your full name" autocomplete="name" />
-          </div>
-
-          <!-- 2. Best email -->
-          <div class="form-group">
-            <label class="form-label" for="field-email">Best email</label>
-            <input class="form-input" type="email" id="field-email" name="email" required placeholder="you@example.com" autocomplete="email" />
-          </div>
-
-          <!-- 3. Website -->
-          <div class="form-group">
-            <label class="form-label" for="field-website">Website or primary online presence <span class="form-label-optional">optional</span></label>
-            <input class="form-input" type="text" id="field-website" name="website" placeholder="https://yoursite.com" autocomplete="url" />
-          </div>
-
-          <hr class="form-divider" />
-
-          <!-- 4. What feels most stuck -->
-          <div class="form-group">
-            <label class="form-label" for="field-stuck">What feels most stuck right now?</label>
-            <span class="form-helper">A few clear sentences is enough.</span>
-            <textarea class="form-textarea" id="field-stuck" name="what_feels_stuck" required rows="4"></textarea>
-          </div>
-
-          <!-- 5. What would make session useful -->
-          <div class="form-group">
-            <label class="form-label" for="field-useful">What would make this session feel genuinely useful?</label>
-            <span class="form-helper">What do you want more clarity, traction, or movement around?</span>
-            <textarea class="form-textarea" id="field-useful" name="session_goal" required rows="4"></textarea>
-          </div>
-
-          <hr class="form-divider" />
-
-          <!-- 6. Which bottleneck -->
-          <div class="form-group">
-            <p class="form-label">Which bottleneck feels most likely right now?</p>
-            <div class="radio-group">
-              <label class="radio-option">
-                <input type="radio" name="bottleneck" value="offer_clarity" required />
-                <span class="radio-label">Offer clarity</span>
-              </label>
-              <label class="radio-option">
-                <input type="radio" name="bottleneck" value="visibility" />
-                <span class="radio-label">Visibility</span>
-              </label>
-              <label class="radio-option">
-                <input type="radio" name="bottleneck" value="sales_system" />
-                <span class="radio-label">Sales system / follow-up</span>
-              </label>
-              <label class="radio-option">
-                <input type="radio" name="bottleneck" value="overwhelm" />
-                <span class="radio-label">Overwhelm / decision fatigue</span>
-              </label>
-              <label class="radio-option">
-                <input type="radio" name="bottleneck" value="implementation" />
-                <span class="radio-label">Implementation / execution friction</span>
-              </label>
-              <label class="radio-option">
-                <input type="radio" name="bottleneck" value="not_sure" />
-                <span class="radio-label">I am not sure</span>
-              </label>
-            </div>
-          </div>
-
-          <!-- 7. What have you tried -->
-          <div class="form-group">
-            <label class="form-label" for="field-tried">What have you already tried to solve this? <span class="form-label-optional">optional</span></label>
-            <span class="form-helper">Include programs, tools, advice, systems, or strategies if relevant.</span>
-            <textarea class="form-textarea" id="field-tried" name="already_tried" rows="4"></textarea>
-          </div>
-
-          <!-- 8. Why does this matter now -->
-          <div class="form-group">
-            <label class="form-label" for="field-why-now">Why does this matter now?</label>
-            <span class="form-helper">What has made this worth addressing at this point?</span>
-            <textarea class="form-textarea" id="field-why-now" name="why_now" required rows="3"></textarea>
-          </div>
-
-          <hr class="form-divider" />
-
-          <!-- 9. Business stage -->
-          <div class="form-group">
-            <p class="form-label">Which best describes your current business stage?</p>
-            <div class="radio-group">
-              <label class="radio-option">
-                <input type="radio" name="business_stage" value="inconsistent_growth" required />
-                <span class="radio-label">I have an offer and some clients, but growth feels inconsistent</span>
-              </label>
-              <label class="radio-option">
-                <input type="radio" name="business_stage" value="stalled" />
-                <span class="radio-label">I have traction, but something important is leaking or stalled</span>
-              </label>
-              <label class="radio-option">
-                <input type="radio" name="business_stage" value="messy_backend" />
-                <span class="radio-label">I have demand, but the backend or execution is messy</span>
-              </label>
-              <label class="radio-option">
-                <input type="radio" name="business_stage" value="established_unclear" />
-                <span class="radio-label">I am established, but the next move feels unclear</span>
-              </label>
-              <label class="radio-option">
-                <input type="radio" name="business_stage" value="none_fit" />
-                <span class="radio-label">None of these fits cleanly</span>
-              </label>
-            </div>
-          </div>
-
-          <!-- 10. What do you most need -->
-          <div class="form-group">
-            <p class="form-label">What do you most need from this session?</p>
-            <div class="radio-group">
-              <label class="radio-option">
-                <input type="radio" name="session_need" value="diagnosis" required />
-                <span class="radio-label">Clear diagnosis</span>
-              </label>
-              <label class="radio-option">
-                <input type="radio" name="session_need" value="prioritization" />
-                <span class="radio-label">Prioritization</span>
-              </label>
-              <label class="radio-option">
-                <input type="radio" name="session_need" value="next_step_plan" />
-                <span class="radio-label">A next-step plan</span>
-              </label>
-              <label class="radio-option">
-                <input type="radio" name="session_need" value="offer_messaging" />
-                <span class="radio-label">Offer / messaging clarity</span>
-              </label>
-              <label class="radio-option">
-                <input type="radio" name="session_need" value="system_rec" />
-                <span class="radio-label">A better system recommendation</span>
-              </label>
-              <label class="radio-option">
-                <input type="radio" name="session_need" value="not_sure_yet" />
-                <span class="radio-label">I am not sure yet</span>
-              </label>
-            </div>
-          </div>
-
-          <!-- 11. Urgency -->
-          <div class="form-group">
-            <p class="form-label">How urgent is this?</p>
-            <div class="radio-group">
-              <label class="radio-option">
-                <input type="radio" name="urgency" value="immediately" required />
-                <span class="radio-label">I want to address this immediately</span>
-              </label>
-              <label class="radio-option">
-                <input type="radio" name="urgency" value="2_weeks" />
-                <span class="radio-label">Within the next 2 weeks</span>
-              </label>
-              <label class="radio-option">
-                <input type="radio" name="urgency" value="30_days" />
-                <span class="radio-label">Within the next 30 days</span>
-              </label>
-              <label class="radio-option">
-                <input type="radio" name="urgency" value="exploring" />
-                <span class="radio-label">I am exploring, but not ready yet</span>
-              </label>
-            </div>
-          </div>
-
-          <!-- 12. Level of support -->
-          <div class="form-group">
-            <p class="form-label">If the right next step becomes clear, which level of support feels most realistic?</p>
-            <div class="radio-group">
-              <label class="radio-option">
-                <input type="radio" name="support_level" value="free_self_guided" required />
-                <span class="radio-label">Free resource or self-guided support</span>
-              </label>
-              <label class="radio-option">
-                <input type="radio" name="support_level" value="paid_session" />
-                <span class="radio-label">A paid strategy or diagnostic session</span>
-              </label>
-              <label class="radio-option">
-                <input type="radio" name="support_level" value="done_with_for_you" />
-                <span class="radio-label">A done-with-you or done-for-you build</span>
-              </label>
-              <label class="radio-option">
-                <input type="radio" name="support_level" value="not_sure" />
-                <span class="radio-label">I am not sure yet</span>
-              </label>
-            </div>
-          </div>
-
-          <div class="form-submit-wrap">
-            <button type="submit" id="form-submit-btn" class="btn btn-primary btn-lg">Continue to book the session</button>
-            <p class="form-smallprint">This inquiry is directional, not absolute. The goal is to help you stop buying the wrong solution and identify the right next move with more precision.</p>
-          </div>
-
-        </form>
-
-        <p class="skip-form-link" style="margin-top: var(--space-6);">
-          Prefer to book directly? <a id="skip-form-link" href="#">Skip the form and book your session</a>
-        </p>
+        <!-- EDIT THIS (optional): add a direct intake link here once you have the full app URL, e.g. https://app.guinwhite.com/diagnostic-intake.html -->
+        <div style="margin-top: var(--space-8); display: flex; flex-direction: column; align-items: flex-start; gap: var(--space-4);">
+          <a id="hero-cta-2" href="#" class="btn btn-primary btn-lg">Book the Diagnostic Strategy Session</a>
+          <p style="font-size: var(--text-xs); color: var(--color-text-faint); max-width: 44ch; line-height: 1.6;">The intake link arrives in your confirmation email immediately after booking.</p>
+        </div>
       </div>
     </section>
 
@@ -1549,7 +1353,7 @@
     // EDIT THIS: diagnostic session flat price (used throughout this page)
     const DIAGNOSTIC_PRICE = 297;
     // EDIT THIS: diagnostic session booking link
-    const DIAGNOSTIC_BOOKING_URL = '#'; // replace with GoHighLevel or Calendly link
+    const DIAGNOSTIC_BOOKING_URL = 'https://link.aibizconnection.com/widget/bookings/diagnostic-strategy-session'; // EDIT THIS: Diagnostic Strategy Session booking link
     // EDIT THIS: post-booking redirect URL
     const DIAGNOSTIC_THANKYOU_URL = 'diagnostic-thankyou.html';
 
@@ -1558,25 +1362,12 @@
       // All CTA buttons and links that use DIAGNOSTIC_BOOKING_URL
       const bookingEls = [
         document.getElementById('hero-cta'),
+        document.getElementById('hero-cta-2'),
         document.getElementById('final-cta-btn'),
-        document.getElementById('skip-form-link'),
       ];
       bookingEls.forEach(function(el) {
         if (el) el.setAttribute('href', DIAGNOSTIC_BOOKING_URL);
       });
-
-      // Form submit redirect
-      const form = document.getElementById('diagnostic-intake-form');
-      if (form) {
-        form.setAttribute('action', DIAGNOSTIC_BOOKING_URL);
-        form.addEventListener('submit', function(e) {
-          // If you need custom redirect behaviour, handle here.
-          // Default: let form POST to action URL and rely on server redirect.
-          // If using a JS-only approach, uncomment:
-          // e.preventDefault();
-          // window.location.href = DIAGNOSTIC_THANKYOU_URL;
-        });
-      }
     })();
 
     /* ============================================================
