@@ -682,7 +682,7 @@
         <div class="progress-bar-inner">
           <div class="progress-label">
             <span id="progress-text">Getting started</span>
-            <span id="progress-count">0 / 12</span>
+            <span id="progress-count">0 / 8</span>
           </div>
           <div class="progress-track">
             <div class="progress-fill" id="progress-fill"></div>
@@ -735,76 +735,86 @@
                  SECTION B: THE SITUATION
             ============================================================ -->
             <h2 class="form-section-heading">The situation</h2>
-            <p class="form-section-intro">Help me understand what is actually going on. Clear is more useful than polished.</p>
+            <p class="form-section-intro">Clear and honest is more useful than polished. I read every response.</p>
 
-            <!-- Q4: What feels most stuck -->
+            <!-- Q4: What feels most stuck or unresolved -->
             <div class="form-group">
-              <label class="form-label" for="field-stuck">What feels most stuck right now?</label>
-              <span class="form-helper">A few clear sentences is enough.</span>
-              <textarea class="form-textarea" id="field-stuck" name="what_feels_stuck" required rows="4" placeholder="Describe the situation in your own words..."></textarea>
+              <label class="form-label" for="field-stuck">What feels most stuck or unresolved right now?</label>
+              <span class="form-helper">Describe the situation in your own words. A few clear sentences is enough.</span>
+              <textarea class="form-textarea" id="field-stuck" name="what_is_stuck" required rows="4" placeholder="What's the situation you want to work through?"></textarea>
             </div>
 
-            <!-- Q5: What would make this session useful -->
+            <!-- Q5: Impact -->
             <div class="form-group">
-              <label class="form-label" for="field-useful">What would make this session feel genuinely useful?</label>
-              <span class="form-helper">What do you want more clarity, traction, or movement around?</span>
-              <textarea class="form-textarea" id="field-useful" name="session_goal" required rows="4" placeholder="What would a good outcome look like for you?"></textarea>
+              <label class="form-label" for="field-impact">What does staying stuck here cost you — in time, money, energy, or opportunity?</label>
+              <span class="form-helper">Be specific if you can.</span>
+              <textarea class="form-textarea" id="field-impact" name="impact" required rows="3" placeholder="What's the real cost of leaving this unaddressed?"></textarea>
+            </div>
+
+            <!-- Q6: Why now -->
+            <div class="form-group">
+              <label class="form-label" for="field-why-now">Why does this matter right now, specifically?</label>
+              <span class="form-helper">What shifted, or what has made this worth addressing at this point?</span>
+              <textarea class="form-textarea" id="field-why-now" name="why_now" required rows="3" placeholder="What changed, or what's the pressure?"></textarea>
             </div>
 
             <hr class="form-divider" />
 
             <!-- ============================================================
-                 SECTION C: DIAGNOSIS
+                 SECTION C: THE DIAGNOSIS
             ============================================================ -->
             <h2 class="form-section-heading">The diagnosis</h2>
-            <p class="form-section-intro">Your best guesses here are useful starting points, even if you are not certain.</p>
+            <p class="form-section-intro">These questions help me understand which pattern is most likely driving what you're experiencing.</p>
 
-            <!-- Q6: Which bottleneck -->
+            <!-- Q7: Bottleneck guess -->
             <div class="form-group">
-              <p class="form-label">Which bottleneck feels most likely right now?</p>
-              <div class="radio-group" role="radiogroup" aria-labelledby="q6-label">
+              <p class="form-label">Which of these sounds most like your situation right now?</p>
+              <div class="radio-group" role="radiogroup">
                 <label class="radio-option">
-                  <input type="radio" name="bottleneck" value="offer_clarity" required />
-                  <span class="radio-label">Offer clarity</span>
+                  <input type="radio" name="bottleneck_guess" value="offer_clarity" required />
+                  <span class="radio-label">My offer or message isn't landing the way I expected</span>
                 </label>
                 <label class="radio-option">
-                  <input type="radio" name="bottleneck" value="visibility" />
-                  <span class="radio-label">Visibility</span>
+                  <input type="radio" name="bottleneck_guess" value="visibility" />
+                  <span class="radio-label">I'm not getting in front of enough of the right people</span>
                 </label>
                 <label class="radio-option">
-                  <input type="radio" name="bottleneck" value="sales_system" />
-                  <span class="radio-label">Sales system / follow-up</span>
+                  <input type="radio" name="bottleneck_guess" value="sales_system" />
+                  <span class="radio-label">Interest exists, but it's not converting to clients or revenue</span>
                 </label>
                 <label class="radio-option">
-                  <input type="radio" name="bottleneck" value="overwhelm" />
-                  <span class="radio-label">Overwhelm / decision fatigue</span>
+                  <input type="radio" name="bottleneck_guess" value="overwhelm" />
+                  <span class="radio-label">I'm carrying too much and can't find traction on anything</span>
                 </label>
                 <label class="radio-option">
-                  <input type="radio" name="bottleneck" value="implementation" />
-                  <span class="radio-label">Implementation / execution friction</span>
+                  <input type="radio" name="bottleneck_guess" value="implementation" />
+                  <span class="radio-label">I know what I should do, but I'm not doing it</span>
                 </label>
                 <label class="radio-option">
-                  <input type="radio" name="bottleneck" value="not_sure" />
-                  <span class="radio-label">I am not sure</span>
+                  <input type="radio" name="bottleneck_guess" value="none_fit" />
+                  <span class="radio-label">None of these fits cleanly</span>
                 </label>
               </div>
             </div>
 
-            <!-- Q7: What have you tried -->
+            <!-- Q8: Already tried -->
             <div class="form-group">
               <label class="form-label" for="field-tried">
-                What have you already tried to solve this?
+                What have you already tried to address this?
                 <span class="form-label-optional">optional</span>
               </label>
-              <span class="form-helper">Include programs, tools, advice, systems, or strategies if relevant.</span>
+              <span class="form-helper">Include programs, coaches, tools, frameworks, or strategies — anything relevant.</span>
               <textarea class="form-textarea" id="field-tried" name="already_tried" rows="4" placeholder="What have you already attempted or invested in?"></textarea>
             </div>
 
-            <!-- Q8: Why does this matter now -->
+            <!-- Q9: What is working -->
             <div class="form-group">
-              <label class="form-label" for="field-why-now">Why does this matter now?</label>
-              <span class="form-helper">What has made this worth addressing at this point?</span>
-              <textarea class="form-textarea" id="field-why-now" name="why_now" required rows="3" placeholder="What shifted, or what is the cost of leaving this unaddressed?"></textarea>
+              <label class="form-label" for="field-working">
+                What IS working, even if the overall situation feels stuck?
+                <span class="form-label-optional">optional</span>
+              </label>
+              <span class="form-helper">This helps me avoid recommending things you already have in place.</span>
+              <textarea class="form-textarea" id="field-working" name="what_is_working" rows="3" placeholder="What's already solid, even if other things aren't?"></textarea>
             </div>
 
             <hr class="form-divider" />
@@ -813,27 +823,27 @@
                  SECTION D: CONTEXT
             ============================================================ -->
             <h2 class="form-section-heading">Context</h2>
-            <p class="form-section-intro">This helps me calibrate what kind of next step actually makes sense for where you are.</p>
+            <p class="form-section-intro">This helps me calibrate what kind of next step would actually fit where you are.</p>
 
-            <!-- Q9: Business stage -->
+            <!-- Q10: Business stage -->
             <div class="form-group">
-              <p class="form-label">Which best describes your current business stage?</p>
+              <p class="form-label">Which best describes where you are in your business right now?</p>
               <div class="radio-group" role="radiogroup">
                 <label class="radio-option">
-                  <input type="radio" name="business_stage" value="inconsistent_growth" required />
+                  <input type="radio" name="business_stage" value="early_traction" required />
                   <span class="radio-label">I have an offer and some clients, but growth feels inconsistent</span>
                 </label>
                 <label class="radio-option">
-                  <input type="radio" name="business_stage" value="stalled" />
+                  <input type="radio" name="business_stage" value="leaking" />
                   <span class="radio-label">I have traction, but something important is leaking or stalled</span>
                 </label>
                 <label class="radio-option">
                   <input type="radio" name="business_stage" value="messy_backend" />
-                  <span class="radio-label">I have demand, but the backend or execution is messy</span>
+                  <span class="radio-label">I have demand, but delivery or operations feel messy</span>
                 </label>
                 <label class="radio-option">
                   <input type="radio" name="business_stage" value="established_unclear" />
-                  <span class="radio-label">I am established, but the next move feels unclear</span>
+                  <span class="radio-label">I'm established, but the next move feels unclear</span>
                 </label>
                 <label class="radio-option">
                   <input type="radio" name="business_stage" value="none_fit" />
@@ -842,81 +852,21 @@
               </div>
             </div>
 
-            <!-- Q10: What do you most need -->
+            <!-- Q11: Session goal -->
             <div class="form-group">
-              <p class="form-label">What do you most need from this session?</p>
-              <div class="radio-group" role="radiogroup">
-                <label class="radio-option">
-                  <input type="radio" name="session_need" value="diagnosis" required />
-                  <span class="radio-label">Clear diagnosis</span>
-                </label>
-                <label class="radio-option">
-                  <input type="radio" name="session_need" value="prioritization" />
-                  <span class="radio-label">Prioritization</span>
-                </label>
-                <label class="radio-option">
-                  <input type="radio" name="session_need" value="next_step_plan" />
-                  <span class="radio-label">A next-step plan</span>
-                </label>
-                <label class="radio-option">
-                  <input type="radio" name="session_need" value="offer_messaging" />
-                  <span class="radio-label">Offer / messaging clarity</span>
-                </label>
-                <label class="radio-option">
-                  <input type="radio" name="session_need" value="system_rec" />
-                  <span class="radio-label">A better system recommendation</span>
-                </label>
-                <label class="radio-option">
-                  <input type="radio" name="session_need" value="not_sure_yet" />
-                  <span class="radio-label">I am not sure yet</span>
-                </label>
-              </div>
+              <label class="form-label" for="field-session-goal">What would make this session feel genuinely useful?</label>
+              <span class="form-helper">What do you want more clarity, traction, or resolution around by the end?</span>
+              <textarea class="form-textarea" id="field-session-goal" name="session_goal" required rows="4" placeholder="What would a good outcome look like for you?"></textarea>
             </div>
 
-            <!-- Q11: Urgency -->
+            <!-- Q12: Anything else -->
             <div class="form-group">
-              <p class="form-label">How urgent is this?</p>
-              <div class="radio-group" role="radiogroup">
-                <label class="radio-option">
-                  <input type="radio" name="urgency" value="immediately" required />
-                  <span class="radio-label">I want to address this immediately</span>
-                </label>
-                <label class="radio-option">
-                  <input type="radio" name="urgency" value="2_weeks" />
-                  <span class="radio-label">Within the next 2 weeks</span>
-                </label>
-                <label class="radio-option">
-                  <input type="radio" name="urgency" value="30_days" />
-                  <span class="radio-label">Within the next 30 days</span>
-                </label>
-                <label class="radio-option">
-                  <input type="radio" name="urgency" value="exploring" />
-                  <span class="radio-label">I am exploring, but not ready yet</span>
-                </label>
-              </div>
-            </div>
-
-            <!-- Q12: Level of support -->
-            <div class="form-group">
-              <p class="form-label">If the right next step becomes clear, which level of support feels most realistic?</p>
-              <div class="radio-group" role="radiogroup">
-                <label class="radio-option">
-                  <input type="radio" name="support_level" value="free_self_guided" required />
-                  <span class="radio-label">Free resource or self-guided support</span>
-                </label>
-                <label class="radio-option">
-                  <input type="radio" name="support_level" value="paid_session" />
-                  <span class="radio-label">A paid strategy or diagnostic session</span>
-                </label>
-                <label class="radio-option">
-                  <input type="radio" name="support_level" value="done_with_for_you" />
-                  <span class="radio-label">A done-with-you or done-for-you build</span>
-                </label>
-                <label class="radio-option">
-                  <input type="radio" name="support_level" value="not_sure" />
-                  <span class="radio-label">I am not sure yet</span>
-                </label>
-              </div>
+              <label class="form-label" for="field-anything-else">
+                Is there anything important I should know before we meet?
+                <span class="form-label-optional">optional</span>
+              </label>
+              <span class="form-helper">Anything that would help me prepare, or that didn't fit above.</span>
+              <textarea class="form-textarea" id="field-anything-else" name="anything_else" rows="3" placeholder="Anything else worth knowing?"></textarea>
             </div>
 
             <!-- SUBMIT -->
@@ -972,9 +922,9 @@
     ============================================================ */
     const REQUIRED_FIELDS = [
       'full_name', 'email',
-      'what_feels_stuck', 'session_goal',
-      'bottleneck', 'why_now',
-      'business_stage', 'session_need', 'urgency', 'support_level'
+      'what_is_stuck', 'impact', 'why_now',
+      'bottleneck_guess',
+      'business_stage', 'session_goal'
     ];
 
     function countCompleted() {
@@ -1025,8 +975,8 @@
 
       // Client-side validation
       let valid = true;
-      const requiredTextFields = ['full_name', 'email', 'what_feels_stuck', 'session_goal', 'why_now'];
-      const requiredRadioGroups = ['bottleneck', 'business_stage', 'session_need', 'urgency', 'support_level'];
+      const requiredTextFields = ['full_name', 'email', 'what_is_stuck', 'impact', 'why_now', 'session_goal'];
+      const requiredRadioGroups = ['bottleneck_guess', 'business_stage'];
 
       // Clear previous errors
       form.querySelectorAll('.field-error').forEach(function(el) { el.remove(); });
@@ -1077,18 +1027,18 @@
         form_type: 'diagnostic_intake',
         sheet: INTAKE_SHEET,
         timestamp: new Date().toISOString(),
-        full_name:       (form.querySelector('[name="full_name"]') || {}).value || '',
-        email:           (form.querySelector('[name="email"]') || {}).value || '',
-        website:         (form.querySelector('[name="website"]') || {}).value || '',
-        what_feels_stuck: (form.querySelector('[name="what_feels_stuck"]') || {}).value || '',
-        session_goal:    (form.querySelector('[name="session_goal"]') || {}).value || '',
-        bottleneck:      ((form.querySelector('[name="bottleneck"]:checked') || {}).value) || '',
-        already_tried:   (form.querySelector('[name="already_tried"]') || {}).value || '',
-        why_now:         (form.querySelector('[name="why_now"]') || {}).value || '',
-        business_stage:  ((form.querySelector('[name="business_stage"]:checked') || {}).value) || '',
-        session_need:    ((form.querySelector('[name="session_need"]:checked') || {}).value) || '',
-        urgency:         ((form.querySelector('[name="urgency"]:checked') || {}).value) || '',
-        support_level:   ((form.querySelector('[name="support_level"]:checked') || {}).value) || '',
+        full_name:        (form.querySelector('[name="full_name"]') || {}).value || '',
+        email:            (form.querySelector('[name="email"]') || {}).value || '',
+        website:          (form.querySelector('[name="website"]') || {}).value || '',
+        what_is_stuck:    (form.querySelector('[name="what_is_stuck"]') || {}).value || '',
+        impact:           (form.querySelector('[name="impact"]') || {}).value || '',
+        why_now:          (form.querySelector('[name="why_now"]') || {}).value || '',
+        bottleneck_guess: ((form.querySelector('[name="bottleneck_guess"]:checked') || {}).value) || '',
+        already_tried:    (form.querySelector('[name="already_tried"]') || {}).value || '',
+        what_is_working:  (form.querySelector('[name="what_is_working"]') || {}).value || '',
+        business_stage:   ((form.querySelector('[name="business_stage"]:checked') || {}).value) || '',
+        session_goal:     (form.querySelector('[name="session_goal"]') || {}).value || '',
+        anything_else:    (form.querySelector('[name="anything_else"]') || {}).value || '',
       };
 
       // Disable submit while in flight
