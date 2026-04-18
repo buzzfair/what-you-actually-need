@@ -2,29 +2,26 @@
 
 A calm, diagnostic web app that helps coaches, consultants, introverted founders, and solo experts stop buying the wrong solution and identify what they actually need next.
 
+**Live app:** [app.guinwhite.com](http://app.guinwhite.com)
+**Fallback:** [buzzfair.github.io/what-you-actually-need](https://buzzfair.github.io/what-you-actually-need/)
+
 ---
 
-## Overview
+## What It Does
 
-Most stuck business owners do not have a motivation problem. They have a misdiagnosis problem. They keep buying the next course, coach, or rebrand when what they actually need is a sharper offer, a consistent visibility rhythm, a follow-up system, or someone to build the thing they already know they should build.
+Eight targeted questions. One of five result paths. A specific diagnosis, a free resource, and a recommended next step — not a generic pitch.
 
-This app is a structured diagnostic tool. It asks eight targeted questions, scores the responses, and routes each user to one of five result paths with a clear, specific next step and relevant resource recommendations.
-
-It is not a lead magnet that ends in a generic sales pitch. It is a decision tool designed to build trust through accuracy.
+The app is a decision tool designed to build trust through accuracy. It is not a lead magnet.
 
 ---
 
 ## Who It's For
 
-- Introverted coaches, consultants, and solo experts
-- Founders who are smart, overwhelmed, and tired of buying the wrong solution
-- Business owners in the $50K–$500K range who already know a lot but are stuck at a specific bottleneck
+Introverted coaches, consultants, and solo experts in the $50K–$500K range who are stuck at a specific bottleneck and buying the wrong solutions.
 
 ---
 
 ## Diagnostic Paths
-
-Each user lands on one of five result pages based on their score:
 
 | Path | Core Diagnosis |
 |---|---|
@@ -34,195 +31,202 @@ Each user lands on one of five result pages based on their score:
 | **Overwhelm** | You are not behind. You are overextended. |
 | **Implementation** | You already know enough. The issue is execution friction. |
 
-Each result page includes: short diagnosis, longer explanation, what they probably do not need, what they likely need next, a best next move this week, a primary CTA, a secondary recommendation block, and an optional affiliate disclosure.
+Each result includes: diagnosis, explanation, what to stop pursuing, what to do instead, a best next move, a primary CTA, a free resource link, and a secondary recommendation.
 
 ---
 
-## Features
+## Architecture
 
-- Eight diagnostic multiple-choice questions, one at a time
-- Behind-the-scenes scoring that routes to five distinct result paths
-- Optional email capture before results (no hard gate — skip is always available)
-- Google Sheets result tracker (via Apps Script Web App endpoint)
-- Automated Gmail follow-up sequences: 3 emails per diagnosis path (immediate, day 3, day 7)
-- Weekly Notion summary of bottleneck distribution for audience analytics
-- Fully editable monetization config: affiliate links, paid offer links, CTA copy
-- Affiliate disclosure block shown only when `showAffiliate: true` per path
-- Light and dark mode (system preference + manual toggle)
-- Mobile-friendly, single-page static HTML — no build step, no dependencies
+### App owns the user experience
 
----
-
-## Project Structure
-
-```
-what-you-actually-need/
-├── index.html           # The entire app — HTML, CSS, and JS in one file
-├── tracker-script.js    # Google Apps Script for result tracking + Gmail + Notion
-├── email-sequences.md   # Human-readable copy for all 15 follow-up emails
-└── README.md            # This file
-```
-
----
-
-## Run Locally
-
-No build step required. Open `index.html` in any browser:
-
-```bash
-open index.html
-```
-
-Or serve it with any static server:
-
-```bash
-npx serve .
-# then visit http://localhost:3000
-```
-
-The app is fully functional offline. The Google Sheets tracker and Gmail sequences require the Apps Script endpoint to be deployed (see `tracker-script.js`).
-
----
-
-## Customize
-
-All customizable content lives inside the `<script>` block in `index.html`. Look for the section labeled:
-
-```
-CUSTOMIZATION SECTION — EDIT THIS BLOCK
-```
-
-### Result copy
-
-Find `const DIAGNOSES = { ... }`
-
-Each of the five diagnosis keys (`offer_clarity`, `visibility`, `sales_system`, `overwhelm`, `implementation`) has:
-
-| Field | What it controls |
+| File | Role |
 |---|---|
-| `pathName` | Bold headline at top of results page |
-| `shortDiagnosis` | One-sentence diagnosis |
-| `explanation` | Longer paragraph |
-| `dontNeed` | What they probably do not need |
-| `doNeed` | What they likely need next |
-| `bestNextMove` | Action-oriented sentence for this week |
+| `index.html` | Full diagnostic app — 8-question quiz, scoring, 5 result paths, routing logic |
+| `visibility-planning-session.html` | Offer page — Visibility Planning Session |
+| `diagnostic-strategy-session.html` | Offer page — Diagnostic Strategy Session |
+| `ai-build-sprint.html` | Offer page — AI Build Sprint |
+| `diagnostic-intake.html` | Long-form pre-session intake (12 questions, standalone) |
+| `ai-build-intake.html` | Long-form pre-sprint intake (12 questions, standalone) |
+| `diagnostic-thankyou.html` | Post-intake confirmation page — Diagnostic session |
+| `build-thankyou.html` | Post-intake confirmation page — AI Build Sprint |
+| `offer-clarity-mini-audit.html` | Free resource — Offer Clarity path |
+| `calm-visibility-rhythm-planner.html` | Free resource — Visibility path |
+| `noise-reduction-reset.html` | Free resource — Overwhelm path |
+| `execution-friction-finder.html` | Free resource — Implementation path |
+| `follow-up-leak-finder.html` | Free resource — Sales System path |
 
-### CTA labels and URLs
+### GHL owns the backend
 
-Inside each diagnosis object:
+GoHighLevel handles:
+- Booking calendars and payment collection
+- Short intake questions at booking (6 questions per session)
+- CRM contact creation and tagging
+- Post-booking confirmation emails (with app intake link)
+- Nurture email sequences
+- Workflow automation
+
+**Do not rebuild any user-facing experience inside GHL.** The app handles everything the user sees.
+
+### Google Sheets / Apps Script owns response logging
+
+Long-form intake submissions (both Diagnostic and AI Build) post to a shared Apps Script web app endpoint. The script routes by `form_type`, logs to the appropriate sheet tab, and sends an owner notification email.
+
+- Sheet: [What You Actually Need — Responses](https://docs.google.com/spreadsheets/d/1VN7oqBFcjxT4MmiLOR4D09upGW8KzqREZWHslmyQZt4/edit)
+- Script source: `tracker-script.js`
+- Sheet tabs: `Results`, `Diagnostic Intake`, `AI Build Intake`
+
+---
+
+## Paid Offers
+
+| Offer | Price | Booking |
+|---|---|---|
+| Visibility Planning Session | 60 min · $297 · virtual | [Book](https://link.aibizconnection.com/widget/bookings/visibility-planning-session) |
+| Diagnostic Strategy Session | 60 min · $297 · virtual | [Book](https://link.aibizconnection.com/widget/bookings/diagnostic-strategy-session) |
+| AI Build Sprint | Starting at $750 · fixed scope · virtual | [Book](https://link.aibizconnection.com/widget/bookings/ai-sprint-session) |
+
+---
+
+## Two-Stage Intake Architecture
+
+Both paid sessions use a two-stage intake system:
+
+**Stage 1 — GHL (at booking)**
+Six short questions collected inside GoHighLevel when the person books. Minimal friction. Purpose: basic qualification and context.
+
+**Stage 2 — App (post-booking)**
+Long-form intake linked in the GHL booking confirmation email. 12 questions. Hosted in the app. Submissions go to Google Sheets and trigger an owner notification.
+
+| Session | Long-form intake URL |
+|---|---|
+| Diagnostic Strategy Session | `https://app.guinwhite.com/diagnostic-intake.html` |
+| AI Build Sprint | `https://app.guinwhite.com/ai-build-intake.html` |
+
+---
+
+## Key Config Locations
+
+### index.html — top-level CONFIG block (~line 965)
 
 ```js
-ctaLabel:    'Clarify the offer',
-ctaUrl:      '#',  // ← SWAP: your URL here
-ctaSupportText: 'Start with the message before you push harder on marketing.',
+const CONFIG = {
+  visibilitySession: {
+    bookingUrl: '...',   // GHL booking link
+  },
+  diagnosticSession: {
+    bookingUrl: '...',   // GHL booking link
+    intakeUrl:  'diagnostic-intake.html',
+  },
+  aiBuild: {
+    bookingUrl: '...',   // GHL booking link
+    intakeUrl:  'ai-build-intake.html',
+  },
+}
 ```
 
-### Affiliate and tool recommendations
+All three booking URLs are live. Search for `EDIT THIS` in any file to find editable values.
 
-Each diagnosis has:
+### diagnostic-strategy-session.html — page-level config (~line 1353)
 
 ```js
-primaryOffer:  { title, url, body }   // shown in the main CTA section
-secondaryRec:  { title, url, body }   // shown below CTA
-affiliateRec:  { title, url, body }   // shown only when showAffiliate: true
-showAffiliate: false                  // ← set true to reveal affiliate block + disclosure
+const DIAGNOSTIC_BOOKING_URL = '...';  // wires all CTAs on the page
 ```
 
-### Custom build offers
-
-Set `primaryOffer.url` or `secondaryRec.url` to your custom build or DFY service page.
-
-### Disclosure text
-
-Find `const DISCLOSURE = { short, long }` and edit the two strings.
-
-### Free resource (global)
-
-Find `const OFFERS = { freeResource: { title, url, body } }` — shown on every result page. Override per-path with `freeResourceOverride` inside a diagnosis.
-
-### Brand config
+### ai-build-sprint.html — page-level config (~line 913)
 
 ```js
-const BRAND = {
-  name: 'Quietly Influential',
-  url:  'https://guinwhite.com',
-};
+const AI_BUILD_BOOKING_URL = '...';    // wires all CTAs on the page
+```
+
+### diagnostic-intake.html and ai-build-intake.html — intake config
+
+```js
+const INTAKE_ENDPOINT = '...';         // Apps Script Web App URL
+const SHEET_TAB_NAME  = '...';         // sheet tab name (must match tracker-script.js)
 ```
 
 ---
 
-## Monetization Notes
+## tracker-script.js — Routing Table
 
-Every link in the app that can be monetized has a `← SWAP:` comment beside it in the script block. There are approximately 20 link slots across five paths. Search for `← SWAP:` in `index.html` to find them all.
+| form_type | Handler | Sheet Tab |
+|---|---|---|
+| (default / quiz result) | `handleQuizResult()` | Results |
+| `diagnostic_intake` | `handleIntakeSubmission()` | Diagnostic Intake |
+| `ai_build_intake` | `handleAiBuildIntake()` | AI Build Intake |
 
-Recommended monetization pattern:
-- **Offer Clarity path** — paid diagnostic or positioning audit first
-- **Visibility path** — affiliate email platform or planning product first
-- **Sales System path** — affiliate CRM or DFY follow-up build first
-- **Overwhelm path** — paid reset diagnostic or simplification session first
-- **Implementation path** — custom AI build offer first
-
-Affiliate disclosures appear inline, above the affiliate block, only when `showAffiliate: true` is set.
-
----
-
-## Result Tracker (Google Sheets + Gmail + Notion)
-
-See `tracker-script.js` for the full setup. Summary:
-
-1. Deploy the script as a Google Apps Script Web App
-2. Paste the Web App URL into `index.html` as `TRACKER_ENDPOINT`
-3. Add your Notion integration token to `CONFIG.NOTION_TOKEN`
-4. Set up two triggers: `processEmailQueue` (daily) and `weeklyNotionSummary` (weekly)
-
-The tracker logs diagnosis, score breakdown, and optional email to a Google Sheet. If an email is captured, it automatically sends a three-email follow-up sequence via Gmail. The weekly function writes a bottleneck distribution summary to a Notion database.
-
-Email copy lives in the `EMAIL_SEQUENCES` block inside `tracker-script.js`.
+**To activate the AI Build intake handler:** paste the updated `tracker-script.js` into Apps Script, deploy as a new version, and confirm the Web App URL matches what is in `ai-build-intake.html`.
 
 ---
 
 ## Deployment
 
-### Live URLs
+### Hosting
+
+GitHub Pages, branch: `main`, root directory.
 
 | URL | Status |
 |---|---|
-| **https://app.guinwhite.com** | Custom domain — canonical live URL |
-| **https://buzzfair.github.io/what-you-actually-need/** | Default GitHub Pages URL (fallback) |
+| `http://app.guinwhite.com` | Live — custom domain |
+| `https://app.guinwhite.com` | Pending — Let's Encrypt cert provisioning by GitHub |
+| `https://buzzfair.github.io/what-you-actually-need/` | Live fallback |
 
-This app is deployed on the subdomain `app.guinwhite.com` so it lives independently from the main website at `guinwhite.com`. The main website DNS is not affected.
+HTTPS will activate automatically once GitHub Pages verifies the custom domain DNS. DNS is fully propagated. Go to Settings → Pages → enable "Enforce HTTPS" once the checkbox becomes active.
 
-### Static hosting (any provider)
+### Custom domain
 
-Upload `index.html` to any static host — Netlify, Vercel, Cloudflare Pages, GitHub Pages, or S3.
+- `CNAME` file at repo root contains: `app.guinwhite.com`
+- DNS: `app.guinwhite.com` CNAME → `www.buzzfair.github.io`
+- Do not delete the `CNAME` file — GitHub Pages will lose the custom domain
 
-### GitHub Pages
+### Run locally
 
-This repository is published via GitHub Pages from the `main` branch root. The default Pages URL is:
+No build step. Open any file directly in a browser or use a static server:
 
-**https://app.guinwhite.com**
-
-The custom domain `app.guinwhite.com` is configured in GitHub Pages settings and via the `CNAME` file in the repo root. Once the DNS CNAME record is added at your registrar, `app.guinwhite.com` will serve the app.
-
-### Domain configuration
-
-The custom subdomain is set in two places:
-- `CNAME` file in the repo root (contains `app.guinwhite.com`)
-- GitHub Pages settings under Settings → Pages → Custom domain
-
-This is a subdomain-only configuration. The `@` and `www` records for `guinwhite.com` are not touched.
-
-To verify or update: go to [github.com/buzzfair/what-you-actually-need/settings/pages](https://github.com/buzzfair/what-you-actually-need/settings/pages).
+```bash
+npx serve .
+```
 
 ---
 
-## Notes
+## GHL Implementation Status
 
-- This is intentionally a single-file app. No frameworks, no build tools, no dependencies.
-- The scoring logic and question copy should not be changed without re-testing all five result paths.
-- The app is designed to work even if the tracker endpoint is not configured — tracking fails silently and never blocks the user.
-- All copy, CTAs, and monetization links can be swapped without touching the HTML structure or CSS.
+| Item | Status |
+|---|---|
+| Visibility Planning Session calendar | Live (confirm payment + intake attached) |
+| Diagnostic Strategy Session calendar | Live |
+| AI Sprint Session calendar | Live |
+| Diagnostic confirmation workflow + email | Pending — build in GHL Automations |
+| AI Build Sprint confirmation workflow + email | Pending — build in GHL Automations |
+| Short intake forms (6 questions per session) | Pending — attach in calendar settings |
+| Apps Script redeployment (AI Build handler) | Pending — deploy updated tracker-script.js |
+
+See `ghl-workflow-setup.md` for full copy-paste workflow specs.
+See `ghl-implementation-plan.md` for full GHL architecture notes.
+See `diagnostic-session-emails.md` for Diagnostic confirmation email + nurture sequence.
+See `ai-build-sprint-emails.md` for AI Build confirmation email + short intake questions.
 
 ---
 
-*Built for [Guin White](https://guinwhite.com) — Quietly Influential*
+## Design Notes
+
+- Single-page static HTML files — no framework, no build tool, no dependencies
+- Embedded CSS and JS per file
+- Design tokens: warm stone palette (`#f5f3ef` bg, `#8e4f6a` primary)
+- Typography: Zodiak display + Work Sans body
+- Light and dark mode (system preference + manual toggle)
+- Mobile-first, psychologically safe, non-coercive tone throughout
+- Voice: direct, intelligent, grounded, incisive, slightly contrarian, non-promotional
+
+---
+
+## Repo Notes
+
+- Scoring logic: A → offer_clarity, B → visibility, C → sales_system, D (Q1/Q5/Q7) → overwhelm, D (Q2/Q3/Q4/Q6/Q8) → implementation
+- Tiebreak priority: offer_clarity > visibility > sales_system > overwhelm > implementation
+- Tracker endpoint fails silently — never blocks the user
+- All monetization links marked `← SWAP:` in the script block; search to find them
+
+---
+
+*Built for [Guin White](https://guinwhite.com)*
