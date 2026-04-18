@@ -1,0 +1,1050 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Visibility Planning Session — What You Actually Need</title>
+  <meta name="description" content="A 60-minute strategic planning session to identify your clearest visibility path, reduce noise, and create a plan you can actually sustain. $297." />
+
+  <!-- FONTS: Zodiak (display) + Work Sans (body) -->
+  <link href="https://api.fontshare.com/v2/css?f[]=zodiak@400,500,700&display=swap" rel="stylesheet" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300..700&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ============================================================
+       DESIGN TOKENS — Warm stone palette + dusty rose accent
+    ============================================================ */
+    :root,
+    [data-theme="light"] {
+      --color-bg:               #f5f3ef;
+      --color-surface:          #faf9f7;
+      --color-surface-2:        #fdfcfb;
+      --color-surface-offset:   #eeebe6;
+      --color-surface-offset-2: #e8e4de;
+      --color-divider:          #dedad3;
+      --color-border:           #d6d2ca;
+
+      --color-text:         #2a2520;
+      --color-text-muted:   #7c7872;
+      --color-text-faint:   #b5b2ac;
+      --color-text-inverse: #faf9f7;
+
+      --color-primary:           #8e4f6a;
+      --color-primary-hover:     #703d54;
+      --color-primary-active:    #542c3e;
+      --color-primary-highlight: #f0e1e8;
+
+      --color-secondary:           #5a7462;
+      --color-secondary-hover:     #445a4b;
+      --color-secondary-highlight: #dae5db;
+
+      --color-warning:           #956740;
+      --color-warning-highlight: #f0e4d6;
+
+      --radius-sm:   0.375rem;
+      --radius-md:   0.5rem;
+      --radius-lg:   0.75rem;
+      --radius-xl:   1rem;
+      --radius-2xl:  1.5rem;
+      --radius-full: 9999px;
+
+      --transition-fast:        150ms cubic-bezier(0.16, 1, 0.3, 1);
+      --transition-interactive: 180ms cubic-bezier(0.16, 1, 0.3, 1);
+      --transition-slow:        400ms cubic-bezier(0.16, 1, 0.3, 1);
+
+      --shadow-sm: 0 1px 3px oklch(0.2 0.01 50 / 0.07);
+      --shadow-md: 0 4px 16px oklch(0.2 0.01 50 / 0.09);
+      --shadow-lg: 0 12px 40px oklch(0.2 0.01 50 / 0.13);
+
+      --font-display: 'Zodiak', 'Georgia', serif;
+      --font-body:    'Work Sans', 'Helvetica Neue', sans-serif;
+
+      --text-xs:   clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem);
+      --text-sm:   clamp(0.875rem, 0.8rem + 0.35vw, 1rem);
+      --text-base: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
+      --text-lg:   clamp(1.125rem, 1rem + 0.75vw, 1.5rem);
+      --text-xl:   clamp(1.5rem, 1.2rem + 1.25vw, 2.25rem);
+      --text-2xl:  clamp(2rem, 1.2rem + 2.5vw, 3.5rem);
+
+      --space-1:  0.25rem;
+      --space-2:  0.5rem;
+      --space-3:  0.75rem;
+      --space-4:  1rem;
+      --space-5:  1.25rem;
+      --space-6:  1.5rem;
+      --space-8:  2rem;
+      --space-10: 2.5rem;
+      --space-12: 3rem;
+      --space-16: 4rem;
+      --space-20: 5rem;
+      --space-24: 6rem;
+
+      --content-narrow:  560px;
+      --content-default: 720px;
+    }
+
+    [data-theme="dark"] {
+      --color-bg:               #18150f;
+      --color-surface:          #1d1a14;
+      --color-surface-2:        #211d17;
+      --color-surface-offset:   #1a1710;
+      --color-surface-offset-2: #1f1c15;
+      --color-divider:          #2a271f;
+      --color-border:           #3a3730;
+      --color-text:             #d4d0c8;
+      --color-text-muted:       #7e7b74;
+      --color-text-faint:       #5a5852;
+      --color-text-inverse:     #1d1a14;
+      --color-primary:          #c48da8;
+      --color-primary-hover:    #d4a8be;
+      --color-primary-active:   #e0c2d0;
+      --color-primary-highlight: #3a2830;
+      --color-secondary:        #7da886;
+      --color-secondary-hover:  #9bbfa4;
+      --color-secondary-highlight: #1e2e22;
+      --color-warning:          #c49060;
+      --color-warning-highlight: #3a2c1c;
+      --shadow-sm: 0 1px 3px oklch(0 0 0 / 0.25);
+      --shadow-md: 0 4px 16px oklch(0 0 0 / 0.35);
+      --shadow-lg: 0 12px 40px oklch(0 0 0 / 0.45);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme]) {
+        --color-bg:               #18150f;
+        --color-surface:          #1d1a14;
+        --color-surface-2:        #211d17;
+        --color-surface-offset:   #1a1710;
+        --color-surface-offset-2: #1f1c15;
+        --color-divider:          #2a271f;
+        --color-border:           #3a3730;
+        --color-text:             #d4d0c8;
+        --color-text-muted:       #7e7b74;
+        --color-text-faint:       #5a5852;
+        --color-text-inverse:     #1d1a14;
+        --color-primary:          #c48da8;
+        --color-primary-hover:    #d4a8be;
+        --color-primary-active:   #e0c2d0;
+        --color-primary-highlight: #3a2830;
+        --color-secondary:        #7da886;
+        --color-secondary-hover:  #9bbfa4;
+        --color-secondary-highlight: #1e2e22;
+        --color-warning:          #c49060;
+        --color-warning-highlight: #3a2c1c;
+        --shadow-sm: 0 1px 3px oklch(0 0 0 / 0.25);
+        --shadow-md: 0 4px 16px oklch(0 0 0 / 0.35);
+        --shadow-lg: 0 12px 40px oklch(0 0 0 / 0.45);
+      }
+    }
+
+    /* ============================================================
+       BASE RESET
+    ============================================================ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html {
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-rendering: optimizeLegibility;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      min-height: 100dvh;
+      line-height: 1.65;
+      font-family: var(--font-body);
+      font-size: var(--text-base);
+      color: var(--color-text);
+      background-color: var(--color-bg);
+      transition: background-color var(--transition-slow), color var(--transition-slow);
+    }
+
+    img, picture, video, canvas, svg { display: block; max-width: 100%; }
+    input, button, textarea, select { font: inherit; color: inherit; }
+    h1, h2, h3, h4, h5, h6 { text-wrap: balance; line-height: 1.2; font-family: var(--font-display); }
+    p, li { text-wrap: pretty; max-width: 65ch; }
+
+    ::selection { background: var(--color-primary-highlight); color: var(--color-text); }
+    :focus-visible { outline: 2px solid var(--color-primary); outline-offset: 3px; border-radius: var(--radius-sm); }
+    button { cursor: pointer; background: none; border: none; }
+    a { color: inherit; }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+    }
+
+    /* ============================================================
+       LAYOUT
+    ============================================================ */
+    .page-wrapper { min-height: 100dvh; display: flex; flex-direction: column; }
+
+    .site-header {
+      padding: var(--space-5) var(--space-6);
+      border-bottom: 1px solid var(--color-divider);
+      background-color: var(--color-bg);
+      transition: background-color var(--transition-slow);
+    }
+
+    .site-header a {
+      font-family: var(--font-display);
+      font-size: var(--text-sm);
+      font-weight: 500;
+      text-decoration: none;
+      color: var(--color-text);
+      letter-spacing: 0.01em;
+    }
+
+    .site-header a:hover { color: var(--color-primary); }
+
+    main {
+      flex: 1;
+      width: 100%;
+    }
+
+    .content-wrap {
+      max-width: var(--content-default);
+      margin: 0 auto;
+      padding: 0 var(--space-6);
+    }
+
+    .site-footer {
+      padding: var(--space-8) var(--space-6);
+      border-top: 1px solid var(--color-divider);
+      text-align: center;
+      font-size: var(--text-xs);
+      color: var(--color-text-faint);
+    }
+
+    .site-footer a { color: var(--color-text-muted); text-decoration: none; }
+    .site-footer a:hover { color: var(--color-primary); }
+
+    /* ============================================================
+       HERO
+    ============================================================ */
+    .hero {
+      padding: var(--space-20) var(--space-6) var(--space-16);
+      text-align: center;
+      border-bottom: 1px solid var(--color-divider);
+    }
+
+    .hero-inner {
+      max-width: var(--content-default);
+      margin: 0 auto;
+    }
+
+    .hero-eyebrow {
+      display: inline-block;
+      font-size: var(--text-xs);
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--color-primary);
+      margin-bottom: var(--space-6);
+      padding: var(--space-2) var(--space-4);
+      background: var(--color-primary-highlight);
+      border-radius: var(--radius-full);
+    }
+
+    .hero-title {
+      font-family: var(--font-display);
+      font-size: var(--text-2xl);
+      font-weight: 700;
+      color: var(--color-text);
+      margin-bottom: var(--space-6);
+      line-height: 1.15;
+      max-width: 16ch;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .hero-subhead {
+      font-size: var(--text-lg);
+      color: var(--color-text-muted);
+      font-weight: 300;
+      margin-bottom: var(--space-10);
+      max-width: 52ch;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1.6;
+    }
+
+    .hero-support {
+      margin-top: var(--space-5);
+      font-size: var(--text-sm);
+      color: var(--color-text-faint);
+    }
+
+    /* ============================================================
+       SECTIONS
+    ============================================================ */
+    .page-section {
+      padding: var(--space-16) var(--space-6);
+      border-bottom: 1px solid var(--color-divider);
+    }
+
+    .page-section:last-of-type { border-bottom: none; }
+
+    .section-inner {
+      max-width: var(--content-default);
+      margin: 0 auto;
+    }
+
+    .section-title {
+      font-family: var(--font-display);
+      font-size: var(--text-xl);
+      font-weight: 500;
+      color: var(--color-text);
+      margin-bottom: var(--space-8);
+    }
+
+    .section-label {
+      font-size: var(--text-xs);
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--color-primary);
+      margin-bottom: var(--space-4);
+    }
+
+    .prose p {
+      color: var(--color-text);
+      margin-bottom: var(--space-4);
+      line-height: 1.7;
+    }
+
+    .prose p:last-child { margin-bottom: 0; }
+
+    /* ============================================================
+       COMPONENTS
+    ============================================================ */
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-2);
+      padding: var(--space-4) var(--space-8);
+      border-radius: var(--radius-full);
+      font-family: var(--font-body);
+      font-size: var(--text-sm);
+      font-weight: 500;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all var(--transition-interactive);
+      border: 2px solid transparent;
+      letter-spacing: 0.01em;
+    }
+
+    .btn-primary {
+      background: var(--color-primary);
+      color: var(--color-text-inverse);
+      border-color: var(--color-primary);
+    }
+
+    .btn-primary:hover {
+      background: var(--color-primary-hover);
+      border-color: var(--color-primary-hover);
+      transform: translateY(-1px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .btn-primary:active {
+      background: var(--color-primary-active);
+      border-color: var(--color-primary-active);
+      transform: translateY(0);
+    }
+
+    .btn-lg {
+      padding: var(--space-5) var(--space-10);
+      font-size: var(--text-base);
+    }
+
+    /* Fit list */
+    .fit-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-3);
+    }
+
+    .fit-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--space-4);
+      padding: var(--space-4) var(--space-5);
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      font-size: var(--text-sm);
+      color: var(--color-text);
+      max-width: 100%;
+      line-height: 1.6;
+    }
+
+    .fit-list li::before {
+      content: '\2714';
+      flex-shrink: 0;
+      color: var(--color-secondary);
+      font-size: 0.85em;
+      margin-top: 0.15em;
+    }
+
+    /* Timeline */
+    .timeline {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      position: relative;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 1.25rem;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: var(--color-divider);
+    }
+
+    .timeline-item {
+      display: flex;
+      gap: var(--space-6);
+      position: relative;
+      padding-bottom: var(--space-8);
+    }
+
+    .timeline-item:last-child { padding-bottom: 0; }
+
+    .timeline-dot {
+      flex-shrink: 0;
+      width: 2.5rem;
+      height: 2.5rem;
+      background: var(--color-primary);
+      border-radius: var(--radius-full);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: var(--text-xs);
+      font-weight: 700;
+      color: var(--color-text-inverse);
+      position: relative;
+      z-index: 1;
+    }
+
+    .timeline-content {
+      flex: 1;
+      padding-top: 0.4rem;
+    }
+
+    .timeline-time {
+      font-size: var(--text-xs);
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--color-primary);
+      margin-bottom: var(--space-2);
+    }
+
+    .timeline-desc {
+      font-size: var(--text-sm);
+      color: var(--color-text);
+      line-height: 1.6;
+      max-width: 100%;
+    }
+
+    /* Deliverables */
+    .deliverables-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-3);
+    }
+
+    .deliverables-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--space-4);
+      font-size: var(--text-sm);
+      color: var(--color-text);
+      max-width: 100%;
+      line-height: 1.6;
+    }
+
+    .deliverables-list li::before {
+      content: '\25BA';
+      flex-shrink: 0;
+      color: var(--color-primary);
+      font-size: 0.6em;
+      margin-top: 0.4em;
+    }
+
+    /* Includes/excludes */
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-6);
+    }
+
+    @media (max-width: 560px) {
+      .two-col { grid-template-columns: 1fr; }
+    }
+
+    .includes-col, .excludes-col {
+      padding: var(--space-6);
+      border-radius: var(--radius-xl);
+      border: 1px solid var(--color-border);
+    }
+
+    .includes-col { background: var(--color-secondary-highlight); }
+    .excludes-col { background: var(--color-surface); }
+
+    .col-title {
+      font-family: var(--font-display);
+      font-size: var(--text-base);
+      font-weight: 500;
+      margin-bottom: var(--space-4);
+    }
+
+    .includes-col .col-title { color: var(--color-secondary); }
+    .excludes-col .col-title { color: var(--color-text-muted); }
+
+    .incl-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-3);
+    }
+
+    .incl-list li {
+      font-size: var(--text-sm);
+      color: var(--color-text);
+      line-height: 1.5;
+      max-width: 100%;
+      display: flex;
+      gap: var(--space-3);
+      align-items: flex-start;
+    }
+
+    .includes-col .incl-list li::before {
+      content: '\2714';
+      flex-shrink: 0;
+      color: var(--color-secondary);
+      font-size: 0.8em;
+      margin-top: 0.2em;
+    }
+
+    .excludes-col .incl-list li::before {
+      content: '\2715';
+      flex-shrink: 0;
+      color: var(--color-text-faint);
+      font-size: 0.8em;
+      margin-top: 0.2em;
+    }
+
+    /* Trust note */
+    .trust-note {
+      padding: var(--space-8);
+      background: var(--color-surface-offset);
+      border-radius: var(--radius-xl);
+      border: 1px solid var(--color-divider);
+      border-left: 4px solid var(--color-primary);
+      font-family: var(--font-display);
+      font-style: italic;
+      font-size: var(--text-lg);
+      color: var(--color-text);
+      line-height: 1.6;
+    }
+
+    /* FAQ */
+    .faq-list {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-1);
+    }
+
+    .faq-item {
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+    }
+
+    .faq-question {
+      width: 100%;
+      text-align: left;
+      padding: var(--space-5) var(--space-6);
+      font-family: var(--font-display);
+      font-size: var(--text-base);
+      font-weight: 500;
+      color: var(--color-text);
+      background: var(--color-surface);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: var(--space-4);
+      cursor: pointer;
+      border: none;
+      transition: background var(--transition-fast);
+    }
+
+    .faq-question:hover { background: var(--color-surface-offset); }
+
+    .faq-question[aria-expanded="true"] { background: var(--color-surface-offset); }
+
+    .faq-icon {
+      flex-shrink: 0;
+      width: 1.25rem;
+      height: 1.25rem;
+      color: var(--color-primary);
+      transition: transform var(--transition-interactive);
+    }
+
+    .faq-question[aria-expanded="true"] .faq-icon {
+      transform: rotate(45deg);
+    }
+
+    .faq-answer {
+      padding: 0 var(--space-6) var(--space-5);
+      font-size: var(--text-sm);
+      color: var(--color-text-muted);
+      line-height: 1.7;
+      background: var(--color-surface-offset);
+      max-width: 100%;
+      display: none;
+    }
+
+    .faq-answer.open {
+      display: block;
+    }
+
+    /* Second CTA */
+    .final-cta {
+      background: var(--color-primary-highlight);
+      padding: var(--space-20) var(--space-6);
+      text-align: center;
+      border-top: 1px solid var(--color-divider);
+    }
+
+    .final-cta-inner {
+      max-width: var(--content-default);
+      margin: 0 auto;
+    }
+
+    .final-cta h2 {
+      font-family: var(--font-display);
+      font-size: var(--text-xl);
+      font-weight: 500;
+      color: var(--color-text);
+      margin-bottom: var(--space-8);
+      max-width: 24ch;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .final-cta-support {
+      margin-top: var(--space-5);
+      font-size: var(--text-sm);
+      color: var(--color-text-muted);
+    }
+
+    /* Reference section */
+    .reference-section {
+      padding: var(--space-12) var(--space-6);
+      background: var(--color-surface-offset);
+      border-top: 1px solid var(--color-divider);
+    }
+
+    .reference-inner {
+      max-width: var(--content-default);
+      margin: 0 auto;
+    }
+
+    .reference-label {
+      font-size: var(--text-xs);
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--color-text-faint);
+      margin-bottom: var(--space-6);
+    }
+
+    .reference-title {
+      font-family: var(--font-display);
+      font-size: var(--text-base);
+      font-weight: 500;
+      color: var(--color-text-muted);
+      margin-bottom: var(--space-5);
+    }
+
+    .reference-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-6);
+    }
+
+    @media (max-width: 560px) {
+      .reference-grid { grid-template-columns: 1fr; }
+    }
+
+    .ref-item {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-1);
+    }
+
+    .ref-key {
+      font-size: var(--text-xs);
+      color: var(--color-text-faint);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .ref-val {
+      font-size: var(--text-sm);
+      color: var(--color-text-muted);
+    }
+
+    .intake-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-2);
+      margin-top: var(--space-3);
+    }
+
+    .intake-list li {
+      font-size: var(--text-sm);
+      color: var(--color-text-muted);
+      padding-left: var(--space-5);
+      position: relative;
+      max-width: 100%;
+    }
+
+    .intake-list li::before {
+      content: counter(item) '.';
+      counter-increment: item;
+      position: absolute;
+      left: 0;
+      color: var(--color-text-faint);
+    }
+
+    .intake-list { counter-reset: item; }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+      font-size: var(--text-sm);
+      color: var(--color-text-muted);
+      text-decoration: none;
+      transition: color var(--transition-fast);
+    }
+
+    .back-link:hover { color: var(--color-primary); }
+    .back-link::before { content: '\2190'; }
+
+    .divider {
+      border: none;
+      border-top: 1px solid var(--color-divider);
+      margin: var(--space-12) 0;
+    }
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <a href="index.html">What You Actually Need</a>
+  </header>
+
+  <main>
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-inner">
+        <a href="index.html" class="back-link" style="margin-bottom: var(--space-8); display: inline-flex;">Back to your results</a>
+        <p class="hero-eyebrow">60 minutes &middot; $297 &middot; Virtual</p>
+        <h1 class="hero-title">Build a visibility rhythm that fits your nervous system and your business.</h1>
+        <p class="hero-subhead">If your work is strong but too few right people are consistently finding it, this session will help you identify the clearest visibility path, reduce noise, and create a realistic plan you can actually sustain.</p>
+        <a href="https://link.aibizconnection.com/widget/bookings/visibility-planning-session" class="btn btn-primary btn-lg" target="_blank" rel="noopener">
+          <!-- EDIT THIS: visibility session booking link -->
+          Book the Visibility Planning Session
+        </a>
+        <p class="hero-support">60 minutes. $297. Paid at booking. You will leave with a clearer visibility path and a practical next-step plan.</p>
+      </div>
+    </section>
+
+    <!-- WHO IT IS FOR -->
+    <section class="page-section">
+      <div class="section-inner">
+        <p class="section-label">Who this is for</p>
+        <h2 class="section-title">This session is for you if</h2>
+        <ul class="fit-list">
+          <li>Your work is genuinely good but not consistently reaching the right people</li>
+          <li>You have tried to be "more visible" and it has not compounded into anything reliable</li>
+          <li>Your current visibility feels dependent on referrals, luck, or sporadic effort</li>
+          <li>You know you need a plan but you are not sure where to start or which channel actually fits</li>
+          <li>You are an introvert or highly sensitive person who finds performative marketing exhausting</li>
+          <li>You are done with advice that assumes you have a marketing team or 20 hours a week</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- WHAT WE WILL DO -->
+    <section class="page-section">
+      <div class="section-inner">
+        <p class="section-label">The 60-minute structure</p>
+        <h2 class="section-title">What we will do</h2>
+        <div class="timeline">
+
+          <div class="timeline-item">
+            <div class="timeline-dot">15</div>
+            <div class="timeline-content">
+              <p class="timeline-time">First 15 minutes</p>
+              <p class="timeline-desc">Audit your current visibility. What exists, what is working, what is not, and what is costing you more effort than it is worth.</p>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-dot">20</div>
+            <div class="timeline-content">
+              <p class="timeline-time">Next 20 minutes</p>
+              <p class="timeline-desc">Identify your clearest visibility path. Based on your offer, buyer, energy type, and available capacity.</p>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-dot">15</div>
+            <div class="timeline-content">
+              <p class="timeline-time">Next 15 minutes</p>
+              <p class="timeline-desc">Build a realistic rhythm. One primary channel, a weekly cadence you can sustain, and what "consistent" actually means for your situation.</p>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-dot">10</div>
+            <div class="timeline-content">
+              <p class="timeline-time">Final 10 minutes</p>
+              <p class="timeline-desc">Map the first 30 days. Specific, actionable, realistic.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- WHAT YOU WILL LEAVE WITH -->
+    <section class="page-section">
+      <div class="section-inner">
+        <p class="section-label">Outcomes</p>
+        <h2 class="section-title">What you will leave with</h2>
+        <ul class="deliverables-list">
+          <li>A clear visibility path — not a generic content calendar, but a specific plan for your business</li>
+          <li>A weekly rhythm that fits your capacity</li>
+          <li>Clarity on which platforms and formats are worth your time — and which are not</li>
+          <li>A 30-day action plan you can start that week</li>
+          <li>A recording of the session, if you prefer it</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- WHAT IS INCLUDED / NOT INCLUDED -->
+    <section class="page-section">
+      <div class="section-inner">
+        <p class="section-label">Scope</p>
+        <h2 class="section-title">What is and is not included</h2>
+        <div class="two-col">
+          <div class="includes-col">
+            <p class="col-title">Included</p>
+            <ul class="incl-list">
+              <li>60-minute virtual session</li>
+              <li>Pre-session intake form so we use the time well</li>
+              <li>Session recording (optional)</li>
+              <li>Brief written summary of your visibility path and first 30 days</li>
+            </ul>
+          </div>
+          <div class="excludes-col">
+            <p class="col-title">Not included</p>
+            <ul class="incl-list">
+              <li>Ongoing coaching or support</li>
+              <li>Copywriting or content creation</li>
+              <li>A promise that visibility is the only thing you need to fix — if clarity, offer, or follow-through is also an issue, we will name that</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TRUST NOTE -->
+    <section class="page-section">
+      <div class="section-inner">
+        <blockquote class="trust-note">
+          "This is not a discovery call. It is a paid, focused working session. I am not trying to upsell you into a longer program. If at the end of the session the thing you actually need is something different from what we expected, I will tell you that directly."
+        </blockquote>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="page-section">
+      <div class="section-inner">
+        <p class="section-label">Questions</p>
+        <h2 class="section-title">Frequently asked</h2>
+        <div class="faq-list" role="list">
+
+          <div class="faq-item" role="listitem">
+            <button class="faq-question" aria-expanded="false" onclick="toggleFAQ(this)">
+              Is this a coaching session?
+              <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <line x1="12" y1="5" x2="12" y2="19"></line>
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+              </svg>
+            </button>
+            <div class="faq-answer">No. It is a focused strategic planning session with a specific output. You will leave with a plan, not an open-ended conversation.</div>
+          </div>
+
+          <div class="faq-item" role="listitem">
+            <button class="faq-question" aria-expanded="false" onclick="toggleFAQ(this)">
+              Will I get a full marketing plan?
+              <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <line x1="12" y1="5" x2="12" y2="19"></line>
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+              </svg>
+            </button>
+            <div class="faq-answer">No. You will get a visibility-specific plan that is realistic for a solo operator. A full marketing plan is out of scope and often unnecessary at this stage.</div>
+          </div>
+
+          <div class="faq-item" role="listitem">
+            <button class="faq-question" aria-expanded="false" onclick="toggleFAQ(this)">
+              Is this paid upfront?
+              <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <line x1="12" y1="5" x2="12" y2="19"></line>
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+              </svg>
+            </button>
+            <div class="faq-answer">Yes. Payment is collected at booking. This keeps the session focused and ensures your time is protected.</div>
+          </div>
+
+          <div class="faq-item" role="listitem">
+            <button class="faq-question" aria-expanded="false" onclick="toggleFAQ(this)">
+              What if visibility is not actually my problem?
+              <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <line x1="12" y1="5" x2="12" y2="19"></line>
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+              </svg>
+            </button>
+            <div class="faq-answer">That happens. If it becomes clear during the session that a different bottleneck is more urgent, I will name it and point you to the right next step — at no additional charge.</div>
+          </div>
+
+          <div class="faq-item" role="listitem">
+            <button class="faq-question" aria-expanded="false" onclick="toggleFAQ(this)">
+              What is the refund or reschedule policy?
+              <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <line x1="12" y1="5" x2="12" y2="19"></line>
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+              </svg>
+            </button>
+            <div class="faq-answer">Full refund or reschedule with at least 24 hours notice. No refund for missed sessions without notice.</div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- SECOND CTA -->
+  <div class="final-cta">
+    <div class="final-cta-inner">
+      <h2>Ready to build a visibility plan that actually works for you?</h2>
+      <a href="https://link.aibizconnection.com/widget/bookings/visibility-planning-session" class="btn btn-primary btn-lg" target="_blank" rel="noopener">
+        <!-- EDIT THIS: visibility session booking link -->
+        Book the Visibility Planning Session
+      </a>
+      <p class="final-cta-support">60 minutes. $297. Paid at booking.</p>
+    </div>
+  </div>
+
+  <!-- GOHIGHLEVEL SETUP REFERENCE -->
+  <section class="reference-section">
+    <div class="reference-inner">
+      <p class="reference-label">Internal reference</p>
+      <h2 class="reference-title">GoHighLevel Calendar Setup</h2>
+      <div class="reference-grid">
+        <div class="ref-item">
+          <p class="ref-key">Calendar name</p>
+          <p class="ref-val">Visibility Planning Session</p>
+        </div>
+        <div class="ref-item">
+          <p class="ref-key">Duration</p>
+          <p class="ref-val">60 minutes</p>
+        </div>
+        <div class="ref-item">
+          <p class="ref-key">Price</p>
+          <p class="ref-val">$297 (payment required at booking)</p>
+        </div>
+        <div class="ref-item">
+          <p class="ref-key">Buffer before</p>
+          <p class="ref-val">15 minutes</p>
+        </div>
+        <div class="ref-item">
+          <p class="ref-key">Buffer after</p>
+          <p class="ref-val">15 minutes</p>
+        </div>
+        <div class="ref-item">
+          <p class="ref-key">Max bookings per day</p>
+          <p class="ref-val">2&ndash;3</p>
+        </div>
+      </div>
+      <div style="margin-top: var(--space-6);">
+        <p class="ref-key" style="margin-bottom: var(--space-3);">Suggested intake questions</p>
+        <ol class="intake-list">
+          <li>Name</li>
+          <li>Email</li>
+          <li>Website URL</li>
+          <li>What type of business do you run?</li>
+          <li>What are you currently selling?</li>
+          <li>What feels hardest about visibility right now?</li>
+          <li>Where are you currently trying to be visible?</li>
+          <li>What would make this session feel genuinely successful for you?</li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    Part of <a href="index.html">What You Actually Need</a> &middot; <a href="https://guinwhite.com" target="_blank" rel="noopener">guinwhite.com</a>
+  </footer>
+
+  <script>
+    // Dark mode detection
+    (function () {
+      const stored = localStorage.getItem('theme');
+      if (stored) {
+        document.documentElement.setAttribute('data-theme', stored);
+      } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.documentElement.setAttribute('data-theme', 'dark');
+      }
+    })();
+
+    // FAQ accordion
+    function toggleFAQ(btn) {
+      const expanded = btn.getAttribute('aria-expanded') === 'true';
+      const answer = btn.nextElementSibling;
+
+      // Close all
+      document.querySelectorAll('.faq-question').forEach(function(q) {
+        q.setAttribute('aria-expanded', 'false');
+        if (q.nextElementSibling) q.nextElementSibling.classList.remove('open');
+      });
+
+      // Open this one if it was closed
+      if (!expanded) {
+        btn.setAttribute('aria-expanded', 'true');
+        answer.classList.add('open');
+      }
+    }
+  </script>
+</body>
+</html>

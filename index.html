@@ -956,9 +956,9 @@ const OFFERS = {
 
   // Your flagship paid diagnostic or session
   paidDiagnostic: {
-    title: 'Paid Diagnostic Session', // ← e.g. "60-Minute Clarity Session"
+    title: 'Diagnostic Strategy Session', // ← e.g. "60-Minute Clarity Session"
     url:   '#',                       // ← SWAP: Calendly, TidyCal, etc.
-    body:  'A focused session to look at your specific situation and identify the clearest path forward.',
+    body:  'A focused 60-minute session to identify your real bottleneck, rule out the wrong fixes, and set a clear next step. $297.',
   },
 
   // Done-for-you AI build (relevant for implementation + sales_system paths)
@@ -973,6 +973,36 @@ const OFFERS = {
     title: 'Secondary Offer',         // ← e.g. "Quietly Influential Cohort"
     url:   '#',                       // ← SWAP: your cohort, course, or group program page
     body:  'A structured program for introverted experts ready to build sustainably.',
+  },
+};
+
+
+/* ------------------------------------------------------------
+   SESSION + BUILD OFFERS
+   These are your primary paid offerings. Edit URLs here.
+
+   EDIT THIS: visibility session booking link
+   EDIT THIS: paid diagnostic session booking link
+   EDIT THIS: AI build offer page link
+------------------------------------------------------------ */
+const SESSION_OFFERS = {
+  visibilitySession: {
+    title: 'Visibility Planning Session',
+    url:   'https://link.aibizconnection.com/widget/bookings/visibility-planning-session',  // EDIT THIS: visibility session booking link
+    price: '60 minutes · $297',
+    body:  'A focused strategic planning session for business owners whose work is strong but whose discoverability is too thin or inconsistent.',
+  },
+  diagnosticSession: {
+    title: 'Diagnostic Strategy Session',
+    url:   'diagnostic-strategy-session.html',  // EDIT THIS: paid diagnostic session booking link (e.g. Calendly or GoHighLevel)
+    price: '60 minutes · $297',
+    body:  'A focused 60-minute session to identify your real bottleneck, rule out the wrong fixes, and set a clear next step. $297.',
+  },
+  aiBuild: {
+    title: 'Done-For-You AI Build',
+    url:   '#',  // EDIT THIS: AI build offer page link (e.g. AI Biz Connection service page)
+    price: 'Starting at $750',
+    body:  'Turn your idea, system, or workflow into a working tool — built with AI, delivered fast.',
   },
 };
 
@@ -1014,14 +1044,14 @@ const DIAGNOSES = {
     doNeed:         'Sharper positioning, cleaner language, and a more precise bridge between what you do and what your buyer already knows they need.',
     bestNextMove:   'Refine the offer before you amplify it. Tighten the problem, the promise, the buyer, and the buying moment.',
     ctaLabel:       'Clarify the offer',
-    ctaUrl:         '#',   // ← SWAP: messaging audit, offer clarity session, positioning workbook
+    ctaUrl:         'diagnostic-strategy-session.html',   // ← SWAP: messaging audit, offer clarity session, positioning workbook
     ctaSupportText: 'Start with the message before you push harder on marketing.',
 
     // PATH-SPECIFIC MONETIZATION
     primaryOffer: {                                       // emphasize paid diagnostic first
-      title: 'Offer Clarity Diagnostic',
-      url:   '#',                                         // ← SWAP: booking link for offer audit
-      body:  'A focused session to clarify exactly what you sell, who it is for, and how to say it in a way that lands.',
+      title: 'Offer Clarity Diagnostic Session',
+      url:   'diagnostic-strategy-session.html',         // ← SWAP: booking link for offer audit
+      body:  'A focused 60-minute session to clarify exactly what you sell, who it is for, and how to say it in a way that lands. $297.',
     },
     secondaryRec: {                                       // prompt pack / workbook second
       title: 'Offer Positioning Prompt Pack',
@@ -1034,7 +1064,11 @@ const DIAGNOSES = {
       body:  'Understand what your buyers actually say before you decide what to write.',
     },
     showAffiliate: false,                                 // ← set true when you have an affiliate link
-    freeResourceOverride: null,                           // ← or { title, url, body } for path-specific freebie
+    freeResourceOverride: {
+      title: 'Offer Clarity Mini-Audit',
+      url:   'offer-clarity-mini-audit.html',
+      body:  'Five to seven self-audit questions to help you tighten your message, buyer fit, promise, and articulation. Free. Takes about five minutes.',
+    },
   },
 
   /* ── VISIBILITY ─────────────────────────────────────────── */
@@ -1047,18 +1081,18 @@ const DIAGNOSES = {
     dontNeed:       'To reinvent your whole business, become louder, or copy someone else\'s content rhythm.',
     doNeed:         'A visibility rhythm that fits your nervous system, your capacity, and the way your buyers actually build trust.',
     bestNextMove:   'Choose one trust-building channel and one repeatable visibility rhythm you can sustain without resentment.',
-    ctaLabel:       'Build a visibility rhythm',
-    ctaUrl:         '#',   // ← SWAP: visibility planning product, workshop, or resource
-    ctaSupportText: 'More exposure is not the goal. Right-fit discoverability is.',
+    ctaLabel:       'Book the Visibility Planning Session',
+    ctaUrl:         'https://link.aibizconnection.com/widget/bookings/visibility-planning-session',   // ← SWAP: visibility planning product, workshop, or resource
+    ctaSupportText: '60 minutes. $297. You will leave with a clearer visibility path and a practical next-step plan.',
 
-    primaryOffer: {                                       // affiliate tool or platform recommendation first
-      title: 'Email Platform for Relationship-First Visibility',
-      url:   '#',                                         // ← SWAP: ConvertKit, Kit, or Substack affiliate
-      body:  'An email list is the most sustainable visibility asset you can own. This is where to start.',
+    primaryOffer: {                                       // paid session first
+      title: 'Visibility Planning Session',
+      url:   'https://link.aibizconnection.com/widget/bookings/visibility-planning-session',         // ← SWAP: ConvertKit, Kit, or Substack affiliate
+      body:  'A focused strategic planning session for business owners whose work is strong but whose discoverability is too thin or inconsistent. 60 minutes. $297.',
     },
     secondaryRec: {                                       // low-ticket visibility planning product second
-      title: 'Visibility Planning Session',
-      url:   '#',                                         // ← SWAP: low-ticket offer or planning worksheet
+      title: 'Calm Visibility Rhythm Planner',
+      url:   'calm-visibility-rhythm-planner.html',                                         // ← SWAP: low-ticket offer or planning worksheet
       body:  'A structured session to build a visibility rhythm that fits your energy and your buyers\' trust timeline.',
     },
     affiliateRec: {
@@ -1067,7 +1101,11 @@ const DIAGNOSES = {
       body:  'One piece of content, many placements — without doubling the effort.',
     },
     showAffiliate: false,
-    freeResourceOverride: null,
+    freeResourceOverride: {
+      title: 'Calm Visibility Rhythm Planner',
+      url:   'calm-visibility-rhythm-planner.html',
+      body:  'A lightweight planning guide to help you build a sustainable visibility rhythm that fits your energy and your buyers\' trust timeline. Free.',
+    },
   },
 
   /* ── SALES SYSTEM ───────────────────────────────────────── */
@@ -1081,13 +1119,13 @@ const DIAGNOSES = {
     doNeed:         'A humane sales system. Usually that means follow-up structure, sequencing, clear invitations, and a process you can trust even when your energy dips.',
     bestNextMove:   'Map the gap between interest and decision, then install one simple follow-up sequence that closes the leak.',
     ctaLabel:       'Fix the follow-up system',
-    ctaUrl:         '#',   // ← SWAP: AI build service, DFY follow-up setup, or CRM referral
+    ctaUrl:         'diagnostic-strategy-session.html',   // ← SWAP: AI build service, DFY follow-up setup, or CRM referral
     ctaSupportText: 'Make it easier for the right people to move forward.',
 
-    primaryOffer: {                                       // affiliate CRM / automation first
-      title: 'CRM for Solo Operators',
-      url:   '#',                                         // ← SWAP: HoneyBook, Dubsado, or other CRM affiliate
-      body:  'A lightweight CRM designed for service-based solopreneurs who need structure without bureaucracy.',
+    primaryOffer: {                                       // paid session first
+      title: 'Sales System Diagnostic Session',
+      url:   'diagnostic-strategy-session.html',         // ← SWAP: HoneyBook, Dubsado, or other CRM affiliate
+      body:  'A focused 60-minute session to map where leads are leaking and identify the first structure to install. $297.',
     },
     secondaryRec: {                                       // done-for-you build second
       title: 'Done-For-You Follow-Up System',
@@ -1100,7 +1138,11 @@ const DIAGNOSES = {
       body:  'Set up one follow-up sequence and let it run — so leads stop falling through the cracks.',
     },
     showAffiliate: false,
-    freeResourceOverride: null,
+    freeResourceOverride: {
+      title: 'Follow-Up Leak Finder',
+      url:   'follow-up-leak-finder.html',
+      body:  'A simple checklist to identify where leads are dropping between interest and decision. Free. Takes about five minutes.',
+    },
   },
 
   /* ── OVERWHELM ──────────────────────────────────────────── */
@@ -1114,13 +1156,13 @@ const DIAGNOSES = {
     doNeed:         'Reduction, triage, and a simpler operating rhythm so your next move becomes obvious again.',
     bestNextMove:   'Cut active priorities in half. Choose one revenue move, one support system, and one thing to stop carrying.',
     ctaLabel:       'Reduce the noise',
-    ctaUrl:         '#',   // ← SWAP: triage session, clarity call booking, simplicity offer
+    ctaUrl:         'diagnostic-strategy-session.html',   // ← SWAP: triage session, clarity call booking, simplicity offer
     ctaSupportText: 'Simpler is often smarter.',
 
     primaryOffer: {                                       // paid diagnostic or simplification offer first
       title: 'Reset Diagnostic Session',
-      url:   '#',                                         // ← SWAP: clarity session / paid diagnostic booking
-      body:  'A focused session to identify what to stop, what to simplify, and what your next 30 days actually need to include.',
+      url:   'diagnostic-strategy-session.html',         // ← SWAP: clarity session / paid diagnostic booking
+      body:  'A focused session to identify what to stop, what to simplify, and what your next 30 days need to look like. $297.',
     },
     secondaryRec: {                                       // planning template second
       title: 'Simplicity-Focused Planning Template',
@@ -1133,7 +1175,11 @@ const DIAGNOSES = {
       body:  'One place for your priorities. Less scattered. More decisive.',
     },
     showAffiliate: false,
-    freeResourceOverride: null,
+    freeResourceOverride: {
+      title: 'Noise Reduction Reset',
+      url:   'noise-reduction-reset.html',
+      body:  'A short triage exercise to reduce open loops, simplify priorities, and regain decision clarity. Free.',
+    },
   },
 
   /* ── IMPLEMENTATION ─────────────────────────────────────── */
@@ -1147,13 +1193,13 @@ const DIAGNOSES = {
     doNeed:         'Build support, better scaffolding, faster activation, or someone to turn the idea into a working asset, workflow, or tool.',
     bestNextMove:   'Pick the smallest build that would create momentum, then get that implemented before consuming anything else.',
     ctaLabel:       'Get it built',
-    ctaUrl:         '#',   // ← SWAP: your AI build sprint, DFY implementation offer, or AI Coach Connection
+    ctaUrl:         'diagnostic-strategy-session.html',   // ← SWAP: your AI build sprint, DFY implementation offer, or AI Coach Connection
     ctaSupportText: 'Knowledge is not the bottleneck now. Activation is.',
 
     primaryOffer: {                                       // custom AI build offer first
-      title: 'AI Build Sprint',
-      url:   '#',                                         // ← SWAP: AI Biz Connection or custom build page
-      body:  'Turn your idea, system, or workflow into a working tool — built with AI, delivered fast.',
+      title: 'Done-For-You AI Build',
+      url:   'diagnostic-strategy-session.html',         // ← SWAP: AI Biz Connection or custom build page
+      body:  'Turn your idea, system, or workflow into a working tool — built with AI, delivered fast. Starting at $750.',
     },
     secondaryRec: {                                       // tool stack recommendation second
       title: 'Tech Stack Recommendation for Solo Operators',
@@ -1166,7 +1212,11 @@ const DIAGNOSES = {
       body:  'Connect what you already have so the execution happens without you having to push it every time.',
     },
     showAffiliate: false,
-    freeResourceOverride: null,
+    freeResourceOverride: {
+      title: 'Execution Friction Finder',
+      url:   'execution-friction-finder.html',
+      body:  'A self-assessment to identify exactly where your good ideas are getting stuck before they become real outputs. Free.',
+    },
   },
 };
 

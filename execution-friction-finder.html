@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Execution Friction Finder — What You Actually Need</title>
+  <meta name="description" content="Find out why the things you know to do are not getting done. A free self-assessment to identify where good ideas are getting stuck." />
+
+  <!-- FONTS: Zodiak (display) + Work Sans (body) -->
+  <link href="https://api.fontshare.com/v2/css?f[]=zodiak@400,500,700&display=swap" rel="stylesheet" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300..700&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ============================================================
+       DESIGN TOKENS — Warm stone palette + dusty rose accent
+    ============================================================ */
+    :root,
+    [data-theme="light"] {
+      --color-bg:               #f5f3ef;
+      --color-surface:          #faf9f7;
+      --color-surface-2:        #fdfcfb;
+      --color-surface-offset:   #eeebe6;
+      --color-surface-offset-2: #e8e4de;
+      --color-divider:          #dedad3;
+      --color-border:           #d6d2ca;
+
+      --color-text:         #2a2520;
+      --color-text-muted:   #7c7872;
+      --color-text-faint:   #b5b2ac;
+      --color-text-inverse: #faf9f7;
+
+      --color-primary:           #8e4f6a;
+      --color-primary-hover:     #703d54;
+      --color-primary-active:    #542c3e;
+      --color-primary-highlight: #f0e1e8;
+
+      --color-secondary:           #5a7462;
+      --color-secondary-hover:     #445a4b;
+      --color-secondary-highlight: #dae5db;
+
+      --color-warning:           #956740;
+      --color-warning-highlight: #f0e4d6;
+
+      --radius-sm:   0.375rem;
+      --radius-md:   0.5rem;
+      --radius-lg:   0.75rem;
+      --radius-xl:   1rem;
+      --radius-2xl:  1.5rem;
+      --radius-full: 9999px;
+
+      --transition-fast:        150ms cubic-bezier(0.16, 1, 0.3, 1);
+      --transition-interactive: 180ms cubic-bezier(0.16, 1, 0.3, 1);
+      --transition-slow:        400ms cubic-bezier(0.16, 1, 0.3, 1);
+
+      --shadow-sm: 0 1px 3px oklch(0.2 0.01 50 / 0.07);
+      --shadow-md: 0 4px 16px oklch(0.2 0.01 50 / 0.09);
+      --shadow-lg: 0 12px 40px oklch(0.2 0.01 50 / 0.13);
+
+      --font-display: 'Zodiak', 'Georgia', serif;
+      --font-body:    'Work Sans', 'Helvetica Neue', sans-serif;
+
+      --text-xs:   clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem);
+      --text-sm:   clamp(0.875rem, 0.8rem + 0.35vw, 1rem);
+      --text-base: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
+      --text-lg:   clamp(1.125rem, 1rem + 0.75vw, 1.5rem);
+      --text-xl:   clamp(1.5rem, 1.2rem + 1.25vw, 2.25rem);
+      --text-2xl:  clamp(2rem, 1.2rem + 2.5vw, 3.5rem);
+
+      --space-1:  0.25rem;
+      --space-2:  0.5rem;
+      --space-3:  0.75rem;
+      --space-4:  1rem;
+      --space-5:  1.25rem;
+      --space-6:  1.5rem;
+      --space-8:  2rem;
+      --space-10: 2.5rem;
+      --space-12: 3rem;
+      --space-16: 4rem;
+      --space-20: 5rem;
+      --space-24: 6rem;
+
+      --content-narrow:  560px;
+      --content-default: 720px;
+    }
+
+    [data-theme="dark"] {
+      --color-bg:               #18150f;
+      --color-surface:          #1d1a14;
+      --color-surface-2:        #211d17;
+      --color-surface-offset:   #1a1710;
+      --color-surface-offset-2: #1f1c15;
+      --color-divider:          #2a271f;
+      --color-border:           #3a3730;
+      --color-text:             #d4d0c8;
+      --color-text-muted:       #7e7b74;
+      --color-text-faint:       #5a5852;
+      --color-text-inverse:     #1d1a14;
+      --color-primary:          #c48da8;
+      --color-primary-hover:    #d4a8be;
+      --color-primary-active:   #e0c2d0;
+      --color-primary-highlight: #3a2830;
+      --color-secondary:        #7da886;
+      --color-secondary-hover:  #9bbfa4;
+      --color-secondary-highlight: #1e2e22;
+      --color-warning:          #c49060;
+      --color-warning-highlight: #3a2c1c;
+      --shadow-sm: 0 1px 3px oklch(0 0 0 / 0.25);
+      --shadow-md: 0 4px 16px oklch(0 0 0 / 0.35);
+      --shadow-lg: 0 12px 40px oklch(0 0 0 / 0.45);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme]) {
+        --color-bg:               #18150f;
+        --color-surface:          #1d1a14;
+        --color-surface-2:        #211d17;
+        --color-surface-offset:   #1a1710;
+        --color-surface-offset-2: #1f1c15;
+        --color-divider:          #2a271f;
+        --color-border:           #3a3730;
+        --color-text:             #d4d0c8;
+        --color-text-muted:       #7e7b74;
+        --color-text-faint:       #5a5852;
+        --color-text-inverse:     #1d1a14;
+        --color-primary:          #c48da8;
+        --color-primary-hover:    #d4a8be;
+        --color-primary-active:   #e0c2d0;
+        --color-primary-highlight: #3a2830;
+        --color-secondary:        #7da886;
+        --color-secondary-hover:  #9bbfa4;
+        --color-secondary-highlight: #1e2e22;
+        --color-warning:          #c49060;
+        --color-warning-highlight: #3a2c1c;
+        --shadow-sm: 0 1px 3px oklch(0 0 0 / 0.25);
+        --shadow-md: 0 4px 16px oklch(0 0 0 / 0.35);
+        --shadow-lg: 0 12px 40px oklch(0 0 0 / 0.45);
+      }
+    }
+
+    /* ============================================================
+       BASE RESET
+    ============================================================ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html {
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-rendering: optimizeLegibility;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      min-height: 100dvh;
+      line-height: 1.65;
+      font-family: var(--font-body);
+      font-size: var(--text-base);
+      color: var(--color-text);
+      background-color: var(--color-bg);
+      transition: background-color var(--transition-slow), color var(--transition-slow);
+    }
+
+    img, picture, video, canvas, svg { display: block; max-width: 100%; }
+    input, button, textarea, select { font: inherit; color: inherit; }
+    h1, h2, h3, h4, h5, h6 { text-wrap: balance; line-height: 1.2; font-family: var(--font-display); }
+    p, li { text-wrap: pretty; max-width: 65ch; }
+
+    ::selection { background: var(--color-primary-highlight); color: var(--color-text); }
+    :focus-visible { outline: 2px solid var(--color-primary); outline-offset: 3px; border-radius: var(--radius-sm); }
+    button { cursor: pointer; background: none; border: none; }
+    a { color: inherit; }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+    }
+
+    /* ============================================================
+       LAYOUT
+    ============================================================ */
+    .page-wrapper { min-height: 100dvh; display: flex; flex-direction: column; }
+
+    .site-header {
+      padding: var(--space-5) var(--space-6);
+      border-bottom: 1px solid var(--color-divider);
+      background-color: var(--color-bg);
+      transition: background-color var(--transition-slow);
+    }
+
+    .site-header a {
+      font-family: var(--font-display);
+      font-size: var(--text-sm);
+      font-weight: 500;
+      text-decoration: none;
+      color: var(--color-text);
+      letter-spacing: 0.01em;
+    }
+
+    .site-header a:hover { color: var(--color-primary); }
+
+    main {
+      flex: 1;
+      width: 100%;
+      max-width: var(--content-default);
+      margin: 0 auto;
+      padding: var(--space-16) var(--space-6);
+    }
+
+    .site-footer {
+      padding: var(--space-8) var(--space-6);
+      border-top: 1px solid var(--color-divider);
+      text-align: center;
+      font-size: var(--text-xs);
+      color: var(--color-text-faint);
+    }
+
+    .site-footer a { color: var(--color-text-muted); text-decoration: none; }
+    .site-footer a:hover { color: var(--color-primary); }
+
+    /* ============================================================
+       COMPONENTS
+    ============================================================ */
+    .page-eyebrow {
+      font-size: var(--text-xs);
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--color-primary);
+      margin-bottom: var(--space-4);
+    }
+
+    .page-title {
+      font-family: var(--font-display);
+      font-size: var(--text-xl);
+      font-weight: 700;
+      color: var(--color-text);
+      margin-bottom: var(--space-4);
+    }
+
+    .page-subtitle {
+      font-size: var(--text-lg);
+      color: var(--color-text-muted);
+      font-weight: 300;
+      margin-bottom: var(--space-8);
+      max-width: 58ch;
+    }
+
+    .section { margin-bottom: var(--space-12); }
+
+    .section-title {
+      font-family: var(--font-display);
+      font-size: var(--text-lg);
+      font-weight: 500;
+      color: var(--color-text);
+      margin-bottom: var(--space-5);
+      padding-bottom: var(--space-3);
+      border-bottom: 1px solid var(--color-divider);
+    }
+
+    .prose p {
+      color: var(--color-text);
+      margin-bottom: var(--space-4);
+      line-height: 1.7;
+    }
+
+    .prose p:last-child { margin-bottom: 0; }
+
+    /* Assessment questions */
+    .assessment {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-5);
+    }
+
+    .assess-q {
+      padding: var(--space-6);
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-xl);
+      border-left: 3px solid var(--color-primary);
+    }
+
+    .assess-q-label {
+      font-size: var(--text-xs);
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--color-primary);
+      margin-bottom: var(--space-2);
+    }
+
+    .assess-q-question {
+      font-family: var(--font-display);
+      font-size: var(--text-base);
+      font-weight: 500;
+      color: var(--color-text);
+      margin-bottom: var(--space-3);
+      line-height: 1.4;
+    }
+
+    .assess-q-note {
+      font-size: var(--text-sm);
+      color: var(--color-text-muted);
+      font-style: italic;
+      line-height: 1.6;
+    }
+
+    /* Stuck list */
+    .stuck-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-3);
+    }
+
+    .stuck-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--space-3);
+      padding: var(--space-4);
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      font-size: var(--text-sm);
+      color: var(--color-text);
+      max-width: 100%;
+    }
+
+    .stuck-list li::before {
+      content: '';
+      flex-shrink: 0;
+      width: 6px;
+      height: 6px;
+      border-radius: var(--radius-full);
+      background: var(--color-warning);
+      margin-top: 0.5em;
+    }
+
+    /* Scaffolding types */
+    .scaffold-grid {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-4);
+    }
+
+    .scaffold-card {
+      padding: var(--space-5) var(--space-6);
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+    }
+
+    .scaffold-type {
+      font-family: var(--font-display);
+      font-size: var(--text-base);
+      font-weight: 500;
+      color: var(--color-text);
+      margin-bottom: var(--space-2);
+    }
+
+    .scaffold-desc {
+      font-size: var(--text-sm);
+      color: var(--color-text-muted);
+      line-height: 1.6;
+      max-width: 100%;
+    }
+
+    .highlight-box {
+      padding: var(--space-6) var(--space-8);
+      background: var(--color-surface-offset);
+      border-radius: var(--radius-xl);
+      border: 1px solid var(--color-divider);
+      margin-top: var(--space-6);
+    }
+
+    .highlight-box p {
+      color: var(--color-text);
+      line-height: 1.7;
+      margin-bottom: var(--space-3);
+    }
+
+    .highlight-box p:last-child { margin-bottom: 0; }
+
+    /* CTA */
+    .cta-section {
+      padding: var(--space-10) var(--space-8);
+      background: var(--color-primary-highlight);
+      border-radius: var(--radius-2xl);
+      border: 1px solid var(--color-border);
+      text-align: center;
+    }
+
+    .cta-section h2 {
+      font-family: var(--font-display);
+      font-size: var(--text-lg);
+      font-weight: 500;
+      color: var(--color-text);
+      margin-bottom: var(--space-4);
+    }
+
+    .cta-section p {
+      color: var(--color-text-muted);
+      margin-bottom: var(--space-6);
+      max-width: 52ch;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-2);
+      padding: var(--space-4) var(--space-8);
+      border-radius: var(--radius-full);
+      font-family: var(--font-body);
+      font-size: var(--text-sm);
+      font-weight: 500;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all var(--transition-interactive);
+      border: 2px solid transparent;
+      letter-spacing: 0.01em;
+    }
+
+    .btn-primary {
+      background: var(--color-primary);
+      color: var(--color-text-inverse);
+      border-color: var(--color-primary);
+    }
+
+    .btn-primary:hover {
+      background: var(--color-primary-hover);
+      border-color: var(--color-primary-hover);
+      transform: translateY(-1px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .btn-primary:active {
+      background: var(--color-primary-active);
+      border-color: var(--color-primary-active);
+      transform: translateY(0);
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+      font-size: var(--text-sm);
+      color: var(--color-text-muted);
+      text-decoration: none;
+      margin-bottom: var(--space-10);
+      transition: color var(--transition-fast);
+    }
+
+    .back-link:hover { color: var(--color-primary); }
+    .back-link::before { content: '\2190'; }
+
+    .cta-support {
+      margin-top: var(--space-4);
+      font-size: var(--text-sm);
+      color: var(--color-text-muted);
+    }
+
+    .cta-support a {
+      color: var(--color-primary);
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+
+    .divider {
+      border: none;
+      border-top: 1px solid var(--color-divider);
+      margin: var(--space-12) 0;
+    }
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <a href="index.html">What You Actually Need</a>
+  </header>
+
+  <main>
+    <a href="index.html" class="back-link">Back to your results</a>
+
+    <p class="page-eyebrow">Free Resource</p>
+    <h1 class="page-title">Execution Friction Finder</h1>
+    <p class="page-subtitle">Find out why the things you know to do are not getting done.</p>
+
+    <section class="section">
+      <div class="prose">
+        <p>Implementation problems are not usually about motivation or discipline. They are about friction — the specific kind that makes starting hard, continuing harder, and finishing feel uncertain. If you have good ideas that are not becoming real things, the issue is almost always structural. Not personal. This assessment helps you locate the friction.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2 class="section-title">Friction Self-Assessment</h2>
+      <div class="assessment">
+
+        <div class="assess-q">
+          <p class="assess-q-label">Question 1</p>
+          <p class="assess-q-question">When you try to start a project, what usually stops you first?</p>
+          <p class="assess-q-note">Note whether it is decision, setup, tools, clarity, or something else.</p>
+        </div>
+
+        <div class="assess-q">
+          <p class="assess-q-label">Question 2</p>
+          <p class="assess-q-question">Do you have a clear "done" definition for your current main project?</p>
+          <p class="assess-q-note">Vague completion criteria are one of the most common execution blockers.</p>
+        </div>
+
+        <div class="assess-q">
+          <p class="assess-q-label">Question 3</p>
+          <p class="assess-q-question">How many active projects are you currently trying to move forward?</p>
+          <p class="assess-q-note">If it is more than two, that is usually the problem.</p>
+        </div>
+
+        <div class="assess-q">
+          <p class="assess-q-label">Question 4</p>
+          <p class="assess-q-question">When you get stuck, what do you do?</p>
+          <p class="assess-q-note">Research, defer, pivot — or push through? Understanding your pattern matters.</p>
+        </div>
+
+        <div class="assess-q">
+          <p class="assess-q-label">Question 5</p>
+          <p class="assess-q-question">Is the thing you are trying to build within your current skill set, or does it require skills or tools you do not yet have?</p>
+          <p class="assess-q-note">This is a scaffolding question, not a capability insult.</p>
+        </div>
+
+        <div class="assess-q">
+          <p class="assess-q-label">Question 6</p>
+          <p class="assess-q-question">Do you have a regular protected time block for implementation work?</p>
+          <p class="assess-q-note">Not "I work when I can." A specific, defended time block.</p>
+        </div>
+
+        <div class="assess-q">
+          <p class="assess-q-label">Question 7</p>
+          <p class="assess-q-question">Is there someone who can review, react, or hold you accountable?</p>
+          <p class="assess-q-note">Execution is faster with a witness. Isolation compounds friction.</p>
+        </div>
+
+      </div>
+    </section>
+
+    <section class="section">
+      <h2 class="section-title">Where execution gets stuck</h2>
+      <ul class="stuck-list">
+        <li>Unclear scope — you do not know what done looks like</li>
+        <li>Tool confusion — you spend more time on setup than on output</li>
+        <li>Perfectionism as a gate — waiting until conditions are right</li>
+        <li>No protected time — execution happens in the margins and never accumulates</li>
+        <li>Missing scaffolding — you need something built that you do not know how to build</li>
+        <li>Decision debt — unresolved earlier choices that block later ones</li>
+      </ul>
+    </section>
+
+    <section class="section">
+      <h2 class="section-title">What scaffolding is missing</h2>
+      <div class="prose">
+        <p>Most implementation problems fall into one of three categories:</p>
+      </div>
+      <div class="scaffold-grid" style="margin-top: var(--space-5);">
+
+        <div class="scaffold-card">
+          <p class="scaffold-type">Technical scaffolding</p>
+          <p class="scaffold-desc">You need a tool, system, or build that you do not have yet. This is the fastest to solve.</p>
+        </div>
+
+        <div class="scaffold-card">
+          <p class="scaffold-type">Process scaffolding</p>
+          <p class="scaffold-desc">You need a sequence or structure to follow. Often a template, workflow, or checklist.</p>
+        </div>
+
+        <div class="scaffold-card">
+          <p class="scaffold-type">Accountability scaffolding</p>
+          <p class="scaffold-desc">You need someone to be doing this with or for. Execution is a social act more often than people admit.</p>
+        </div>
+
+      </div>
+      <div class="highlight-box">
+        <p>Identify which type of scaffolding is missing. That tells you whether you need to learn, hire, build, or delegate.</p>
+      </div>
+    </section>
+
+    <hr class="divider" />
+
+    <section class="cta-section">
+      <h2>If you want it built instead of figured out</h2>
+      <p>If what you need is a working system, tool, or automated workflow — not more thinking about it — the Done-For-You AI Build takes your idea from concept to working asset. Starting at $750.</p>
+      <a href="#" class="btn btn-primary">Explore the AI Build</a>
+      <!-- EDIT THIS: link to AI build/DFY service page -->
+      <p class="cta-support">Or <a href="index.html">return to your results</a> to explore other next steps.</p>
+    </section>
+
+    <a href="index.html" class="back-link" style="margin-top: var(--space-10); margin-bottom: 0;">Back to your results</a>
+  </main>
+
+  <footer class="site-footer">
+    Part of <a href="index.html">What You Actually Need</a> &middot; <a href="https://guinwhite.com" target="_blank" rel="noopener">guinwhite.com</a>
+  </footer>
+
+  <script>
+    (function () {
+      const stored = localStorage.getItem('theme');
+      if (stored) {
+        document.documentElement.setAttribute('data-theme', stored);
+      } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.documentElement.setAttribute('data-theme', 'dark');
+      }
+    })();
+  </script>
+</body>
+</html>

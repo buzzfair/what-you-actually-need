@@ -1,0 +1,1107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Build Sprint · What You Actually Need</title>
+  <meta name="description" content="One stuck idea turned into one working implementation. Fixed scope, virtual, starting at $750. AI workflows, automations, sequences, and systems." />
+
+  <!-- FONTS: Zodiak (display) + Work Sans (body) -->
+  <link href="https://api.fontshare.com/v2/css?f[]=zodiak@400,500,700&display=swap" rel="stylesheet" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300..700&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ============================================================
+       DESIGN TOKENS — Warm stone palette + dusty rose accent
+    ============================================================ */
+    :root,
+    [data-theme="light"] {
+      --color-bg:               #f5f3ef;
+      --color-surface:          #faf9f7;
+      --color-surface-2:        #fdfcfb;
+      --color-surface-offset:   #eeebe6;
+      --color-surface-offset-2: #e8e4de;
+      --color-divider:          #dedad3;
+      --color-border:           #d6d2ca;
+
+      --color-text:         #2a2520;
+      --color-text-muted:   #7c7872;
+      --color-text-faint:   #b5b2ac;
+      --color-text-inverse: #faf9f7;
+
+      --color-primary:           #8e4f6a;
+      --color-primary-hover:     #703d54;
+      --color-primary-active:    #542c3e;
+      --color-primary-highlight: #f0e1e8;
+
+      --color-secondary:           #5a7462;
+      --color-secondary-hover:     #445a4b;
+      --color-secondary-highlight: #dae5db;
+
+      --color-warning:           #956740;
+      --color-warning-highlight: #f0e4d6;
+
+      --radius-sm:   0.375rem;
+      --radius-md:   0.5rem;
+      --radius-lg:   0.75rem;
+      --radius-xl:   1rem;
+      --radius-2xl:  1.5rem;
+      --radius-full: 9999px;
+
+      --shadow-sm: 0 1px 3px oklch(0.2 0.01 50 / 0.07);
+      --shadow-md: 0 4px 16px oklch(0 0 0 / 0.09);
+      --shadow-lg: 0 12px 40px oklch(0 0 0 / 0.13);
+
+      --font-display: 'Zodiak', 'Georgia', serif;
+      --font-body:    'Work Sans', 'Helvetica Neue', sans-serif;
+
+      --text-xs:   clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem);
+      --text-sm:   clamp(0.875rem, 0.8rem + 0.35vw, 1rem);
+      --text-base: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
+      --text-lg:   clamp(1.125rem, 1rem + 0.75vw, 1.5rem);
+      --text-xl:   clamp(1.5rem, 1.2rem + 1.25vw, 2.25rem);
+      --text-2xl:  clamp(2rem, 1.2rem + 2.5vw, 3.5rem);
+
+      --space-1:  0.25rem;
+      --space-2:  0.5rem;
+      --space-3:  0.75rem;
+      --space-4:  1rem;
+      --space-5:  1.25rem;
+      --space-6:  1.5rem;
+      --space-8:  2rem;
+      --space-10: 2.5rem;
+      --space-12: 3rem;
+      --space-16: 4rem;
+      --space-20: 5rem;
+      --space-24: 6rem;
+
+      --content-narrow:  560px;
+      --content-default: 720px;
+
+      --transition-fast:        150ms cubic-bezier(0.16, 1, 0.3, 1);
+      --transition-interactive: 180ms cubic-bezier(0.16, 1, 0.3, 1);
+      --transition-slow:        400ms cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    [data-theme="dark"] {
+      --color-bg:               #18150f;
+      --color-surface:          #1d1a14;
+      --color-surface-2:        #211d17;
+      --color-surface-offset:   #1a1710;
+      --color-surface-offset-2: #1f1c15;
+      --color-divider:          #2a271f;
+      --color-border:           #3a3730;
+      --color-text:             #d4d0c8;
+      --color-text-muted:       #7e7b74;
+      --color-text-faint:       #5a5852;
+      --color-text-inverse:     #1d1a14;
+      --color-primary:          #c48da8;
+      --color-primary-hover:    #d4a8be;
+      --color-primary-active:   #e0c2d0;
+      --color-primary-highlight: #3a2830;
+      --color-secondary:        #7da886;
+      --color-secondary-hover:  #9bbfa4;
+      --color-secondary-highlight: #1e2e22;
+      --color-warning:          #c49060;
+      --color-warning-highlight: #3a2c1c;
+      --shadow-sm: 0 1px 3px oklch(0 0 0 / 0.25);
+      --shadow-md: 0 4px 16px oklch(0 0 0 / 0.35);
+      --shadow-lg: 0 12px 40px oklch(0 0 0 / 0.45);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme]) {
+        --color-bg:               #18150f;
+        --color-surface:          #1d1a14;
+        --color-surface-2:        #211d17;
+        --color-surface-offset:   #1a1710;
+        --color-divider:          #2a271f;
+        --color-border:           #3a3730;
+        --color-text:             #d4d0c8;
+        --color-text-muted:       #7e7b74;
+        --color-text-faint:       #5a5852;
+        --color-text-inverse:     #1d1a14;
+        --color-primary:          #c48da8;
+        --color-primary-hover:    #d4a8be;
+        --color-primary-highlight: #3a2830;
+        --color-secondary:        #7da886;
+        --color-secondary-hover:  #9bbfa4;
+        --color-secondary-highlight: #1e2e22;
+        --color-warning:          #c49060;
+        --color-warning-highlight: #3a2c1c;
+        --shadow-sm: 0 1px 3px oklch(0 0 0 / 0.25);
+        --shadow-md: 0 4px 16px oklch(0 0 0 / 0.35);
+        --shadow-lg: 0 12px 40px oklch(0 0 0 / 0.45);
+      }
+    }
+
+    /* ============================================================
+       BASE RESET
+    ============================================================ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html {
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-rendering: optimizeLegibility;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      min-height: 100dvh;
+      line-height: 1.65;
+      font-family: var(--font-body);
+      font-size: var(--text-base);
+      color: var(--color-text);
+      background-color: var(--color-bg);
+      transition: background-color var(--transition-slow), color var(--transition-slow);
+    }
+
+    img, picture, video, canvas, svg { display: block; max-width: 100%; }
+    input, button, textarea, select { font: inherit; color: inherit; }
+    h1, h2, h3, h4, h5, h6 { text-wrap: balance; line-height: 1.2; font-family: var(--font-display); }
+    p, li { text-wrap: pretty; max-width: 65ch; }
+
+    ::selection { background: var(--color-primary-highlight); color: var(--color-text); }
+    :focus-visible { outline: 2px solid var(--color-primary); outline-offset: 3px; border-radius: var(--radius-sm); }
+    button { cursor: pointer; background: none; border: none; }
+    a { color: inherit; }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+    }
+
+    /* ============================================================
+       LAYOUT
+    ============================================================ */
+    .page-wrapper { min-height: 100dvh; display: flex; flex-direction: column; }
+
+    .site-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: var(--space-5) var(--space-6);
+      border-bottom: 1px solid var(--color-divider);
+      position: sticky;
+      top: 0;
+      background-color: var(--color-bg);
+      z-index: 100;
+      transition: background-color var(--transition-slow);
+    }
+
+    .site-header a {
+      font-family: var(--font-display);
+      font-size: var(--text-sm);
+      font-weight: 500;
+      text-decoration: none;
+      color: var(--color-text);
+    }
+
+    .site-header a:hover { color: var(--color-primary); }
+
+    main { flex: 1; width: 100%; }
+
+    .site-footer {
+      padding: var(--space-8) var(--space-6);
+      border-top: 1px solid var(--color-divider);
+      text-align: center;
+      font-size: var(--text-xs);
+      color: var(--color-text-faint);
+    }
+
+    .site-footer a {
+      color: var(--color-text-faint);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    .site-footer a:hover { color: var(--color-text-muted); }
+
+    /* ============================================================
+       HERO
+    ============================================================ */
+    .hero {
+      padding: var(--space-20) var(--space-6) var(--space-16);
+      text-align: center;
+      border-bottom: 1px solid var(--color-divider);
+    }
+
+    .hero-inner {
+      max-width: var(--content-default);
+      margin: 0 auto;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      font-size: var(--text-xs);
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--color-primary);
+      margin-bottom: var(--space-6);
+      padding: var(--space-2) var(--space-4);
+      background: var(--color-primary-highlight);
+      border-radius: var(--radius-full);
+    }
+
+    .hero-title {
+      font-family: var(--font-display);
+      font-size: var(--text-2xl);
+      font-weight: 700;
+      color: var(--color-text);
+      margin-bottom: var(--space-6);
+      line-height: 1.15;
+      max-width: 18ch;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .hero-subhead {
+      font-size: var(--text-lg);
+      color: var(--color-text-muted);
+      font-weight: 300;
+      margin-bottom: var(--space-10);
+      max-width: 54ch;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1.6;
+    }
+
+    .hero-support {
+      margin-top: var(--space-5);
+      font-size: var(--text-sm);
+      color: var(--color-text-faint);
+      max-width: 52ch;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .hero-back {
+      margin-top: var(--space-8);
+      font-size: var(--text-sm);
+      color: var(--color-text-faint);
+    }
+
+    .hero-back a {
+      color: var(--color-text-muted);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      transition: color var(--transition-fast);
+    }
+
+    .hero-back a:hover { color: var(--color-primary); }
+
+    /* ============================================================
+       BUTTONS
+    ============================================================ */
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+      padding: var(--space-4) var(--space-8);
+      background-color: var(--color-primary);
+      color: var(--color-text-inverse);
+      font-family: var(--font-body);
+      font-size: var(--text-base);
+      font-weight: 500;
+      text-decoration: none;
+      border: none;
+      border-radius: var(--radius-lg);
+      cursor: pointer;
+      transition: background-color var(--transition-interactive), transform var(--transition-fast), box-shadow var(--transition-interactive);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .btn-primary:hover {
+      background-color: var(--color-primary-hover);
+      box-shadow: var(--shadow-md);
+      transform: translateY(-1px);
+    }
+
+    .btn-primary:active {
+      background-color: var(--color-primary-active);
+      transform: translateY(0);
+    }
+
+    /* ============================================================
+       SECTIONS
+    ============================================================ */
+    .page-section {
+      padding: var(--space-16) var(--space-6);
+      border-bottom: 1px solid var(--color-divider);
+    }
+
+    .page-section:last-of-type { border-bottom: none; }
+
+    .section-inner {
+      max-width: var(--content-default);
+      margin: 0 auto;
+    }
+
+    .section-title {
+      font-family: var(--font-display);
+      font-size: var(--text-xl);
+      font-weight: 500;
+      color: var(--color-text);
+      margin-bottom: var(--space-8);
+    }
+
+    /* ============================================================
+       BULLET LISTS
+    ============================================================ */
+    .check-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-4);
+    }
+
+    .check-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--space-3);
+      font-size: var(--text-base);
+      color: var(--color-text-muted);
+      max-width: none;
+    }
+
+    .check-list li::before {
+      content: '';
+      display: block;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background-color: var(--color-primary);
+      margin-top: 0.55em;
+      flex-shrink: 0;
+    }
+
+    .check-list.not-for li::before {
+      background-color: var(--color-text-faint);
+    }
+
+    /* ============================================================
+       WHAT GETS BUILT GRID
+    ============================================================ */
+    .deliverable-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: var(--space-4);
+      margin-bottom: var(--space-8);
+    }
+
+    .deliverable-card {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      padding: var(--space-5) var(--space-6);
+      font-size: var(--text-sm);
+      color: var(--color-text-muted);
+      display: flex;
+      align-items: flex-start;
+      gap: var(--space-3);
+    }
+
+    .deliverable-card::before {
+      content: '';
+      display: block;
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background-color: var(--color-primary);
+      margin-top: 0.5em;
+      flex-shrink: 0;
+    }
+
+    /* ============================================================
+       CALLOUTS
+    ============================================================ */
+    .callout {
+      border-radius: var(--radius-lg);
+      padding: var(--space-6);
+      font-size: var(--text-sm);
+      line-height: 1.65;
+    }
+
+    .callout-note {
+      background: var(--color-surface-offset);
+      border-left: 3px solid var(--color-border);
+      color: var(--color-text-muted);
+    }
+
+    .callout-note a {
+      color: var(--color-primary);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    .callout-note a:hover { color: var(--color-primary-hover); }
+
+    /* ============================================================
+       INCLUDED ITEMS
+    ============================================================ */
+    .included-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-5);
+    }
+
+    .included-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--space-4);
+      padding-bottom: var(--space-5);
+      border-bottom: 1px solid var(--color-divider);
+      max-width: none;
+    }
+
+    .included-list li:last-child { border-bottom: none; padding-bottom: 0; }
+
+    .included-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: var(--radius-md);
+      background: var(--color-primary-highlight);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      color: var(--color-primary);
+    }
+
+    .included-content strong {
+      display: block;
+      font-size: var(--text-sm);
+      font-weight: 600;
+      color: var(--color-text);
+      margin-bottom: var(--space-1);
+    }
+
+    .included-content span {
+      font-size: var(--text-sm);
+      color: var(--color-text-muted);
+    }
+
+    /* ============================================================
+       PRICING SECTION
+    ============================================================ */
+    .pricing-block {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-xl);
+      padding: var(--space-8) var(--space-10);
+      margin-bottom: var(--space-6);
+    }
+
+    .pricing-block p {
+      color: var(--color-text-muted);
+      max-width: none;
+      line-height: 1.75;
+    }
+
+    /* ============================================================
+       TRUST NOTE
+    ============================================================ */
+    .trust-block {
+      background: var(--color-secondary-highlight);
+      border-radius: var(--radius-xl);
+      padding: var(--space-8) var(--space-10);
+    }
+
+    .trust-block p {
+      color: var(--color-text-muted);
+      max-width: none;
+      line-height: 1.75;
+    }
+
+    /* ============================================================
+       INQUIRY FORM
+    ============================================================ */
+    .form-section {
+      background: var(--color-surface);
+    }
+
+    .form-intro {
+      margin-bottom: var(--space-8);
+    }
+
+    .form-intro p {
+      font-size: var(--text-base);
+      color: var(--color-text-muted);
+      max-width: none;
+      line-height: 1.7;
+    }
+
+    .form-confirm {
+      background: var(--color-primary-highlight);
+      border-radius: var(--radius-lg);
+      padding: var(--space-5) var(--space-6);
+      font-size: var(--text-sm);
+      color: var(--color-primary);
+      margin-bottom: var(--space-8);
+      line-height: 1.65;
+    }
+
+    form { display: flex; flex-direction: column; gap: var(--space-8); }
+
+    .field-group {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-2);
+    }
+
+    .field-group label {
+      font-size: var(--text-sm);
+      font-weight: 500;
+      color: var(--color-text);
+    }
+
+    .field-group .field-helper {
+      font-size: var(--text-xs);
+      color: var(--color-text-faint);
+      margin-top: var(--space-1);
+    }
+
+    .field-group input[type="text"],
+    .field-group input[type="email"],
+    .field-group textarea {
+      width: 100%;
+      padding: var(--space-4) var(--space-5);
+      background: var(--color-bg);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      font-size: var(--text-base);
+      color: var(--color-text);
+      transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+      resize: vertical;
+    }
+
+    .field-group input[type="text"]:focus,
+    .field-group input[type="email"]:focus,
+    .field-group textarea:focus {
+      outline: none;
+      border-color: var(--color-primary);
+      box-shadow: 0 0 0 3px var(--color-primary-highlight);
+    }
+
+    .field-group textarea { min-height: 100px; }
+
+    .radio-group {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-3);
+      margin-top: var(--space-2);
+    }
+
+    .radio-option {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--space-3);
+      cursor: pointer;
+      font-size: var(--text-sm);
+      color: var(--color-text-muted);
+    }
+
+    .radio-option input[type="radio"] {
+      margin-top: 0.15em;
+      accent-color: var(--color-primary);
+      flex-shrink: 0;
+      width: 16px;
+      height: 16px;
+    }
+
+    .form-divider {
+      height: 1px;
+      background: var(--color-divider);
+      border: none;
+    }
+
+    .form-submit-area {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-4);
+    }
+
+    .form-fine-print {
+      font-size: var(--text-xs);
+      color: var(--color-text-faint);
+      line-height: 1.6;
+      max-width: none;
+    }
+
+    .form-alt-link {
+      margin-top: var(--space-8);
+      padding-top: var(--space-8);
+      border-top: 1px solid var(--color-divider);
+      font-size: var(--text-sm);
+      color: var(--color-text-muted);
+    }
+
+    .form-alt-link a {
+      color: var(--color-primary);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    .form-alt-link a:hover { color: var(--color-primary-hover); }
+
+    /* ============================================================
+       SECOND CTA
+    ============================================================ */
+    .second-cta {
+      text-align: center;
+      padding: var(--space-20) var(--space-6);
+      background: var(--color-surface-offset);
+    }
+
+    .second-cta-inner {
+      max-width: var(--content-narrow);
+      margin: 0 auto;
+    }
+
+    .second-cta h2 {
+      font-family: var(--font-display);
+      font-size: var(--text-xl);
+      font-weight: 500;
+      color: var(--color-text);
+      margin-bottom: var(--space-8);
+    }
+
+    .second-cta-support {
+      margin-top: var(--space-4);
+      font-size: var(--text-sm);
+      color: var(--color-text-faint);
+    }
+
+    /* ============================================================
+       THEME TOGGLE
+    ============================================================ */
+    .theme-toggle {
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: var(--color-text-muted);
+      display: flex;
+      align-items: center;
+      padding: var(--space-2);
+      border-radius: var(--radius-sm);
+      transition: color var(--transition-fast), background-color var(--transition-fast);
+    }
+
+    .theme-toggle:hover {
+      color: var(--color-text);
+      background-color: var(--color-surface-offset);
+    }
+  </style>
+</head>
+<body>
+
+<div class="page-wrapper">
+
+  <!-- HEADER -->
+  <header class="site-header">
+    <a href="index.html">What You Actually Need</a>
+    <button class="theme-toggle" data-theme-toggle aria-label="Toggle dark mode"></button>
+  </header>
+
+  <main>
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-inner">
+        <span class="hero-badge">Starting at $750 · fixed-scope · virtual</span>
+        <h1 class="hero-title">Stop researching. Get the thing built.</h1>
+        <p class="hero-subhead">If you already know enough but the asset, workflow, tool, or system still is not live, this sprint turns one stuck idea into one working implementation. Fast, focused, and scoped for momentum.</p>
+        <a href="#inquiry-form" class="btn-primary">Request an AI Build Sprint</a>
+        <p class="hero-support">Best for people who do not need more information. They need activation, structure, and a working first version.</p>
+        <div class="hero-back"><a href="index.html">← Back to your results</a></div>
+      </div>
+    </section>
+
+    <!-- WHO IT IS FOR -->
+    <section class="page-section">
+      <div class="section-inner">
+        <h2 class="section-title">Who this is for</h2>
+        <ul class="check-list">
+          <li>You know (roughly) what you want built — a workflow, tool, sequence, system, or asset</li>
+          <li>You have been researching, planning, or attempting it for longer than the actual build would take</li>
+          <li>You are not blocked by strategy — you are blocked by execution</li>
+          <li>You want something working, not another framework to follow</li>
+          <li>You are ready to scope a specific deliverable and move</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- WHO IT IS NOT FOR -->
+    <section class="page-section">
+      <div class="section-inner">
+        <h2 class="section-title">Who this is not for</h2>
+        <ul class="check-list not-for" style="margin-bottom: var(--space-8);">
+          <li>People who are still figuring out what they want</li>
+          <li>People who want open-ended consulting or ongoing coaching</li>
+          <li>People expecting a giant custom software project for a sprint price</li>
+          <li>People who are not prepared to make fast decisions on scope and direction</li>
+        </ul>
+        <div class="callout callout-note">
+          If you are not yet sure what to build, the <a href="diagnostic-strategy-session.html">Diagnostic Strategy Session</a> may be a better first step.
+        </div>
+      </div>
+    </section>
+
+    <!-- WHAT GETS BUILT -->
+    <section class="page-section">
+      <div class="section-inner">
+        <h2 class="section-title">What this sprint can deliver</h2>
+        <div class="deliverable-grid">
+          <div class="deliverable-card">A custom AI workflow or automation</div>
+          <div class="deliverable-card">A lead qualification or intake system</div>
+          <div class="deliverable-card">A follow-up or email sequence, built and installed</div>
+          <div class="deliverable-card">A client onboarding flow</div>
+          <div class="deliverable-card">A content repurposing or publishing system</div>
+          <div class="deliverable-card">A Notion, Airtable, or Google Workspace system</div>
+          <div class="deliverable-card">A ChatGPT or Perplexity-powered internal tool</div>
+          <div class="deliverable-card">A GoHighLevel automation or pipeline</div>
+        </div>
+        <div class="callout callout-note">
+          Each sprint is scoped to one deliverable. If the project is larger, it is broken into phases.
+        </div>
+      </div>
+    </section>
+
+    <!-- WHAT IS INCLUDED -->
+    <section class="page-section">
+      <div class="section-inner">
+        <h2 class="section-title">What is included</h2>
+        <ul class="included-list">
+          <li>
+            <div class="included-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            </div>
+            <div class="included-content">
+              <strong>Scoping call (20–30 minutes)</strong>
+              <span>A short focused call to define the deliverable precisely before any work begins.</span>
+            </div>
+          </li>
+          <li>
+            <div class="included-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+            </div>
+            <div class="included-content">
+              <strong>The build itself</strong>
+              <span>Designed for your tools, your workflow, and your situation — not a generic template.</span>
+            </div>
+          </li>
+          <li>
+            <div class="included-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+            </div>
+            <div class="included-content">
+              <strong>One round of revisions</strong>
+              <span>Structured feedback incorporated after initial delivery.</span>
+            </div>
+          </li>
+          <li>
+            <div class="included-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+            </div>
+            <div class="included-content">
+              <strong>Handoff document or walkthrough</strong>
+              <span>So you can use and maintain what was built without being dependent on anyone.</span>
+            </div>
+          </li>
+          <li>
+            <div class="included-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            </div>
+            <div class="included-content">
+              <strong>Follow-up window</strong>
+              <span>A window for questions after delivery — so you can get unstuck if something comes up in practice.</span>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- WHAT IS NOT INCLUDED -->
+    <section class="page-section">
+      <div class="section-inner">
+        <h2 class="section-title">What is not included</h2>
+        <ul class="check-list not-for">
+          <li>Ongoing support or maintenance</li>
+          <li>Training your team or staff</li>
+          <li>Open-ended consulting outside the scoped deliverable</li>
+          <li>Rebuilds or pivots mid-sprint without a scope change discussion</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- HOW PRICING WORKS -->
+    <section class="page-section">
+      <div class="section-inner">
+        <h2 class="section-title">How pricing works</h2>
+        <div class="pricing-block">
+          <p>Sprints start at $750. The actual price depends on scope, complexity, and the tools involved. Simple automations and single-sequence builds tend to fall in the $750–$1,000 range. More complex systems, multi-step workflows, or builds requiring platform integrations typically run $1,000–$1,500 or more. Scope is confirmed before work begins. You will not be surprised.</p>
+        </div>
+        <div class="callout callout-note">
+          Not sure if your idea fits a sprint? The inquiry form below helps clarify that — and if it is too early or too undefined, I will say so.
+        </div>
+      </div>
+    </section>
+
+    <!-- TRUST NOTE -->
+    <section class="page-section">
+      <div class="section-inner">
+        <h2 class="section-title">How this works in practice</h2>
+        <div class="trust-block">
+          <p>You submit the inquiry form. I review it and assess whether the request is a clear fit for a sprint, needs a scoping conversation first, or would be better served by a Diagnostic Strategy Session before building anything. If it is a fit, you will receive a scope summary and a clear next step. If it is not the right time for a build, I will tell you that directly.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- INQUIRY FORM -->
+    <section class="page-section form-section" id="inquiry-form">
+      <div class="section-inner">
+        <h2 class="section-title">AI Build Sprint Inquiry</h2>
+        <div class="form-intro">
+          <p>If you already know enough but the thing still is not built, this form helps me quickly assess fit, scope, readiness, and budget comfort. This is for focused implementation requests, not open-ended consulting.</p>
+        </div>
+        <div class="form-confirm">
+          I review inquiries personally. If your request is a fit for an AI Build Sprint, I will follow up with next steps, scope direction, and pricing guidance. If it is too early or too undefined for a sprint, I may recommend a Diagnostic Strategy Session first.
+        </div>
+
+        <!-- EDIT THIS: form action URL — replace with GoHighLevel webhook, Formspree, or other endpoint -->
+        <form action="#" method="POST" id="ai-build-inquiry-form">
+
+          <!-- 1. Full name -->
+          <div class="field-group">
+            <label for="full-name">Full name <span style="color:var(--color-primary)">*</span></label>
+            <input type="text" id="full-name" name="full_name" required autocomplete="name" placeholder="Your full name" />
+          </div>
+
+          <!-- 2. Best email -->
+          <div class="field-group">
+            <label for="email">Best email <span style="color:var(--color-primary)">*</span></label>
+            <input type="email" id="email" name="email" required autocomplete="email" placeholder="you@example.com" />
+          </div>
+
+          <!-- 3. Website -->
+          <div class="field-group">
+            <label for="website">Website or primary online presence</label>
+            <input type="text" id="website" name="website" autocomplete="url" placeholder="https://" />
+          </div>
+
+          <hr class="form-divider" />
+
+          <!-- 4. What do you want built? -->
+          <div class="field-group">
+            <label for="what-built">What do you want built? <span style="color:var(--color-primary)">*</span></label>
+            <textarea id="what-built" name="what_built" required rows="4" placeholder="Name the asset, tool, workflow, or system as clearly as you can."></textarea>
+            <span class="field-helper">Name the asset, tool, workflow, or system as clearly as you can.</span>
+          </div>
+
+          <!-- 5. What outcome? -->
+          <div class="field-group">
+            <label for="outcome">What outcome should this create? <span style="color:var(--color-primary)">*</span></label>
+            <textarea id="outcome" name="outcome" required rows="4" placeholder="For example: qualify leads, improve follow-up, reduce admin, clarify offers, or turn an idea into a working tool."></textarea>
+            <span class="field-helper">For example: qualify leads, improve follow-up, reduce admin, clarify offers, or turn an idea into a working tool.</span>
+          </div>
+
+          <hr class="form-divider" />
+
+          <!-- 6. Where does this stand? -->
+          <div class="field-group">
+            <label>Which of these best describes where this stands right now? <span style="color:var(--color-primary)">*</span></label>
+            <div class="radio-group">
+              <label class="radio-option">
+                <input type="radio" name="readiness" value="know_exactly" required />
+                I know exactly what I want built
+              </label>
+              <label class="radio-option">
+                <input type="radio" name="readiness" value="know_problem" />
+                I know the problem, but need help narrowing the build
+              </label>
+              <label class="radio-option">
+                <input type="radio" name="readiness" value="rough_idea" />
+                I have a rough idea, but it is still fuzzy
+              </label>
+              <label class="radio-option">
+                <input type="radio" name="readiness" value="not_sure" />
+                I am not sure this is a build yet
+              </label>
+            </div>
+          </div>
+
+          <!-- 7. What have you tried? -->
+          <div class="field-group">
+            <label for="tried">What have you already tried?</label>
+            <textarea id="tried" name="tried" rows="3" placeholder="Include tools, prompts, platforms, contractors, or DIY attempts if relevant."></textarea>
+            <span class="field-helper">Include tools, prompts, platforms, contractors, or DIY attempts if relevant.</span>
+          </div>
+
+          <!-- 8. Tools involved -->
+          <div class="field-group">
+            <label for="tools">What tools or platforms are already involved?</label>
+            <textarea id="tools" name="tools" rows="3" placeholder="For example: GoHighLevel, Notion, Airtable, Google Sheets, Zapier, ChatGPT, Perplexity, ConvertKit, Kajabi, etc."></textarea>
+            <span class="field-helper">For example: GoHighLevel, Notion, Airtable, Google Sheets, Zapier, ChatGPT, Perplexity, ConvertKit, Kajabi, etc.</span>
+          </div>
+
+          <hr class="form-divider" />
+
+          <!-- 9. Preferred timeline -->
+          <div class="field-group">
+            <label>What is your preferred timeline? <span style="color:var(--color-primary)">*</span></label>
+            <div class="radio-group">
+              <label class="radio-option">
+                <input type="radio" name="timeline" value="asap" required />
+                As soon as possible
+              </label>
+              <label class="radio-option">
+                <input type="radio" name="timeline" value="2_weeks" />
+                Within 2 weeks
+              </label>
+              <label class="radio-option">
+                <input type="radio" name="timeline" value="30_days" />
+                Within 30 days
+              </label>
+              <label class="radio-option">
+                <input type="radio" name="timeline" value="exploring" />
+                I am exploring, but not ready to start yet
+              </label>
+            </div>
+          </div>
+
+          <!-- 10. Investment comfort -->
+          <div class="field-group">
+            <label>What level of investment feels realistic for this kind of sprint? <span style="color:var(--color-primary)">*</span></label>
+            <div class="radio-group">
+              <label class="radio-option">
+                <input type="radio" name="investment" value="750_1000" required />
+                $750 to $1,000
+              </label>
+              <label class="radio-option">
+                <input type="radio" name="investment" value="1000_1500" />
+                $1,000 to $1,500
+              </label>
+              <label class="radio-option">
+                <input type="radio" name="investment" value="1500_plus" />
+                $1,500+
+              </label>
+              <label class="radio-option">
+                <input type="radio" name="investment" value="not_sure" />
+                I am not sure yet
+              </label>
+            </div>
+          </div>
+
+          <hr class="form-divider" />
+
+          <!-- 11. What would success look like? -->
+          <div class="field-group">
+            <label for="success">What would make this sprint feel successful? <span style="color:var(--color-primary)">*</span></label>
+            <textarea id="success" name="success" required rows="4" placeholder="What would you want to have working, clarified, or completed by the end?"></textarea>
+            <span class="field-helper">What would you want to have working, clarified, or completed by the end?</span>
+          </div>
+
+          <!-- 12. What you need most -->
+          <div class="field-group">
+            <label>Which best describes what you need most right now? <span style="color:var(--color-primary)">*</span></label>
+            <div class="radio-group">
+              <label class="radio-option">
+                <input type="radio" name="need_type" value="need_built" required />
+                I need something built
+              </label>
+              <label class="radio-option">
+                <input type="radio" name="need_type" value="help_clarifying" />
+                I need help clarifying what should be built
+              </label>
+              <label class="radio-option">
+                <input type="radio" name="need_type" value="strategy_and_build" />
+                I need both strategy and build direction
+              </label>
+              <label class="radio-option">
+                <input type="radio" name="need_type" value="not_sure" />
+                I am not sure yet
+              </label>
+            </div>
+          </div>
+
+          <!-- SUBMIT -->
+          <div class="form-submit-area">
+            <button type="submit" class="btn-primary" style="align-self:flex-start;">Submit AI Build Inquiry</button>
+            <p class="form-fine-print">This inquiry is for fixed-scope implementation support. If your request is a better fit for diagnostic strategy first, I will point you in that direction rather than forcing the wrong offer.</p>
+          </div>
+
+        </form>
+
+        <div class="form-alt-link">
+          Not sure if you need a build or a diagnosis first? <a href="diagnostic-strategy-session.html">Book a Diagnostic Strategy Session →</a>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECOND CTA -->
+    <section class="second-cta">
+      <div class="second-cta-inner">
+        <h2>Ready to scope your sprint?</h2>
+        <a href="#inquiry-form" class="btn-primary">Request an AI Build Sprint</a>
+        <p class="second-cta-support">Starting at $750. Scope confirmed before work begins.</p>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    Part of <a href="index.html">What You Actually Need</a> &middot; <a href="https://guinwhite.com" target="_blank" rel="noopener">guinwhite.com</a>
+  </footer>
+
+</div>
+
+<script>
+  // EDIT THIS: AI Build Sprint inquiry form action (GoHighLevel webhook, Formspree, etc.)
+  const BUILD_FORM_ACTION = '#';
+  // EDIT THIS: redirect after form submission
+  const BUILD_THANKYOU_URL = 'build-thankyou.html';
+  // EDIT THIS: base price display
+  const BUILD_BASE_PRICE = 750;
+
+  // Set form action and handle redirect
+  const form = document.getElementById('ai-build-inquiry-form');
+  if (form && BUILD_FORM_ACTION !== '#') {
+    form.action = BUILD_FORM_ACTION;
+  }
+
+  form.addEventListener('submit', function(e) {
+    if (BUILD_FORM_ACTION === '#') {
+      // Dev mode: just redirect to thank-you
+      e.preventDefault();
+      window.location.href = BUILD_THANKYOU_URL;
+    }
+    // If real endpoint, form submits normally, then redirect via meta or server
+  });
+
+  // Dark mode IIFE
+  (function(){
+    const root = document.documentElement;
+    let theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    root.setAttribute('data-theme', theme);
+    const toggle = document.querySelector('[data-theme-toggle]');
+    const MOON = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
+    const SUN = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>';
+    if (toggle) {
+      toggle.innerHTML = theme === 'dark' ? SUN : MOON;
+      toggle.addEventListener('click', () => {
+        theme = theme === 'dark' ? 'light' : 'dark';
+        root.setAttribute('data-theme', theme);
+        toggle.innerHTML = theme === 'dark' ? SUN : MOON;
+      });
+    }
+  })();
+</script>
+
+</body>
+</html>
