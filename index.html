@@ -1002,8 +1002,9 @@ const CONFIG = {
     title:    'AI Build Sprint',
     price:    'Starting at $750',
     format:   'Fixed-scope · starting at $750 · virtual',
-    page:     'ai-build-sprint.html',                      // app-native sales + inquiry form page
-    inquiryUrl: '#',                                        // EDIT THIS: GHL form endpoint — AI Build Sprint inquiry
+    page:     'ai-build-sprint.html',                      // app-native sales page
+    bookingUrl: 'https://link.aibizconnection.com/widget/bookings/ai-sprint-session', // EDIT THIS: AI Build Sprint booking link
+    intakeUrl:  'ai-build-intake.html',                    // EDIT THIS: app-native long-form pre-sprint intake (sent via post-booking email)
     body:     'Turn one stuck idea into one working implementation. Fast, focused, and scoped for momentum.',
   },
 
@@ -1675,18 +1676,18 @@ function escAttr(str) {
 
     Each paid offer has:
       page        ← app-native HTML page (already wired — do not change)
-      bookingUrl  ← GHL booking link (EDIT THIS when you have one)
-      inquiryUrl  ← GHL form endpoint (EDIT THIS when you have one)
+      bookingUrl  ← GHL booking link
+      intakeUrl   ← app-native long-form intake page (link sent via post-booking email)
       price, format, title, body
 
     Architecture rule:
       App owns: all pages, forms, CTAs, thank-you states, routing
       GHL owns: booking, payment, email sequences, automations
 
-    The three things you will add to CONFIG when ready:
-      CONFIG.visibilitySession.bookingUrl  ← already live
-      CONFIG.diagnosticSession.bookingUrl  ← live: https://link.aibizconnection.com/widget/bookings/diagnostic-strategy-session
-      CONFIG.aiBuild.inquiryUrl            ← replace '#' with GHL form endpoint
+    All three booking URLs are now live:
+      CONFIG.visibilitySession.bookingUrl  ← live
+      CONFIG.diagnosticSession.bookingUrl  ← live
+      CONFIG.aiBuild.bookingUrl            ← live: https://link.aibizconnection.com/widget/bookings/ai-sprint-session
 
   ── 4. PATH-SPECIFIC DIAGNOSES & MONETIZATION
     const DIAGNOSES = { offer_clarity, visibility, sales_system, overwhelm, implementation }
@@ -1700,10 +1701,10 @@ function escAttr(str) {
 
   ── 5. WHERE TO EDIT OFFER LINKS
     Search for: EDIT THIS
-    Three main slots:
-      CONFIG.visibilitySession.bookingUrl  (line ~977)
-      CONFIG.diagnosticSession.bookingUrl  (line ~991)
-      CONFIG.aiBuild.inquiryUrl            (line ~1005)
+    Three main booking URL slots:
+      CONFIG.visibilitySession.bookingUrl  (line ~977)  ← live
+      CONFIG.diagnosticSession.bookingUrl  (line ~991)  ← live
+      CONFIG.aiBuild.bookingUrl            (line ~1006) ← live
     Path-specific affiliate/secondary links: search ← SWAP:
 
   ── 6. QUESTIONS (do not edit without testing scoring)

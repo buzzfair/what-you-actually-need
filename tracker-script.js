@@ -12,10 +12,15 @@
  *  TWO-STAGE INTAKE ARCHITECTURE
  *  ──────────────────────────────
  *  Stage 1 (GHL):  Short 6-question intake collected at booking (inside GoHighLevel)
- *  Stage 2 (App):  12-question pre-session intake at diagnostic-intake.html
- *                  → POSTs to this script with form_type: 'diagnostic_intake'
- *                  → Logged to a separate sheet tab (INTAKE_SHEET_NAME)
- *                  → Owner receives notification email immediately
+ *  Stage 2 (App):  Long-form intake at diagnostic-intake.html or ai-build-intake.html
+ *                  → POSTs to this script with form_type: 'diagnostic_intake' or 'ai_build_intake'
+ *                  → Each type logs to its own sheet tab
+ *                  → Owner receives notification email immediately on each submission
+ *
+ *  ROUTING TABLE:
+ *    form_type: 'diagnostic_intake' → handleIntakeSubmission()  → 'Diagnostic Intake' sheet
+ *    form_type: 'ai_build_intake'   → handleAiBuildIntake()     → 'AI Build Intake' sheet
+ *    (default)                      → handleQuizResult()        → 'Results' sheet
  *
  * ============================================================
  *  SETUP INSTRUCTIONS (one-time, ~5 minutes)
@@ -62,8 +67,10 @@ var CONFIG = {
 
   // ── Sheet settings
   SHEET_NAME:        'Results',           // tab name in your spreadsheet (quiz results)
-  INTAKE_SHEET_NAME: 'Diagnostic Intake', // tab name for pre-session long-form intake responses
-                                          // ← create this tab in your sheet before deploying
+  INTAKE_SHEET_NAME:    'Diagnostic Intake', // tab name for Diagnostic Strategy Session long-form intake
+                                             // ← create this tab in your sheet before deploying
+  AI_BUILD_SHEET_NAME: 'AI Build Intake',    // tab name for AI Build Sprint long-form intake
+                                             // ← create this tab in your sheet before deploying
 
   // ── Owner notification
   OWNER_EMAIL: 'guin.white@gmail.com',    // ← EDIT: email address to notify when a new intake is submitted
@@ -449,6 +456,10 @@ function doPost(e) {
       return handleIntakeSubmission(data);
     }
 
+    if (data.form_type === 'ai_build_intake') {
+      return handleAiBuildIntake(data);
+    }
+
     // Default: quiz result
     return handleQuizResult(data);
 
@@ -628,6 +639,148 @@ function notifyOwnerIntake(data) {
   } catch (err) {
     // Fail silently — the sheet row was already saved
     Logger.log('notifyOwnerIntake email error: ' + err.message);
+  }
+}
+
+
+/* ============================================================
+   HANDLER C — handleAiBuildIntake()
+   Receives 12-field long-form intake from ai-build-intake.html.
+   1. Logs all fields to the 'AI Build Intake' sheet tab.
+   2. Sends an immediate notification email to the owner.
+
+   Google Sheet columns (in order):
+     Timestamp | Full Name | Email | Website |
+     What Built | Outcome | Readiness | Already Tried | Tools |
+     Timeline | Investment | Success Definition | Need Type
+
+   SETUP:
+   ──────
+   In your Google Sheet, add a tab called 'AI Build Intake'.
+   The script creates headers automatically on the first submission.
+   If headers already exist (i.e. you added them manually), the
+   script will append rows directly without recreating them.
+============================================================ */
+function handleAiBuildIntake(data) {
+  try {
+    var ss    = SpreadsheetApp.getActiveSpreadsheet();
+    var sheet = ss.getSheetByName(CONFIG.AI_BUILD_SHEET_NAME);
+
+    // Create sheet if it does not exist yet
+    if (!sheet) {
+      sheet = ss.insertSheet(CONFIG.AI_BUILD_SHEET_NAME);
+    }
+
+    // Add header row if the sheet is empty
+    if (sheet.getLastRow() === 0) {
+      sheet.appendRow([
+        'Timestamp',
+        'Full Name',
+        'Email',
+        'Website',
+        'What Built',
+        'Outcome',
+        'Readiness',
+        'Already Tried',
+        'Tools',
+        'Timeline',
+        'Investment',
+        'Success Definition',
+        'Need Type',
+      ]);
+      sheet.getRange(1, 1, 1, 13).setFontWeight('bold');
+    }
+
+    var timestamp = data.timestamp || new Date().toISOString();
+
+    sheet.appendRow([
+      timestamp,
+      data.full_name          || '',
+      data.email              || '',
+      data.website            || '',
+      data.what_built         || '',
+      data.outcome            || '',
+      data.readiness          || '',
+      data.tried              || '',
+      data.tools              || '',
+      data.timeline           || '',
+      data.investment         || '',
+      data.success_definition || '',
+      data.need_type          || '',
+    ]);
+
+    notifyOwnerAiBuild(data);
+
+    return ContentService
+      .createTextOutput(JSON.stringify({ success: true }))
+      .setMimeType(ContentService.MimeType.JSON);
+
+  } catch (err) {
+    return ContentService
+      .createTextOutput(JSON.stringify({ success: false, error: err.message }))
+      .setMimeType(ContentService.MimeType.JSON);
+  }
+}
+
+
+/* ============================================================
+   HANDLER C helper — notifyOwnerAiBuild()
+   Sends a plain-text summary email to CONFIG.OWNER_EMAIL when
+   a new AI Build Sprint intake is submitted.
+============================================================ */
+function notifyOwnerAiBuild(data) {
+  if (!CONFIG.OWNER_EMAIL) return;
+
+  var name      = data.full_name          || '(no name)';
+  var email     = data.email              || '(no email)';
+  var website   = data.website            || '(not provided)';
+  var whatBuilt = data.what_built         || '(not provided)';
+  var outcome   = data.outcome            || '(not provided)';
+  var readiness = data.readiness          || '(not provided)';
+  var tried     = data.tried              || '(not provided)';
+  var tools     = data.tools              || '(not provided)';
+  var timeline  = data.timeline           || '(not provided)';
+  var invest    = data.investment         || '(not provided)';
+  var success   = data.success_definition || '(not provided)';
+  var needType  = data.need_type          || '(not provided)';
+
+  var subject = 'New AI Build Sprint intake: ' + name;
+
+  var body = [
+    'A new AI Build Sprint pre-sprint intake has been submitted.',
+    '',
+    'Name:       ' + name,
+    'Email:      ' + email,
+    'Website:    ' + website,
+    '',
+    'What they want built:',
+    whatBuilt,
+    '',
+    'Desired outcome:',
+    outcome,
+    '',
+    'Readiness:    ' + readiness,
+    'Timeline:     ' + timeline,
+    'Investment:   ' + invest,
+    'Need type:    ' + needType,
+    '',
+    'Tools already in use:',
+    tools,
+    '',
+    'What they have already tried:',
+    tried,
+    '',
+    'What success looks like:',
+    success,
+    '',
+    '---',
+    'View all responses: https://docs.google.com/spreadsheets/d/1VN7oqBFcjxT4MmiLOR4D09upGW8KzqREZWHslmyQZt4/edit',
+  ].join('\n');
+
+  try {
+    GmailApp.sendEmail(CONFIG.OWNER_EMAIL, subject, body);
+  } catch (err) {
+    Logger.log('notifyOwnerAiBuild email error: ' + err.message);
   }
 }
 
