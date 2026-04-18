@@ -996,12 +996,17 @@ const CONFIG = {
   /* ----------------------------------------------------------
      AI Build Sprint
      App page: ai-build-sprint.html (app-native)
-     GHL owns: inquiry form endpoint, follow-up workflow
+     GHL owns: booking, payment, confirmation email, reminders
+
+     Pricing strings below read from aiBuildPricing (defined
+     after CONFIG). To update public-facing price copy, change
+     aiBuildPricing.publicPricingPhrase and aiBuildPricing.basePrice
+     — do not edit the strings here directly.
   ---------------------------------------------------------- */
   aiBuild: {
     title:    'AI Build Sprint',
-    price:    'Starting at $750',
-    format:   'Fixed-scope · starting at $750 · virtual',
+    price:    'Starting at $750',          // keep in sync with aiBuildPricing.publicPricingPhrase
+    format:   'Fixed-scope · starting at $750 · virtual', // keep in sync with aiBuildPricing.formatPhrase
     page:     'ai-build-sprint.html',                      // app-native sales page
     bookingUrl: 'https://link.aibizconnection.com/widget/bookings/ai-sprint-session', // EDIT THIS: AI Build Sprint booking link
     intakeUrl:  'ai-build-intake.html',                    // EDIT THIS: app-native long-form pre-sprint intake (sent via post-booking email)
@@ -1028,6 +1033,92 @@ const CONFIG = {
     body:  'A structured program for introverted experts ready to build sustainably.',
   },
 };
+
+/* ============================================================
+   AI BUILD SPRINT PRICING
+   Single source of truth for all AI Build Sprint pricing and
+   tier descriptions. Pages and emails should reference this
+   object rather than hardcoding prices or tier names.
+
+   HOW TO UPDATE PRICES:
+   - Change basePrice and/or publicPricingPhrase here.
+   - Update CONFIG.aiBuild.price and CONFIG.aiBuild.format
+     above to stay in sync (they are used by the results UI).
+   - Update the hero badge in ai-build-sprint.html.
+   - Do NOT scatter new price literals elsewhere.
+
+   TIERS:
+   - core: the default, bookable sprint. Price is confirmed.
+   - extended / intensive: under development. price: null
+     means not yet publicly listed. Set prices here when ready.
+============================================================ */
+const aiBuildPricing = {
+  currency:            'USD',
+  displayTagline:      'AI Build Sprint',
+  publicPricingPhrase: 'starting at $750',
+  formatPhrase:        'Fixed-scope · starting at $750 · virtual',
+  basePrice:           750,
+
+  tiers: {
+    core: {
+      id:          'core',
+      label:       'Core Sprint',
+      shortLabel:  'Core',
+      headline:    'Core AI Build Sprint',
+      description: 'A focused, one-session sprint to build or significantly advance one AI-powered asset or workflow in your business.',
+      includes: [
+        'One 60–90 minute live AI Build Sprint session',
+        'Pre-session AI Build intake review',
+        'A concrete build, prototype, or clearly defined implementation plan for one core asset',
+      ],
+      price:     750,
+      isDefault: true,
+    },
+
+    extended: {
+      id:          'extended',
+      label:       'Extended Sprint',
+      shortLabel:  'Extended',
+      headline:    'Extended AI Build Sprint',
+      description: 'Everything in Core, plus structured follow-up support to refine, stabilize, or integrate what was built.',
+      includes: [
+        'One 60–90 minute live AI Build Sprint session',
+        'Pre-session AI Build intake review',
+        'Post-session refinement and QA support (7–14 days, scope confirmed before work begins)',
+        'Asynchronous check-ins to support implementation and adjustment',
+      ],
+      price:     null,   // not yet publicly listed — set when scope is finalized
+      isDefault: false,
+    },
+
+    intensive: {
+      id:          'intensive',
+      label:       'Intensive Sprint',
+      shortLabel:  'Intensive',
+      headline:    'Intensive AI Build Sprint',
+      description: 'Deeper implementation support for more complex builds or higher-stakes work.',
+      includes: [
+        'Two AI Build Sprint sessions or one extended deep-dive block (scope confirmed before booking)',
+        'Pre-session and between-session review of relevant assets',
+        'Hands-on implementation support across a larger or more complex build',
+      ],
+      price:     null,   // not yet publicly listed — set when scope is finalized
+      isDefault: false,
+    },
+  },
+
+  // Internal notes — not user-facing
+  // - Keep public messaging as "starting at $750" until higher tiers are priced.
+  // - Extended and intensive prices should be confirmed on a per-scope basis
+  //   until standard packages are defined.
+  notes: {},
+};
+
+/* ------ Helper accessors (read from aiBuildPricing — no literals) ------ */
+function getAiBuildBasePrice()          { return aiBuildPricing.basePrice; }
+function getAiBuildPublicPricingPhrase() { return aiBuildPricing.publicPricingPhrase; }
+function getAiBuildTier(tierId)          { return aiBuildPricing.tiers[tierId] || null; }
+function listAiBuildTiers()              { return Object.values(aiBuildPricing.tiers); }
 
 // Backwards-compat aliases so existing DIAGNOSES references keep working
 const OFFERS = {
@@ -1235,7 +1326,7 @@ const DIAGNOSES = {
     primaryOffer: {                                       // custom AI build offer first
       title: 'Done-For-You AI Build',
       url:   'ai-build-sprint.html',                      // ← SWAP: AI Biz Connection or custom build page
-      body:  'Turn your idea, system, or workflow into a working tool — built with AI, delivered fast. Starting at $750.',
+      body:  `Turn your idea, system, or workflow into a working tool — built with AI, delivered fast. ${aiBuildPricing.publicPricingPhrase.charAt(0).toUpperCase() + aiBuildPricing.publicPricingPhrase.slice(1)}.`,
     },
     secondaryRec: {                                       // tool stack recommendation second
       title: 'Tech Stack Recommendation for Solo Operators',
