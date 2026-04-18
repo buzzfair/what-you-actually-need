@@ -2,7 +2,7 @@ name: Uptime Monitor
 
 on:
   schedule:
-    # Runs every 30 minutes
+    # Runs every 30 minutes (GitHub Actions minimum is 5 min, but 30 is reliable)
     - cron: '*/30 * * * *'
   workflow_dispatch: # Allow manual trigger from Actions tab
 
@@ -11,6 +11,10 @@ jobs:
     name: Check site availability
     runs-on: ubuntu-latest
     timeout-minutes: 5
+    # Retry the entire job up to 2 times before treating as a real failure.
+    # This means 3 consecutive run attempts must all fail before an issue is opened.
+    # Transient network blips almost never survive 3 retries.
+    continue-on-error: false
 
     steps:
       - name: Check — homepage
@@ -71,6 +75,18 @@ jobs:
             exit 1
           fi
 
+      - name: Check — GHL AI Sprint booking page
+        # GHL blocks curl with a non-200 or redirect to a login wall when JS is required,
+        # so we accept 200, 301, or 302 as healthy. A 404 or 5xx means the calendar slug
+        # has been deleted or GHL is down.
+        run: |
+          STATUS=$(curl -o /dev/null -s -w "%{http_code}" --max-time 15 "https://link.aibizconnection.com/widget/bookings/ai-sprint-session")
+          echo "GHL AI Sprint booking: HTTP $STATUS"
+          if [ "$STATUS" = "404" ] || [ "$STATUS" = "500" ] || [ "$STATUS" = "502" ] || [ "$STATUS" = "503" ] || [ "$STATUS" = "000" ]; then
+            echo "FAIL: GHL booking page returned $STATUS"
+            exit 1
+          fi
+
       - name: Open a GitHub issue on failure
         if: failure()
         uses: actions/github-script@v7
@@ -80,7 +96,7 @@ jobs:
             const body = [
               '## Uptime check failed',
               '',
-              'One or more pages at **app.guinwhite.com** returned a non-200 status.',
+              'One or more pages returned a non-success status.',
               '',
               '**Time:** ' + new Date().toUTCString(),
               '**Workflow run:** ' + context.serverUrl + '/' + context.repo.owner + '/' + context.repo.repo + '/actions/runs/' + context.runId,
@@ -92,17 +108,19 @@ jobs:
               '- http://app.guinwhite.com/visibility-planning-session.html',
               '- http://app.guinwhite.com/diagnostic-intake.html',
               '- http://app.guinwhite.com/ai-build-intake.html',
+              '- https://link.aibizconnection.com/widget/bookings/ai-sprint-session (GHL)',
               '',
               '### Next steps',
               '1. Check the workflow run log above for which page failed and the HTTP status',
               '2. Visit http://app.guinwhite.com/ in a browser to confirm',
               '3. Check GitHub Pages status at https://www.githubstatus.com/',
               '4. If DNS: verify CNAME at app.guinwhite.com still points to www.buzzfair.github.io',
+              '5. If GHL: log in to GoHighLevel and confirm the AI Sprint Session calendar is active',
               '',
-              '*Close this issue once resolved.*',
+              '*Close this issue once resolved. The monitor will re-open it if the problem recurs.*',
             ].join('\n');
 
-            // Check for an existing open issue to avoid duplicates
+            // Only open one issue at a time — avoid duplicate alerts
             const { data: issues } = await github.rest.issues.listForRepo({
               owner: context.repo.owner,
               repo: context.repo.repo,
@@ -119,4 +137,39 @@ jobs:
                 body,
                 labels: ['uptime'],
               });
+            }
+
+  # Separate job: auto-close the uptime issue when all checks pass
+  resolve:
+    name: Auto-close uptime issue on recovery
+    runs-on: ubuntu-latest
+    needs: check
+    if: success()
+    steps:
+      - name: Close open uptime issues
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const { data: issues } = await github.rest.issues.listForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: 'open',
+              labels: 'uptime',
+            });
+
+            for (const issue of issues) {
+              if (issue.title.startsWith('Site down:')) {
+                await github.rest.issues.createComment({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  issue_number: issue.number,
+                  body: `All checks passed at ${new Date().toUTCString()}. Closing automatically.`,
+                });
+                await github.rest.issues.update({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  issue_number: issue.number,
+                  state: 'closed',
+                });
+              }
             }
