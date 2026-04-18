@@ -534,15 +534,15 @@ function handleIntakeSubmission(data) {
         'Full Name',
         'Email',
         'Website',
-        'What Feels Stuck',
-        'Session Goal',
-        'Bottleneck',
-        'Already Tried',
+        'What Is Stuck',
+        'Impact',
         'Why Now',
+        'Bottleneck Guess',
+        'Already Tried',
+        'What Is Working',
         'Business Stage',
-        'Session Need',
-        'Urgency',
-        'Support Level',
+        'Session Goal',
+        'Anything Else',
       ]);
       // Bold the header row
       sheet.getRange(1, 1, 1, 13).setFontWeight('bold');
@@ -553,18 +553,18 @@ function handleIntakeSubmission(data) {
     // Log the intake row
     sheet.appendRow([
       timestamp,
-      data.full_name       || '',
-      data.email           || '',
-      data.website         || '',
-      data.what_feels_stuck || '',
-      data.session_goal    || '',
-      data.bottleneck      || '',
-      data.already_tried   || '',
-      data.why_now         || '',
-      data.business_stage  || '',
-      data.session_need    || '',
-      data.urgency         || '',
-      data.support_level   || '',
+      data.full_name        || '',
+      data.email            || '',
+      data.website          || '',
+      data.what_is_stuck    || '',
+      data.impact           || '',
+      data.why_now          || '',
+      data.bottleneck_guess || '',
+      data.already_tried    || '',
+      data.what_is_working  || '',
+      data.business_stage   || '',
+      data.session_goal     || '',
+      data.anything_else    || '',
     ]);
 
     // Notify the owner
@@ -590,18 +590,18 @@ function handleIntakeSubmission(data) {
 function notifyOwnerIntake(data) {
   if (!CONFIG.OWNER_EMAIL) return;
 
-  var name      = data.full_name        || '(no name)';
-  var email     = data.email            || '(no email)';
-  var website   = data.website          || '(not provided)';
-  var stuck     = data.what_feels_stuck || '(not provided)';
-  var goal      = data.session_goal     || '(not provided)';
-  var bottleneck = data.bottleneck      || '(not provided)';
-  var tried     = data.already_tried    || '(not provided)';
-  var whyNow    = data.why_now          || '(not provided)';
-  var stage     = data.business_stage   || '(not provided)';
-  var need      = data.session_need     || '(not provided)';
-  var urgency   = data.urgency          || '(not provided)';
-  var support   = data.support_level    || '(not provided)';
+  var name           = data.full_name        || '(no name)';
+  var email          = data.email            || '(no email)';
+  var website        = data.website          || '(not provided)';
+  var stuck          = data.what_is_stuck    || '(not provided)';
+  var impact         = data.impact           || '(not provided)';
+  var whyNow         = data.why_now          || '(not provided)';
+  var bottleneckGuess = data.bottleneck_guess || '(not provided)';
+  var tried          = data.already_tried    || '(not provided)';
+  var working        = data.what_is_working  || '(not provided)';
+  var stage          = data.business_stage   || '(not provided)';
+  var goal           = data.session_goal     || '(not provided)';
+  var extra          = data.anything_else    || '(not provided)';
 
   var subject = 'New pre-session intake: ' + name;
 
@@ -612,23 +612,29 @@ function notifyOwnerIntake(data) {
     'Email:    ' + email,
     'Website:  ' + website,
     '',
-    'What feels stuck:',
+    'What is stuck:',
     stuck,
     '',
-    'Session goal:',
-    goal,
+    'Impact:',
+    impact,
     '',
-    'Bottleneck:    ' + bottleneck,
-    'Business stage: ' + stage,
-    'Session need:  ' + need,
-    'Urgency:       ' + urgency,
-    'Support level: ' + support,
+    'Why now:',
+    whyNow,
+    '',
+    'Bottleneck guess: ' + bottleneckGuess,
+    'Business stage:   ' + stage,
     '',
     'What they have tried:',
     tried,
     '',
-    'Why now:',
-    whyNow,
+    'What is working:',
+    working,
+    '',
+    'Session goal:',
+    goal,
+    '',
+    'Anything else:',
+    extra,
     '',
     '---',
     'View all responses: https://docs.google.com/spreadsheets/d/1VN7oqBFcjxT4MmiLOR4D09upGW8KzqREZWHslmyQZt4/edit',
