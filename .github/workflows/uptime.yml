@@ -1,0 +1,122 @@
+name: Uptime Monitor
+
+on:
+  schedule:
+    # Runs every 30 minutes
+    - cron: '*/30 * * * *'
+  workflow_dispatch: # Allow manual trigger from Actions tab
+
+jobs:
+  check:
+    name: Check site availability
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Check — homepage
+        run: |
+          STATUS=$(curl -o /dev/null -s -w "%{http_code}" --max-time 15 -L "http://app.guinwhite.com/")
+          TIME=$(curl -o /dev/null -s -w "%{time_total}" --max-time 15 -L "http://app.guinwhite.com/")
+          echo "Homepage: HTTP $STATUS in ${TIME}s"
+          if [ "$STATUS" != "200" ]; then
+            echo "FAIL: homepage returned $STATUS"
+            exit 1
+          fi
+
+      - name: Check — Diagnostic Strategy Session page
+        run: |
+          STATUS=$(curl -o /dev/null -s -w "%{http_code}" --max-time 15 "http://app.guinwhite.com/diagnostic-strategy-session.html")
+          TIME=$(curl -o /dev/null -s -w "%{time_total}" --max-time 15 "http://app.guinwhite.com/diagnostic-strategy-session.html")
+          echo "Diagnostic Strategy Session: HTTP $STATUS in ${TIME}s"
+          if [ "$STATUS" != "200" ]; then
+            echo "FAIL: diagnostic-strategy-session.html returned $STATUS"
+            exit 1
+          fi
+
+      - name: Check — AI Build Sprint page
+        run: |
+          STATUS=$(curl -o /dev/null -s -w "%{http_code}" --max-time 15 "http://app.guinwhite.com/ai-build-sprint.html")
+          TIME=$(curl -o /dev/null -s -w "%{time_total}" --max-time 15 "http://app.guinwhite.com/ai-build-sprint.html")
+          echo "AI Build Sprint: HTTP $STATUS in ${TIME}s"
+          if [ "$STATUS" != "200" ]; then
+            echo "FAIL: ai-build-sprint.html returned $STATUS"
+            exit 1
+          fi
+
+      - name: Check — Visibility Planning Session page
+        run: |
+          STATUS=$(curl -o /dev/null -s -w "%{http_code}" --max-time 15 "http://app.guinwhite.com/visibility-planning-session.html")
+          TIME=$(curl -o /dev/null -s -w "%{time_total}" --max-time 15 "http://app.guinwhite.com/visibility-planning-session.html")
+          echo "Visibility Planning Session: HTTP $STATUS in ${TIME}s"
+          if [ "$STATUS" != "200" ]; then
+            echo "FAIL: visibility-planning-session.html returned $STATUS"
+            exit 1
+          fi
+
+      - name: Check — Diagnostic intake page
+        run: |
+          STATUS=$(curl -o /dev/null -s -w "%{http_code}" --max-time 15 "http://app.guinwhite.com/diagnostic-intake.html")
+          echo "Diagnostic intake: HTTP $STATUS"
+          if [ "$STATUS" != "200" ]; then
+            echo "FAIL: diagnostic-intake.html returned $STATUS"
+            exit 1
+          fi
+
+      - name: Check — AI Build intake page
+        run: |
+          STATUS=$(curl -o /dev/null -s -w "%{http_code}" --max-time 15 "http://app.guinwhite.com/ai-build-intake.html")
+          echo "AI Build intake: HTTP $STATUS"
+          if [ "$STATUS" != "200" ]; then
+            echo "FAIL: ai-build-intake.html returned $STATUS"
+            exit 1
+          fi
+
+      - name: Open a GitHub issue on failure
+        if: failure()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const title = `Site down: uptime check failed ${new Date().toUTCString()}`;
+            const body = [
+              '## Uptime check failed',
+              '',
+              'One or more pages at **app.guinwhite.com** returned a non-200 status.',
+              '',
+              '**Time:** ' + new Date().toUTCString(),
+              '**Workflow run:** ' + context.serverUrl + '/' + context.repo.owner + '/' + context.repo.repo + '/actions/runs/' + context.runId,
+              '',
+              '### Pages monitored',
+              '- http://app.guinwhite.com/',
+              '- http://app.guinwhite.com/diagnostic-strategy-session.html',
+              '- http://app.guinwhite.com/ai-build-sprint.html',
+              '- http://app.guinwhite.com/visibility-planning-session.html',
+              '- http://app.guinwhite.com/diagnostic-intake.html',
+              '- http://app.guinwhite.com/ai-build-intake.html',
+              '',
+              '### Next steps',
+              '1. Check the workflow run log above for which page failed and the HTTP status',
+              '2. Visit http://app.guinwhite.com/ in a browser to confirm',
+              '3. Check GitHub Pages status at https://www.githubstatus.com/',
+              '4. If DNS: verify CNAME at app.guinwhite.com still points to www.buzzfair.github.io',
+              '',
+              '*Close this issue once resolved.*',
+            ].join('\n');
+
+            // Check for an existing open issue to avoid duplicates
+            const { data: issues } = await github.rest.issues.listForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: 'open',
+              labels: 'uptime',
+            });
+
+            const alreadyOpen = issues.some(i => i.title.startsWith('Site down:'));
+            if (!alreadyOpen) {
+              await github.rest.issues.create({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                title,
+                body,
+                labels: ['uptime'],
+              });
+            }

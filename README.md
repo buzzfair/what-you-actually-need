@@ -230,3 +230,62 @@ See `ai-build-sprint-emails.md` for AI Build confirmation email + short intake q
 ---
 
 *Built for [Guin White](https://guinwhite.com)*
+
+---
+
+## Uptime Monitoring
+
+A GitHub Actions workflow runs every 30 minutes and checks all critical pages.
+
+**File:** `.github/workflows/uptime.yml`
+**Schedule:** Every 30 minutes, 24/7
+**Pages monitored:**
+- `http://app.guinwhite.com/` — homepage / main app
+- `http://app.guinwhite.com/diagnostic-strategy-session.html`
+- `http://app.guinwhite.com/ai-build-sprint.html`
+- `http://app.guinwhite.com/visibility-planning-session.html`
+- `http://app.guinwhite.com/diagnostic-intake.html`
+- `http://app.guinwhite.com/ai-build-intake.html`
+
+**How you get alerted:** If any page returns a non-200 status, the workflow automatically opens a GitHub Issue labeled `uptime` with the failed page, timestamp, and a direct link to the run log. Duplicate issues are suppressed — only one open issue at a time.
+
+**View run history:** [github.com/buzzfair/what-you-actually-need/actions](https://github.com/buzzfair/what-you-actually-need/actions)
+
+**Trigger manually:** Go to Actions → Uptime Monitor → Run workflow.
+
+---
+
+## Swapping in Affiliate Links
+
+All monetizable link slots in `index.html` are marked with `← SWAP:` comments. Search for that string to find all ~20 slots across the five result paths.
+
+### How to update
+
+1. Open `index.html` in any editor
+2. Search for `← SWAP:`
+3. Replace `'#'` with your live affiliate or product URL
+4. Commit and push — GitHub Pages deploys automatically
+
+### Affiliate link slots by path
+
+| Path | Slot | Comment |
+|---|---|---|
+| Offer Clarity | `secondaryRec.url` | Prompt pack, workbook, or Gumroad product |
+| Offer Clarity | `affiliateRec.url` | Tool affiliate (e.g. Wynter, Hotjar) |
+| Visibility | `primaryOffer.url` | Low-ticket visibility product or ConvertKit affiliate |
+| Visibility | `secondaryRec.url` | Planning worksheet or Repurpose.io affiliate |
+| Visibility | `affiliateRec.url` | Email platform affiliate |
+| Sales System | `secondaryRec.url` | DFY service page or CRM referral |
+| Sales System | `affiliateRec.url` | Kit, ActiveCampaign, or Flodesk affiliate |
+| Overwhelm | `secondaryRec.url` | Notion template or planning resource |
+| Overwhelm | `affiliateRec.url` | Notion, Linear, or Sunsama affiliate |
+| Implementation | `secondaryRec.url` | Curated AI tool resource page |
+| Implementation | `affiliateRec.url` | Make, Zapier, or n8n affiliate |
+
+Affiliate disclosure blocks are hidden by default. Set `showAffiliate: true` inside a diagnosis object to reveal the block and inline disclosure for that path only.
+
+### Recommended commit message when updating links
+
+```
+Swap in live affiliate links — [path name]
+```
