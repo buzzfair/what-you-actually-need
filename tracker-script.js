@@ -488,6 +488,9 @@ function handleQuizResult(data) {
     // Log the result row
     sheet.appendRow([timestamp, diagnosis, label, scores, email]);
 
+    // Notify owner of new quiz result
+    notifyOwnerQuizResult(diagnosis, label, scores, email, timestamp);
+
     // Schedule follow-up emails if an email address was provided
     if (email && email.indexOf('@') > -1 && EMAIL_SEQUENCES[diagnosis]) {
       scheduleFollowUps(email, diagnosis);
@@ -504,6 +507,33 @@ function handleQuizResult(data) {
   }
 }
 
+
+/* ============================================================
+   HANDLER A helper — notifyOwnerQuizResult()
+   Sends a plain-text summary email to CONFIG.OWNER_EMAIL when
+   a new quiz result is submitted.
+============================================================ */
+function notifyOwnerQuizResult(diagnosis, label, scores, email, timestamp) {
+  if (!CONFIG.OWNER_EMAIL) return;
+  try {
+    var subject = 'New quiz result: ' + (label || diagnosis || 'unknown');
+    var body = [
+      'A new What You Actually Need quiz result has been submitted.',
+      '',
+      'Timestamp: ' + timestamp,
+      'Email:     ' + (email || '(not provided)'),
+      'Diagnosis: ' + (diagnosis || '(none)'),
+      'Label:     ' + (label || '(none)'),
+      'Scores:    ' + (scores || '(none)'),
+      '',
+      '---',
+      'View all responses: https://docs.google.com/spreadsheets/d/1VN7oqBFcjxT4MmiLOR4D09upGW8KzqREZWHslmyQZt4/edit',
+    ].join('\n');
+    GmailApp.sendEmail(CONFIG.OWNER_EMAIL, subject, body);
+  } catch (err) {
+    Logger.log('notifyOwnerQuizResult email error: ' + err.message);
+  }
+}
 
 /* ============================================================
    HANDLER B — handleIntakeSubmission()
