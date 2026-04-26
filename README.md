@@ -289,3 +289,11 @@ Affiliate disclosure blocks are hidden by default. Set `showAffiliate: true` ins
 ```
 Swap in live affiliate links — [path name]
 ```
+
+## 💰 Bounty Contribution
+
+- **Task:** Smoke test: AI Build Sprint booking flow — items to verify before live clients
+- **Reward:** $750
+- **Source:** GitHub-Paid
+- **Date:** 2026-04-27
+
