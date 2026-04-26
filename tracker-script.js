@@ -531,7 +531,7 @@ function notifyOwnerQuizResult(diagnosis, label, scores, email, timestamp) {
     ].join('\n');
     GmailApp.sendEmail(CONFIG.OWNER_EMAIL, subject, body);
   } catch (err) {
-    Logger.log('notifyOwnerQuizResult email error: ' + err.message);
+    console.log('notifyOwnerQuizResult email error: ' + err.message);
   }
 }
 
@@ -618,6 +618,7 @@ function handleIntakeSubmission(data) {
    a new pre-session intake is submitted.
 ============================================================ */
 function notifyOwnerIntake(data) {
+  console.log('notifyOwnerIntake called. OWNER_EMAIL: ' + CONFIG.OWNER_EMAIL);
   if (!CONFIG.OWNER_EMAIL) return;
 
   var name           = data.full_name        || '(no name)';
@@ -674,7 +675,7 @@ function notifyOwnerIntake(data) {
     GmailApp.sendEmail(CONFIG.OWNER_EMAIL, subject, body);
   } catch (err) {
     // Fail silently — the sheet row was already saved
-    Logger.log('notifyOwnerIntake email error: ' + err.message);
+    console.log('notifyOwnerIntake email error: ' + err.message);
   }
 }
 
@@ -765,6 +766,7 @@ function handleAiBuildIntake(data) {
    a new AI Build Sprint intake is submitted.
 ============================================================ */
 function notifyOwnerAiBuild(data) {
+  console.log('notifyOwnerAiBuild called. OWNER_EMAIL: ' + CONFIG.OWNER_EMAIL);
   if (!CONFIG.OWNER_EMAIL) return;
 
   var name      = data.full_name          || '(no name)';
@@ -816,7 +818,7 @@ function notifyOwnerAiBuild(data) {
   try {
     GmailApp.sendEmail(CONFIG.OWNER_EMAIL, subject, body);
   } catch (err) {
-    Logger.log('notifyOwnerAiBuild email error: ' + err.message);
+    console.log('notifyOwnerAiBuild email error: ' + err.message);
   }
 }
 
@@ -945,7 +947,7 @@ function ensureQueueProcessorTrigger() {
 
 function weeklyNotionSummary() {
   if (!CONFIG.NOTION_TOKEN || CONFIG.NOTION_TOKEN === '') {
-    Logger.log('Notion token not set. Add it to CONFIG.NOTION_TOKEN.');
+    console.log('Notion token not set. Add it to CONFIG.NOTION_TOKEN.');
     return;
   }
 
@@ -1026,9 +1028,9 @@ function weeklyNotionSummary() {
   var result   = JSON.parse(response.getContentText());
 
   if (result.object === 'error') {
-    Logger.log('Notion error: ' + result.message);
+    console.log('Notion error: ' + result.message);
   } else {
-    Logger.log('Weekly summary written to Notion: ' + weekLabel + ' (' + totalResponses + ' responses)');
+    console.log('Weekly summary written to Notion: ' + weekLabel + ' (' + totalResponses + ' responses)');
   }
 }
 
