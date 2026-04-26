@@ -6,15 +6,19 @@ on:
     - cron: '*/30 * * * *'
   workflow_dispatch: # Allow manual trigger from Actions tab
 
+# Explicit permissions required for github-script to create/close issues
+permissions:
+  issues: write
+  contents: read
+
 jobs:
   check:
     name: Check site availability
     runs-on: ubuntu-latest
     timeout-minutes: 5
-    # Retry the entire job up to 2 times before treating as a real failure.
-    # This means 3 consecutive run attempts must all fail before an issue is opened.
-    # Transient network blips almost never survive 3 retries.
     continue-on-error: false
+    env:
+      ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION: true  # suppress Node.js 20 deprecation warning
 
     steps:
       - name: Check — homepage
@@ -89,7 +93,7 @@ jobs:
 
       - name: Open a GitHub issue on failure
         if: failure()
-        uses: actions/github-script@v7
+        uses: actions/github-script@v6
         with:
           script: |
             const title = `Site down: uptime check failed ${new Date().toUTCString()}`;
@@ -147,7 +151,7 @@ jobs:
     if: success()
     steps:
       - name: Close open uptime issues
-        uses: actions/github-script@v7
+        uses: actions/github-script@v6
         with:
           script: |
             const { data: issues } = await github.rest.issues.listForRepo({
