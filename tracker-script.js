@@ -121,7 +121,7 @@ var EMAIL_SEQUENCES = {
         '',
         'The clearest next step is to work on your positioning before anything else. I have put together something that can help you do that:',
         '',
-        '[YOUR LINK HERE]',  // ← SWAP: offer clarity resource or session link
+        'https://app.guinwhite.com/diagnostic-strategy-session.html',  // offer clarity → strategy session
         '',
         'Guin',
       ].join('\n'),
@@ -167,7 +167,7 @@ var EMAIL_SEQUENCES = {
         '',
         'If you want help doing that, this is where to start:',
         '',
-        '[YOUR LINK HERE]',  // ← SWAP: offer clarity session or resource link
+        'https://app.guinwhite.com/diagnostic-strategy-session.html',  // offer clarity → strategy session
         '',
         'Guin',
       ].join('\n'),
@@ -190,7 +190,7 @@ var EMAIL_SEQUENCES = {
         '',
         'Here is where I would point you first:',
         '',
-        '[YOUR LINK HERE]',  // ← SWAP: visibility resource, workshop, or platform affiliate
+        'https://app.guinwhite.com/calm-visibility-rhythm-planner.html',  // visibility → free resource
         '',
         'Guin',
       ].join('\n'),
@@ -234,7 +234,7 @@ var EMAIL_SEQUENCES = {
         '',
         'If you want to work on that with some support, here is where to go:',
         '',
-        '[YOUR LINK HERE]',  // ← SWAP: visibility planning product or session link
+        'https://link.aibizconnection.com/widget/bookings/visibility-planning-session',  // visibility → book session
         '',
         'Guin',
       ].join('\n'),
@@ -259,7 +259,7 @@ var EMAIL_SEQUENCES = {
         '',
         'Here is the first step:',
         '',
-        '[YOUR LINK HERE]',  // ← SWAP: sales system build, CRM affiliate, or DFY service
+        'https://app.guinwhite.com/diagnostic-strategy-session.html',  // sales system → strategy session
         '',
         'Guin',
       ].join('\n'),
@@ -301,7 +301,7 @@ var EMAIL_SEQUENCES = {
         '',
         'If you want help building it, here is where to start:',
         '',
-        '[YOUR LINK HERE]',  // ← SWAP: DFY sales build or CRM recommendation
+        'https://app.guinwhite.com/diagnostic-strategy-session.html',  // sales system → strategy session
         '',
         'Guin',
       ].join('\n'),
@@ -324,7 +324,7 @@ var EMAIL_SEQUENCES = {
         '',
         'Here is where I would point you:',
         '',
-        '[YOUR LINK HERE]',  // ← SWAP: clarity session booking or simplification resource
+        'https://app.guinwhite.com/diagnostic-strategy-session.html',  // overwhelm → strategy session
         '',
         'Guin',
       ].join('\n'),
@@ -366,7 +366,7 @@ var EMAIL_SEQUENCES = {
         '',
         'If you want help figuring out what to cut, what to keep, and what to actually focus on, here is where to go:',
         '',
-        '[YOUR LINK HERE]',  // ← SWAP: reset diagnostic session or triage resource
+        'https://app.guinwhite.com/diagnostic-strategy-session.html',  // overwhelm → strategy session
         '',
         'Guin',
       ].join('\n'),
@@ -389,7 +389,7 @@ var EMAIL_SEQUENCES = {
         '',
         'Here is where I would point you first:',
         '',
-        '[YOUR LINK HERE]',  // ← SWAP: AI build sprint or implementation offer
+        'https://app.guinwhite.com/ai-build-sprint.html',  // implementation → AI Build Sprint page
         '',
         'Guin',
       ].join('\n'),
@@ -431,7 +431,7 @@ var EMAIL_SEQUENCES = {
         '',
         'If you want help turning what you already know into something that actually works for you, here is where to go:',
         '',
-        '[YOUR LINK HERE]',  // ← SWAP: AI build sprint or done-for-you implementation
+        'https://link.aibizconnection.com/widget/bookings/ai-sprint-session',  // implementation → book sprint
         '',
         'Guin',
       ].join('\n'),
