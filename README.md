@@ -2,7 +2,7 @@
 
 A calm, diagnostic web app that helps coaches, consultants, introverted founders, and solo experts stop buying the wrong solution and identify what they actually need next.
 
-**Live app:** [app.guinwhite.com](http://app.guinwhite.com)
+**Live app:** [app.guinwhite.com](https://app.guinwhite.com)
 **Fallback:** [buzzfair.github.io/what-you-actually-need](https://buzzfair.github.io/what-you-actually-need/)
 
 ---
@@ -167,7 +167,7 @@ GitHub Pages, branch: `main`, root directory.
 
 | URL | Status |
 |---|---|
-| `http://app.guinwhite.com` | Live — custom domain |
+| `https://app.guinwhite.com` | Live — custom domain |
 | `https://app.guinwhite.com` | Pending — Let's Encrypt cert provisioning by GitHub |
 | `https://buzzfair.github.io/what-you-actually-need/` | Live fallback |
 
@@ -240,12 +240,12 @@ A GitHub Actions workflow runs every 30 minutes and checks all critical pages.
 **File:** `.github/workflows/uptime.yml`
 **Schedule:** Every 30 minutes, 24/7
 **Pages monitored:**
-- `http://app.guinwhite.com/` — homepage / main app
-- `http://app.guinwhite.com/diagnostic-strategy-session.html`
-- `http://app.guinwhite.com/ai-build-sprint.html`
-- `http://app.guinwhite.com/visibility-planning-session.html`
-- `http://app.guinwhite.com/diagnostic-intake.html`
-- `http://app.guinwhite.com/ai-build-intake.html`
+- `https://app.guinwhite.com/` — homepage / main app
+- `https://app.guinwhite.com/diagnostic-strategy-session.html`
+- `https://app.guinwhite.com/ai-build-sprint.html`
+- `https://app.guinwhite.com/visibility-planning-session.html`
+- `https://app.guinwhite.com/diagnostic-intake.html`
+- `https://app.guinwhite.com/ai-build-intake.html`
 
 **How you get alerted:** If any page returns a non-200 status, the workflow automatically opens a GitHub Issue labeled `uptime` with the failed page, timestamp, and a direct link to the run log. Duplicate issues are suppressed — only one open issue at a time.
 
