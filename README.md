@@ -155,8 +155,6 @@ const SHEET_TAB_NAME  = '...';         // sheet tab name (must match tracker-scr
 | `diagnostic_intake` | `handleIntakeSubmission()` | Diagnostic Intake |
 | `ai_build_intake` | `handleAiBuildIntake()` | AI Build Intake |
 
-**To activate the AI Build intake handler:** paste the updated `tracker-script.js` into Apps Script, deploy as a new version, and confirm the Web App URL matches what is in `ai-build-intake.html`.
-
 ---
 
 ## Deployment
@@ -167,11 +165,8 @@ GitHub Pages, branch: `main`, root directory.
 
 | URL | Status |
 |---|---|
-| `https://app.guinwhite.com` | Live — custom domain |
-| `https://app.guinwhite.com` | Pending — Let's Encrypt cert provisioning by GitHub |
+| `https://app.guinwhite.com` | Live — custom domain, HTTPS enforced |
 | `https://buzzfair.github.io/what-you-actually-need/` | Live fallback |
-
-HTTPS will activate automatically once GitHub Pages verifies the custom domain DNS. DNS is fully propagated. Go to Settings → Pages → enable "Enforce HTTPS" once the checkbox becomes active.
 
 ### Custom domain
 
@@ -193,13 +188,13 @@ npx serve .
 
 | Item | Status |
 |---|---|
-| Visibility Planning Session calendar | Live (confirm payment + intake attached) |
+| Visibility Planning Session calendar | Live |
 | Diagnostic Strategy Session calendar | Live |
 | AI Sprint Session calendar | Live |
-| Diagnostic confirmation workflow + email | Pending — build in GHL Automations |
-| AI Build Sprint confirmation workflow + email | Pending — build in GHL Automations |
-| Short intake forms (6 questions per session) | Pending — attach in calendar settings |
-| Apps Script redeployment (AI Build handler) | Pending — deploy updated tracker-script.js |
+| Diagnostic confirmation workflow + email | Live |
+| AI Build Sprint confirmation workflow + email | Live |
+| Short intake forms (6 questions per session) | Live |
+| Apps Script — all three handlers active | Live |
 
 See `ghl-workflow-setup.md` for full copy-paste workflow specs.
 See `ghl-implementation-plan.md` for full GHL architecture notes.
@@ -220,15 +215,6 @@ See `ai-build-sprint-emails.md` for AI Build confirmation email + short intake q
 
 ---
 
-## Repo Notes
-
-- Scoring logic: A → offer_clarity, B → visibility, C → sales_system, D (Q1/Q5/Q7) → overwhelm, D (Q2/Q3/Q4/Q6/Q8) → implementation
-- Tiebreak priority: offer_clarity > visibility > sales_system > overwhelm > implementation
-- Tracker endpoint fails silently — never blocks the user
-- All monetization links marked `← SWAP:` in the script block; search to find them
-
----
-
 *Built for [Guin White](https://guinwhite.com)*
 
 ---
@@ -246,8 +232,9 @@ A GitHub Actions workflow runs every 30 minutes and checks all critical pages.
 - `https://app.guinwhite.com/visibility-planning-session.html`
 - `https://app.guinwhite.com/diagnostic-intake.html`
 - `https://app.guinwhite.com/ai-build-intake.html`
+- `https://link.aibizconnection.com/widget/bookings/ai-sprint-session` — GHL booking page (3 retries, 20s timeout)
 
-**How you get alerted:** If any page returns a non-200 status, the workflow automatically opens a GitHub Issue labeled `uptime` with the failed page, timestamp, and a direct link to the run log. Duplicate issues are suppressed — only one open issue at a time.
+**How you get alerted:** If any page returns a non-success status, the workflow automatically opens a GitHub Issue labeled `uptime` with the failed page, timestamp, and a direct link to the run log. Duplicate issues are suppressed — only one open issue at a time. Issues close automatically on recovery.
 
 **View run history:** [github.com/buzzfair/what-you-actually-need/actions](https://github.com/buzzfair/what-you-actually-need/actions)
 
@@ -255,37 +242,29 @@ A GitHub Actions workflow runs every 30 minutes and checks all critical pages.
 
 ---
 
-## Swapping in Affiliate Links
+## Affiliate Links — Current Status
 
-All monetizable link slots in `index.html` are marked with `← SWAP:` comments. Search for that string to find all ~20 slots across the five result paths.
+All affiliate cards are live. Each result path shows one affiliate recommendation block with an inline disclosure. `showAffiliate` must be `true` in the diagnosis object for the block to render.
 
-### How to update
+| Path | Card | Program | Status |
+|---|---|---|---|
+| Offer Clarity | `affiliateRec` | Think Like a Strategist (Introvert Media) | Live |
+| Visibility | `affiliateRec` | Quso.ai | Live |
+| Sales System | `secondaryRec` | Client Connector — AI Biz Connection | Live |
+| Sales System | `affiliateRec` | 3-6 Month Evergreen Email Sequence (Introvert Media) | Live |
+| Overwhelm | `affiliateRec` | Productive AF (Introvert Media) | Live |
+| Implementation | `affiliateRec` | ClickUp AI Super Agents Course (Introvert Media) | Live |
 
-1. Open `index.html` in any editor
-2. Search for `← SWAP:`
-3. Replace `'#'` with your live affiliate or product URL
-4. Commit and push — GitHub Pages deploys automatically
+### How to update an affiliate link
 
-### Affiliate link slots by path
+1. Open `index.html`
+2. Find the diagnosis object for the path you want to update
+3. Replace the `url` value in `affiliateRec` or `secondaryRec`
+4. Set `showAffiliate: true` if it is not already
+5. Commit and push — GitHub Pages deploys automatically
 
-| Path | Slot | Comment |
-|---|---|---|
-| Offer Clarity | `secondaryRec.url` | Prompt pack, workbook, or Gumroad product |
-| Offer Clarity | `affiliateRec.url` | Tool affiliate (e.g. Wynter, Hotjar) |
-| Visibility | `primaryOffer.url` | Low-ticket visibility product or ConvertKit affiliate |
-| Visibility | `secondaryRec.url` | Planning worksheet or Repurpose.io affiliate |
-| Visibility | `affiliateRec.url` | Email platform affiliate |
-| Sales System | `secondaryRec.url` | DFY service page or CRM referral |
-| Sales System | `affiliateRec.url` | Kit, ActiveCampaign, or Flodesk affiliate |
-| Overwhelm | `secondaryRec.url` | Notion template or planning resource |
-| Overwhelm | `affiliateRec.url` | Notion, Linear, or Sunsama affiliate |
-| Implementation | `secondaryRec.url` | Curated AI tool resource page |
-| Implementation | `affiliateRec.url` | Make, Zapier, or n8n affiliate |
+### Repo notes
 
-Affiliate disclosure blocks are hidden by default. Set `showAffiliate: true` inside a diagnosis object to reveal the block and inline disclosure for that path only.
-
-### Recommended commit message when updating links
-
-```
-Swap in live affiliate links — [path name]
-```
+- Scoring logic: A → offer_clarity, B → visibility, C → sales_system, D (Q1/Q5/Q7) → overwhelm, D (Q2/Q3/Q4/Q6/Q8) → implementation
+- Tiebreak priority: offer_clarity > visibility > sales_system > overwhelm > implementation
+- Tracker endpoint fails silently — never blocks the user
