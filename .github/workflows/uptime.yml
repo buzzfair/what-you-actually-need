@@ -15,7 +15,7 @@ jobs:
   check:
     name: Check site availability
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    timeout-minutes: 10
     continue-on-error: false
     env:
       ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION: true  # suppress Node.js 20 deprecation warning
@@ -80,16 +80,38 @@ jobs:
           fi
 
       - name: Check — GHL AI Sprint booking page
-        # GHL blocks curl with a non-200 or redirect to a login wall when JS is required,
-        # so we accept 200, 301, or 302 as healthy. A 404 or 5xx means the calendar slug
-        # has been deleted or GHL is down.
+        # GHL pages can load slowly, so we retry with increased timeout
+        # to avoid false positives from transient slowness
         run: |
-          STATUS=$(curl -o /dev/null -s -w "%{http_code}" --max-time 15 "https://link.aibizconnection.com/widget/bookings/ai-sprint-session")
-          echo "GHL AI Sprint booking: HTTP $STATUS"
-          if [ "$STATUS" = "404" ] || [ "$STATUS" = "500" ] || [ "$STATUS" = "502" ] || [ "$STATUS" = "503" ] || [ "$STATUS" = "000" ]; then
-            echo "FAIL: GHL booking page returned $STATUS"
-            exit 1
-          fi
+          MAX_ATTEMPTS=3
+          TIMEOUT=20  # Increased from 15 to 20 seconds for GHL
+
+          for attempt in $(seq 1 $MAX_ATTEMPTS); do
+            STATUS=$(curl -o /dev/null -s -w "%{http_code}" --max-time $TIMEOUT "https://link.aibizconnection.com/widget/bookings/ai-sprint-session")
+            echo "GHL AI Sprint booking: HTTP $STATUS (attempt $attempt/$MAX_ATTEMPTS)"
+
+            # Success if not a failure status
+            if [ "$STATUS" != "404" ] && [ "$STATUS" != "500" ] && [ "$STATUS" != "502" ] && [ "$STATUS" != "503" ] && [ "$STATUS" != "000" ]; then
+              echo "SUCCESS: GHL booking page loaded"
+              exit 0
+            fi
+
+            # Don't retry on 404 (page doesn't exist)
+            if [ "$STATUS" = "404" ]; then
+              echo "FAIL: GHL booking page not found"
+              exit 1
+            fi
+
+            # Wait before retrying (skip on last attempt)
+            if [ $attempt -lt $MAX_ATTEMPTS ]; then
+              WAIT_TIME=$((5 * attempt))  # 5s, then 10s, then give up
+              echo "Retrying in ${WAIT_TIME}s..."
+              sleep $WAIT_TIME
+            fi
+          done
+
+          echo "FAIL: GHL booking page returned $STATUS after $MAX_ATTEMPTS attempts"
+          exit 1
 
       - name: Open a GitHub issue on failure
         if: failure()
